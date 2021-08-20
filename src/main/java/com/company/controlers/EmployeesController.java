@@ -42,16 +42,19 @@ public class EmployeesController {
 
         }
 
-
-//        System.out.println("Do you wish use this data to create a user Y/N");
-
-        System.out.println("Enter password: ");
-        String password1 = scanner.next().trim();
-        System.out.println("");
-
-        System.out.println("Retype your password: ");
-        String password2 = scanner.next().trim();
-        System.out.println("");
+        System.out.println("Welcome message");
+//password probably must be generated
+//        System.out.println("Welcome message");
+////not sure that we need part with passwords here, it easier to write default randomizer
+//        System.out.println("Enter password: ");
+//        String password1 = scanner.next().trim();
+//        System.out.println("");
+//
+//        System.out.println("Retype your password: ");
+//        String password2 = scanner.next().trim();
+//        System.out.println("");
+        String password1 = "qwerty";
+        String password2 = "qwerty";
 
         //check if user is able to type password twice correctly
         if(password1.equals(password2)){
