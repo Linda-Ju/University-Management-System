@@ -6,16 +6,18 @@ public class Employee {
     private String name;
     private String surname;
     private String position;
+    private int userID;
 
     public Employee(){
 
     }
 
-    public Employee(int id, String name, String surname, String position) {
+    public Employee(int id, String name, String surname, String position, int userID) {
         this.id = id;
         this.name = name;
         this.surname = surname;
         this.position = position;
+        this.userID = userID;
     }
 
     public int getId() {
@@ -50,4 +52,11 @@ public class Employee {
         this.position = position;
     }
 
+    public int getUserID() {
+        return userID;
+    }
+
+    public void setUserID(int userID) {
+        this.userID = userID;
+    }
 }
