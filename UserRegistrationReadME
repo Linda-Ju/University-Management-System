@@ -1,0 +1,8 @@
+
+Creating new user - there will be no registration form,
+ 'cos every student and employee must be in system automatically.
+ We added username and password generation, so there no need in registration user
+ or admin can do it manually via database
+
+ For every employee and student username and password will be provided,
+ but there will be option to change it.

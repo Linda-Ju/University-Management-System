@@ -4,6 +4,7 @@ import com.company.dbhelper.DbConnection;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.Random;
 import java.util.Scanner;
 
 public class EmployeesController {
@@ -43,21 +44,10 @@ public class EmployeesController {
         }
 
         System.out.println("Welcome message");
-//password probably must be generated
-//        System.out.println("Welcome message");
-////not sure that we need part with passwords here, it easier to write default randomizer
-//        System.out.println("Enter password: ");
-//        String password1 = scanner.next().trim();
-//        System.out.println("");
-//
-//        System.out.println("Retype your password: ");
-//        String password2 = scanner.next().trim();
-//        System.out.println("");
-        String password1 = "qwerty";
-        String password2 = "qwerty";
+//password probably is generated
 
-        //check if user is able to type password twice correctly
-        if(password1.equals(password2)){
+ String password = getRandomNumberString();
+
             try {
                 ps = DbConnection.user().prepareStatement("SELECT * FROM employees WHERE first_name = '" + name +
                         "' AND last_name = '" + surname + "' AND position = '" + position + "';");
@@ -73,7 +63,7 @@ public class EmployeesController {
 
                     try {
                         ps = DbConnection.user().prepareStatement("INSERT INTO users(username, password, access)" +
-                                "VALUES ('" + login + "', '" + password1 + "', '" + position +"')");
+                                "VALUES ('" + login + "', '" + password + "', '" + position +"')");
 
                         ps.execute();
                     } catch (Exception e) {
@@ -87,16 +77,20 @@ public class EmployeesController {
                 e.printStackTrace();
 
             }
-        } else {
-            System.out.println("Password doesn't match");
-            System.out.println("");
 
-        }
+    }
 
 
 
 
+    public static String getRandomNumberString() {
+        //Password generator
+        // It will generate 6 digit random Number.
+        // from 0 to 999999
+        Random rnd = new Random();
+        int number = rnd.nextInt(999999);
 
-
+        // this will convert any number sequence into 6 character.
+        return String.format("%06d", number);
     }
 }
