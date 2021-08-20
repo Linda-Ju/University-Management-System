@@ -46,19 +46,8 @@ public class StudentsController {
 
 
 //        System.out.println("Welcome message");
-////not sure that we need part with passwords here, it easier to write default randomizer
-//        System.out.println("Enter password: ");
-//        String password1 = scanner.next().trim();
-//        System.out.println("");
-//
-//        System.out.println("Retype your password: ");
-//        String password2 = scanner.next().trim();
-//        System.out.println("");
-        String password1 = "qwerty";
-        String password2 = "qwerty";
 
-        //check if user is able to type password twice correctly
-        if (password1.equals(password2)) {//delete if double check isn't needed
+        String password = EmployeesController.getRandomNumberString();
             try {
                 ps = DbConnection.user().prepareStatement("SELECT * FROM students WHERE name = '" + name +
                         "' AND surname = '" + surname + "' AND 'group' = '" + group + "';");
@@ -74,7 +63,7 @@ public class StudentsController {
 
                     try {
                         ps = DbConnection.user().prepareStatement("INSERT INTO users(username, password, access)" +
-                                "VALUES ('" + login + "', '" + password1 + "', student)");
+                                "VALUES ('" + login + "', '" + password + "', student)");
 
                         ps.execute();
                     } catch (Exception e) {
@@ -87,11 +76,6 @@ public class StudentsController {
             } catch (Exception e) {
                 e.printStackTrace();
 
-            }//delete below if double check password isn'r needed anymore
-        } else {
-            System.out.println("Password doesn't match");
-            System.out.println("");
-
-        }
+            }
     }
 }
