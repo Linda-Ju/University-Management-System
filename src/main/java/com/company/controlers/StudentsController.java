@@ -4,6 +4,7 @@ import com.company.dbhelper.DbConnection;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.Scanner;
 
 public class StudentsController {
@@ -14,29 +15,29 @@ public class StudentsController {
     public static void addNewStudent() {
 
 
-        System.out.println("Enter the student's name: ");
+        System.out.println("\nEnter the student's name: ");
         String name = scanner.next();
-        System.out.println("");
 
-        System.out.println("Enter the student's surname: ");
+
+        System.out.println("\nEnter the student's surname: ");
         String surname = scanner.next();
-        System.out.println("");
 
-        System.out.println("Enter the student's faculty: ");
+
+        System.out.println("\nEnter the student's faculty: ");
         String faculty = scanner.next();
-        System.out.println("");
 
-        System.out.println("Enter the student's group: ");
+
+        System.out.println("\nEnter the student's group: ");
         String group = scanner.next();
-        System.out.println("");
+
 
         try {
             ps = DbConnection.user().prepareStatement("INSERT INTO students(name, surname, faculty, 'group')" +
                     "VALUES ('" + name + "', '" + surname + "' , '" + faculty + "', '" + group + "')");
 
             ps.execute();
-            System.out.println("New student has been added to database");
-            System.out.println("");
+            System.out.println("\nNew student has been added to database. Generating account..");
+
 
 
         } catch (Exception e) {
@@ -47,7 +48,7 @@ public class StudentsController {
 
 //        System.out.println("Welcome message");
 
-        String password = EmployeesController.getRandomNumberString();
+
             try {
                 ps = DbConnection.user().prepareStatement("SELECT * FROM students WHERE name = '" + name +
                         "' AND surname = '" + surname + "' AND 'group' = '" + group + "';");
@@ -57,18 +58,40 @@ public class StudentsController {
 
                 while (rs.next()) {
 
-                    int employeesID = rs.getInt("id");
+                    int studentsID = rs.getInt("id");
 
-                    String login = name.substring(0, 3) + surname.substring(0, 3) + employeesID;//
+                    String password = EmployeesController.getRandomNumberString();
+                    String login = name.substring(0, 3) + surname.substring(0, 3) + studentsID;//
 
                     try {
                         ps = DbConnection.user().prepareStatement("INSERT INTO users(username, password, access)" +
                                 "VALUES ('" + login + "', '" + password + "', student)");
-
                         ps.execute();
+                        System.out.println("New account has been set.\n Username: " + login + "\n Password: " + password +
+                                "\n\n Don't forget to write those down.");
                     } catch (Exception e) {
                         e.printStackTrace();
 
+                    }
+                    try {
+                        ps = DbConnection.user().prepareStatement("SELECT * FROM users WHERE username = '" + login +"';");
+                        rs = ps.executeQuery();
+                        while(rs.next()){
+                            int usersID = rs.getInt("id");
+
+                            try{
+                                ps = DbConnection.user().prepareStatement("UPDATE students SET user_id = "+ usersID +" WHERE id =" + studentsID);
+                                ps.execute();
+
+                            } catch (Exception e) {
+                                e.printStackTrace();
+
+                            }
+
+                        }
+
+                    } catch (SQLException throwables) {
+                        throwables.printStackTrace();
                     }
                 }
 

@@ -4,6 +4,7 @@ import com.company.dbhelper.DbConnection;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -15,26 +16,27 @@ public class EmployeesController {
     public static void addNewEmployee() {
 
 
-        System.out.println("Enter the employee's name: ");
+        System.out.println("\nEnter the employee's name: ");
         String name = scanner.next();
-        System.out.println("");
 
-        System.out.println("Enter the employee's surname: ");
+
+        System.out.println("\nEnter the employee's surname: ");
         String surname = scanner.next();
-        System.out.println("");
 
-        System.out.println("Enter the employee's position: ");
+
+        System.out.println("\nEnter the employee's position: ");
         String position = scanner.next();
-        System.out.println("");
+
+
 
 
         try {
-            ps = DbConnection.user().prepareStatement("INSERT INTO employees(first_name, last_name, speciality)" +
+            ps = DbConnection.user().prepareStatement("INSERT INTO employees(first_name, last_name, position)" +
                     "VALUES ('" + name + "', '" + surname + "' , '" + position + "')");
 
             ps.execute();
-            System.out.println("New employee has been added to database");
-            System.out.println("");
+            System.out.println("\nData been added to database. Generating users account...\n");
+
 
 
 
@@ -42,12 +44,6 @@ public class EmployeesController {
             e.printStackTrace();
 
         }
-
-        System.out.println("Welcome message");
-//password probably is generated
-
- String password = getRandomNumberString();
-
             try {
                 ps = DbConnection.user().prepareStatement("SELECT * FROM employees WHERE first_name = '" + name +
                         "' AND last_name = '" + surname + "' AND position = '" + position + "';");
@@ -58,17 +54,42 @@ public class EmployeesController {
                 while(rs.next()) {
 
                     int employeesID = rs.getInt("id");
-
                     String login = name.substring(0, 3) + surname.substring(0, 3) + employeesID;//
+                    String password = getRandomNumberString();
 
                     try {
                         ps = DbConnection.user().prepareStatement("INSERT INTO users(username, password, access)" +
-                                "VALUES ('" + login + "', '" + password + "', '" + position +"')");
+                                "VALUES ('" + login + "', '" + password + "', '" + position + "')");
 
                         ps.execute();
+                        System.out.println("New account has been set.\n Username: " + login + "\n Password: " + password +
+                                "\n\n Don't forget to write those down.");
+
+
                     } catch (Exception e) {
                         e.printStackTrace();
 
+                    }
+
+                    try {
+                        ps = DbConnection.user().prepareStatement("SELECT * FROM users WHERE username = '" + login +"';");
+                        rs = ps.executeQuery();
+                        while(rs.next()){
+                            int usersID = rs.getInt("id");
+
+                            try{
+                                ps = DbConnection.user().prepareStatement("UPDATE employees SET user_id = "+ usersID +" WHERE id =" + employeesID);
+                                ps.execute();
+
+                            } catch (Exception e) {
+                                e.printStackTrace();
+
+                            }
+
+                        }
+
+                    } catch (SQLException throwables) {
+                        throwables.printStackTrace();
                     }
                 }
 
