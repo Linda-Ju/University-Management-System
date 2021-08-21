@@ -6,14 +6,16 @@ public class Event {
     private String eventDate;
     private String eventName;
     private String description;
+    private int id;
 
     public Event() {
     }
 
-    public Event(String eventDate, String eventName, String description) {
+    public Event(String eventDate, String eventName, String description, int id) {
         this.eventDate = eventDate;
         this.eventName = eventName;
         this.description = description;
+        this.id = id;
     }
 
     public String getEventDate() {
@@ -38,5 +40,13 @@ public class Event {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }
