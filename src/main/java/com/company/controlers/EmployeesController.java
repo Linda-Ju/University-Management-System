@@ -1,6 +1,7 @@
 package com.company.controlers;
 
 import com.company.dbhelper.DbConnection;
+import com.company.objects.Employee;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -101,7 +102,46 @@ public class EmployeesController {
 
     }
 
+public static Employee getEmployeeByID(){
+    System.out.println("\nEnter the employee's id: ");
+    int id = scanner.nextInt();
+    System.out.println("");
 
+    try {
+        ps = DbConnection.user().prepareStatement("SELECT * FROM employees WHERE id =" + id);
+        rs = ps.executeQuery();
+
+        System.out.println("\nid \t  name  \t surname \t position ");
+
+
+        String name;
+        String surname;
+        String position;
+        Employee employee = new Employee();
+
+
+        while(rs.next()){
+
+            name = rs.getString("first_name");
+            surname = rs.getString("last_name");
+            position = rs.getString("position");
+
+
+
+            employee.setId(id);
+
+
+            System.out.println(id + " \t " + name + " \t " + surname + " \t " + position);
+            System.out.println("");
+        }
+        return employee;
+
+
+    } catch (SQLException throwables) {
+        throwables.printStackTrace();
+        return null;
+    }
+}
 
 
     public static String getRandomNumberString() {
