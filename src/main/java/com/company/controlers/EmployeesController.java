@@ -249,18 +249,13 @@ public class EmployeesController {
             System.out.println("id \t  name  \t surname \t position ");
 
             int employeeID;
-            String name;
-            String surname;
-            String position;
+
             Objects employee = new Objects();
         while (rs.next()) {
                 employeeID = rs.getInt("id");
-                name = rs.getString("first_name");
-                surname = rs.getString("last_name");
-                position = rs.getString("position");
-                employee.setId(employeeID);
+;
 
-                System.out.println(employeeID + " \t " + name + " \t " + surname + " \t " + position);
+                System.out.println(employeeID + " \t " + rs.getString("first_name") + " \t " + rs.getString("last_name") + " \t " + rs.getString("position"));
                 System.out.println("");
 
         }

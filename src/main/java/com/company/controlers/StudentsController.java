@@ -207,7 +207,6 @@ public class StudentsController {
 
     }
 
-    //need to check on database column name, group doesn't work so well
     public static void editStudentGroup(){
         int id = getStudentByID().getId();
 
@@ -331,7 +330,7 @@ public class StudentsController {
         }
 
     }
-//some issue here
+
     public static void selectStudentsByGroup(){
         System.out.println("\nEnter faculty: ");
         String faculty = scanner.next().trim();
@@ -374,22 +373,17 @@ public class StudentsController {
             System.out.println("id \t  name  \t surname \t faculty \t group");
 
             int studentsID;
-            String name;
-            String surname;
-            String faculty;
-            String group;
+
             Objects student = new Objects();
             while (rs.next()) {
                 studentsID = rs.getInt("id");
-                name = rs.getString("name");
-                surname = rs.getString("surname");
-                faculty = rs.getString("faculty");
-                group = rs.getString("group_id");
-                student.setId(studentsID);
 
-                System.out.println(studentsID + " \t " + name + " \t " + surname + " \t " + faculty + " \t " + group);
+                System.out.println(studentsID + " \t " + rs.getString("name")+ " \t "
+                        + rs.getString("surname") + " \t "
+                        + rs.getString("faculty") + " \t "
+                        + rs.getString("group_id"));
                 System.out.println("");
-
+                student.setId(studentsID);
             }
             return student;
 
