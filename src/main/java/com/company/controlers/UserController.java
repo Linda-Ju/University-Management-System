@@ -2,6 +2,7 @@ package com.company.controlers;
 ///THIS IS COPY FROM OTHER PROJECT, NEEDS TO BE UPDATED
 
 import com.company.dbhelper.DbConnection;
+import com.company.objects.Objects;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -12,72 +13,86 @@ public class UserController {
     private static Scanner scanner = new Scanner(System.in);
     private static PreparedStatement ps;
     private static ResultSet rs;
-    //table users
+    //since users are automatically generated we don't need user add option
+    //also it's deleting on cascade with person(employee ar student),there will be no delete option
 
-    private static boolean addNewUser() {
-        System.out.println("New user registration");//Introduction
-        System.out.println("");
 
-        //ask user to provide username
-        System.out.println("Enter username: ");
-        String login = scanner.next().trim();
-        System.out.println("");
+    public static void editUserPassword(){//not sure that that correct way
+        int id = getUserByID().getId();
 
-        //Check if username is already taken
-        try {
-            ps = DbConnection.user().prepareStatement("SELECT * FROM users WHERE username = '" + login + "';");
+        System.out.println("\nDo you wish to edit this data Y/N");
+        String option = scanner.next().trim();
+        if (option.equals("Y")) {
 
-            rs = ps.executeQuery();
 
-            if (rs.next()) {
-                System.out.println("This username is taken. Try '" + login + "1'.");
-                System.out.println("");
-                return false;
+            System.out.println("Enter new password: ");
+            String password1 = scanner.next().trim();
+            System.out.println("");
 
-            } else {
-                System.out.println("Username OK");
-                System.out.println("");
-
-                //ask user to provide password
-                System.out.println("Enter password: ");
-                String password1 = scanner.next().trim();
-                System.out.println("");
-
-                System.out.println("Retype your password: ");
-                String password2 = scanner.next().trim();
-                System.out.println("");
+            System.out.println("Retype new password: ");
+            String password2 = scanner.next().trim();
+            System.out.println("");
 
             //check if user is able to type password twice correctly
-                if(password1.equals(password2)){
-                    try {
-                        ps = DbConnection.user().prepareStatement("INSERT INTO users(username, password)" +
-                                "VALUES ('" + login + "', '" + password1 + "')");
+            if(password1.equals(password2)){
+                try {
+                    ps = DbConnection.user().prepareStatement("UPDATE users SET password = '" + password1 + "' WHERE id =" + id);
+                    ps.execute();
 
-                        ps.execute();
-                        return true;
 
-                    } catch (Exception e) {
-                        e.printStackTrace();
-
-                    }
-                } else {
-                    System.out.println("Password doesn't match");
+                    System.out.println("successfully updated");
                     System.out.println("");
-                    return false;
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+
                 }
-
+            } else {
+                System.out.println("Password doesn't match");
+                //some action here
             }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
 
-    return true;
+
+
+        } else {
+            System.out.println("Users data remains unchanged");
+        }
 
     }
 
-    public static void registerUser(){
-        System.out.println(addNewUser() ? "Registration successful" : "Registration failed.");
+    public static Objects getUserByID() {
+        System.out.println("\nEnter the user's id: ");
+        int id = scanner.nextInt();
         System.out.println("");
+
+        try {
+            ps = DbConnection.user().prepareStatement("SELECT * FROM employees WHERE id =" + id);
+            rs = ps.executeQuery();
+
+            System.out.println("id \t  username  \t access \t password");//password field must be deleted on last stage of project
+
+            int userID;
+
+            Objects user = new Objects();
+            while (rs.next()) {
+                userID = rs.getInt("id");
+                ;
+
+                System.out.println(userID + " \t " + rs.getString("username") + " \t " + rs.getString("access") + " \t " + rs.getString("password"));
+                System.out.println("");
+
+            }
+            return user;
+
+
+        }
+
+
+        catch (SQLException throwables) {
+            throwables.printStackTrace();
+            return null;
+        }
+
     }
 
 }//end of class
