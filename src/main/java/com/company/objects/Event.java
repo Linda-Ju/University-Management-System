@@ -3,24 +3,24 @@ package com.company.objects;
 import java.util.Date;
 
 public class Event {
-    private Date eventDate;
+    private String eventDate;
     private String eventName;
     private String description;
 
     public Event() {
     }
 
-    public Event(Date eventDate, String eventName, String description) {
+    public Event(String eventDate, String eventName, String description) {
         this.eventDate = eventDate;
         this.eventName = eventName;
         this.description = description;
     }
 
-    public Date getEventDate() {
+    public String getEventDate() {
         return eventDate;
     }
 
-    public void setEventDate(Date eventDate) {
+    public void setEventDate(String eventDate) {
         this.eventDate = eventDate;
     }
 
