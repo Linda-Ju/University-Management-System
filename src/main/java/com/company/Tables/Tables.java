@@ -54,8 +54,8 @@ CREATE TABLE mit_database.students (
 	name varchar(20) NOT NULL,
 	surname varchar(50) NOT NULL,
 	user_id INT NOT NULL,
-	faculty varchar(100) NOT NULL,
-	`group` varchar(100) NOT NULL,
+	faculty varchar(100) NULL,
+	`group` varchar(100) NULL,
 	CONSTRAINT students_PK PRIMARY KEY (id),
 	CONSTRAINT students_FK FOREIGN KEY (user_id) REFERENCES mit_database.users(id) ON UPDATE CASCADE
 )
