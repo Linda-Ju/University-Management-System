@@ -1,7 +1,9 @@
 package com.company.controlers;
 
 import com.company.dbhelper.DbConnection;
-import com.company.objects.Student;
+
+import com.company.objects.Objects;
+
 
 
 import java.sql.PreparedStatement;
@@ -187,7 +189,7 @@ public class EventsController {
 
     }
 
-    public static Student getEventByID() {
+    public static Objects getEventByID() {
         System.out.println("\nEnter the events id: ");
         int id = scanner.nextInt();
         System.out.println("");
@@ -196,27 +198,20 @@ public class EventsController {
             ps = DbConnection.user().prepareStatement("SELECT * FROM events WHERE id =" + id);
             rs = ps.executeQuery();
 
-            System.out.println("id \t  name  \t surname \t faculty \t group");
-
-            int studentsID;
-            String name;
-            String surname;
-            String faculty;
-            String group;
-            Student student = new Student();
+            System.out.println("date \t  event \t description");
+            int eventID;
+            Objects event = new Objects();
             while (rs.next()) {
-                studentsID = rs.getInt("id");
-                name = rs.getString("name");
-                surname = rs.getString("surname");
-                faculty = rs.getString("faculty");
-                group = rs.getString("group_id");
-                student.setId(studentsID);
+                eventID = rs.getInt("id");
 
-                System.out.println(studentsID + " \t " + name + " \t " + surname + " \t " + faculty + " \t " + group);
+                System.out.println( eventID + " \t " + rs.getString("event_date") + " \t " +
+                        rs.getString("label") + " \t " + rs.getString("description"));
                 System.out.println("");
+                event.setId(eventID);
 
             }
-            return student;
+
+            return event;
 
 
         }

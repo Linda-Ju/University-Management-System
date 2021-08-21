@@ -1,7 +1,7 @@
 package com.company.controlers;
 
 import com.company.dbhelper.DbConnection;
-import com.company.objects.Employee;
+import com.company.objects.Objects;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -237,9 +237,9 @@ public class EmployeesController {
 
     }
 
-public static Employee getEmployeeByID() {
-    System.out.println("\nEnter the employee's id: ");
-    int id = scanner.nextInt();
+    public static Objects getEmployeeByID() {
+        System.out.println("\nEnter the employee's id: ");
+     int id = scanner.nextInt();
     System.out.println("");
 
     try {
@@ -252,13 +252,13 @@ public static Employee getEmployeeByID() {
             String name;
             String surname;
             String position;
-            Employee employee = new Employee();
+            Objects employee = new Objects();
         while (rs.next()) {
                 employeeID = rs.getInt("id");
                 name = rs.getString("first_name");
                 surname = rs.getString("last_name");
                 position = rs.getString("position");
-employee.setId(employeeID);
+                employee.setId(employeeID);
 
                 System.out.println(employeeID + " \t " + name + " \t " + surname + " \t " + position);
                 System.out.println("");

@@ -1,7 +1,7 @@
 package com.company.controlers;
 
 import com.company.dbhelper.DbConnection;
-import com.company.objects.Student;
+import com.company.objects.Objects;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -362,7 +362,7 @@ public class StudentsController {
 
     }
 
-    public static Student getStudentByID() {
+    public static Objects getStudentByID() {
         System.out.println("\nEnter the student's id: ");
         int id = scanner.nextInt();
         System.out.println("");
@@ -378,7 +378,7 @@ public class StudentsController {
             String surname;
             String faculty;
             String group;
-            Student student = new Student();
+            Objects student = new Objects();
             while (rs.next()) {
                 studentsID = rs.getInt("id");
                 name = rs.getString("name");

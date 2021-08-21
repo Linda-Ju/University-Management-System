@@ -88,7 +88,7 @@ CREATE TABLE mit_database.students (
      */
 
     /*
-    CREATE TABLE mit_database.Events (
+    CREATE TABLE mit_database.events (
 	event_date varchar(50) NULL,
 	event varchar(100) NOT NULL,
 	description varchar(300) NULL
