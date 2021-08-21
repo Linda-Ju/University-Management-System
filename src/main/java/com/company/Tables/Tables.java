@@ -12,7 +12,7 @@ public class Tables {
     /*
 
     ++++USERS+++
-    CREATE TABLE doctors (
+    CREATE TABLE users (
 	id INT auto_increment NOT NULL,
 	username varchar(20) NOT NULL,
 	password varchar(10) NOT NULL,

@@ -1,6 +1,7 @@
 package com.company.controlers;
 
 import com.company.dbhelper.DbConnection;
+import com.company.objects.Employee;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -101,8 +102,180 @@ public class EmployeesController {
 
     }
 
+    public static void editEmployeeName(){
+        int id = getEmployeeByID().getId();
+
+        System.out.println("\nDo you wish to edit this data Y/N");
+        String option = scanner.next().trim();
+        if (option.equals("Y")) {
 
 
+            System.out.println("Enter edited name");
+            String update = scanner.next().trim();
+            System.out.println("");
+
+
+            try {
+
+                ps = DbConnection.user().prepareStatement("UPDATE employees SET first_name = '" + update + "' WHERE id =" + id);
+                ps.execute();
+
+
+                System.out.println("successfully updated");
+                System.out.println("");
+
+
+            } catch (Exception e) {
+                e.printStackTrace();
+
+            }
+
+
+        } else {
+            System.out.println("Person data remains unchanged");
+        }
+
+    }
+
+    public static void editEmployeeSurname(){
+        int id = getEmployeeByID().getId();
+
+        System.out.println("\nDo you wish to edit this data Y/N");
+        String option = scanner.next().trim();
+        if (option.equals("Y")) {
+
+
+            System.out.println("Enter edited surname");
+            String update = scanner.next().trim();
+            System.out.println("");
+
+
+            try {
+
+                ps = DbConnection.user().prepareStatement("UPDATE employees SET last_name = '" + update + "' WHERE id =" + id);
+                ps.execute();
+
+
+                System.out.println("successfully updated");
+                System.out.println("");
+
+
+            } catch (Exception e) {
+                e.printStackTrace();
+
+            }
+
+
+        } else {
+            System.out.println("Person data remains unchanged");
+        }
+
+    }
+
+    public static void editEmployeePosition(){
+        int id = getEmployeeByID().getId();
+
+        System.out.println("\nDo you wish to edit this data Y/N");
+        String option = scanner.next().trim();
+        if (option.equals("Y")) {
+
+
+            System.out.println("Enter new position");
+            String update = scanner.next().trim();
+
+
+
+            try {
+
+                ps = DbConnection.user().prepareStatement("UPDATE employees SET position = '" + update + "' WHERE id =" + id);
+                ps.execute();
+
+
+                System.out.println("successfully updated");
+                System.out.println("");
+
+
+            } catch (Exception e) {
+                e.printStackTrace();
+
+            }
+
+
+        } else {
+            System.out.println("Person data remains unchanged");
+        }
+
+    }
+
+    public static void deleteEmployee(){
+
+        int id = getEmployeeByID().getId();
+
+        System.out.println("\nDo you wish to delete this data Y/N");
+        String option = scanner.next().trim();
+        System.out.println("");
+        if (option.equals("Y")) {
+            try {
+
+                ps = DbConnection.user().prepareStatement("DELETE FROM employees WHERE id = " + id);
+                ps.execute();
+
+                System.out.println("successfully removed to database");
+                System.out.println("");
+
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+
+        } else {
+            System.out.println("Person remained in database");
+            System.out.println("");
+        }
+
+
+    }
+
+public static Employee getEmployeeByID() {
+    System.out.println("\nEnter the employee's id: ");
+    int id = scanner.nextInt();
+    System.out.println("");
+
+    try {
+        ps = DbConnection.user().prepareStatement("SELECT * FROM employees WHERE id =" + id);
+        rs = ps.executeQuery();
+
+            System.out.println("id \t  name  \t surname \t position ");
+
+            int employeeID;
+            String name;
+            String surname;
+            String position;
+            Employee employee = new Employee();
+        while (rs.next()) {
+                employeeID = rs.getInt("id");
+                name = rs.getString("first_name");
+                surname = rs.getString("last_name");
+                position = rs.getString("position");
+employee.setId(employeeID);
+
+                System.out.println(employeeID + " \t " + name + " \t " + surname + " \t " + position);
+                System.out.println("");
+
+        }
+            return employee;
+
+
+    }
+
+
+     catch (SQLException throwables) {
+        throwables.printStackTrace();
+        return null;
+    }
+
+}
 
     public static String getRandomNumberString() {
         //Password generator
