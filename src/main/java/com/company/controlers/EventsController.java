@@ -45,7 +45,111 @@ public class EventsController {
         }
     }
 
+    public static void editEventLabel(){
+        int id = getEventByID().getId();
 
+        System.out.println("\nDo you wish to edit this data Y/N");
+        String option = scanner.next().trim();
+        if (option.equals("Y")) {
+
+
+            System.out.println("Enter edited label");
+            String update = scanner.next().trim();
+            System.out.println("");
+
+
+            try {
+
+                ps = DbConnection.user().prepareStatement("UPDATE events SET label = '" + update + "' WHERE id =" + id);
+                ps.execute();
+
+
+                System.out.println("successfully updated");
+                System.out.println("");
+
+
+            } catch (Exception e) {
+                e.printStackTrace();
+
+            }
+
+
+        } else {
+            System.out.println("Event remains unchanged");
+        }
+
+    }
+
+    public static void editEventDate(){
+        int id = getEventByID().getId();
+
+        System.out.println("\nDo you wish to edit this data Y/N");
+        String option = scanner.next().trim();
+        if (option.equals("Y")) {
+
+
+            System.out.println("Enter edited date(format dd.mm.yyyy):");
+            String update = scanner.next().trim();
+            System.out.println("");
+
+
+            try {
+
+                ps = DbConnection.user().prepareStatement("UPDATE events SET event_date = '" + update + "' WHERE id =" + id);
+                ps.execute();
+
+
+                System.out.println("successfully updated");
+                System.out.println("");
+
+
+            } catch (Exception e) {
+                e.printStackTrace();
+
+            }
+
+
+        } else {
+            System.out.println("Event remains unchanged");
+        }
+
+    }
+
+    //Cannot scan sentence....
+    public static void editEventDescription(){
+        int id = getEventByID().getId();
+
+        System.out.println("\nDo you wish to edit this data Y/N");
+        String option = scanner.next().trim();
+        if (option.equals("Y")) {
+
+
+            System.out.println("Enter edited activity");
+            String update = scanner.next();
+
+
+
+            try {
+
+                ps = DbConnection.user().prepareStatement("UPDATE events SET description = '" + update + "' WHERE id =" + id);
+                ps.execute();
+
+
+                System.out.println("successfully updated");
+                System.out.println("");
+
+
+            } catch (Exception e) {
+                e.printStackTrace();
+
+            }
+
+
+        } else {
+            System.out.println("Event remains unchanged");
+        }
+
+    }
 
     public static void deleteEvent(){
         System.out.println("\nEnter the events date(format dd.mm.yyyy): ");
@@ -198,7 +302,7 @@ public class EventsController {
             ps = DbConnection.user().prepareStatement("SELECT * FROM events WHERE id =" + id);
             rs = ps.executeQuery();
 
-            System.out.println("date \t  event \t description");
+            System.out.println("id \t date \t  event \t description");
             int eventID;
             Objects event = new Objects();
             while (rs.next()) {
