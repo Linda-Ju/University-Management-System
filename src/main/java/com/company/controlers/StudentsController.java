@@ -223,7 +223,7 @@ public class StudentsController {
 
             try {
 
-                ps = DbConnection.user().prepareStatement("UPDATE students SET 'group' = '" + update + "' WHERE id = " + id);
+                ps = DbConnection.user().prepareStatement("UPDATE students SET group_id = '" + update + "' WHERE id = " + id);
                 ps.execute();
 
 
@@ -288,7 +288,7 @@ public class StudentsController {
             while (rs.next()) {
 
                 System.out.println(rs.getInt("id") + " \t " + rs.getString("name") + " \t " +
-                        rs.getString("surname") + " \t " + rs.getString("faculty") + " \t " + rs.getString("group"));
+                        rs.getString("surname") + " \t " + rs.getString("faculty") + " \t " + rs.getString("group_id"));
                 System.out.println("");
 
             }
@@ -317,7 +317,37 @@ public class StudentsController {
             while (rs.next()) {
 
                 System.out.println(rs.getInt("id") + " \t " + rs.getString("name") + " \t " +
-                        rs.getString("surname") + " \t " + rs.getString("faculty") + " \t " + rs.getString("group"));
+                        rs.getString("surname") + " \t " + rs.getString("faculty") + " \t " + rs.getString("group_id"));
+
+
+            }
+
+        }
+
+
+        catch (SQLException throwables) {
+            throwables.printStackTrace();
+
+        }
+
+    }
+//some issue here
+    public static void selectStudentsByGroup(){
+        System.out.println("\nEnter faculty: ");
+        String faculty = scanner.next().trim();
+        System.out.println("\nEnter group: ");
+        String group = scanner.next().trim();
+        System.out.println("");
+        try {
+            ps = DbConnection.user().prepareStatement("SELECT * FROM students WHERE faculty = '" + faculty +"' AND group_id = '"+ group + "'");
+            rs = ps.executeQuery();
+
+            System.out.println("id \t  name  \t surname \t faculty \t group");
+
+            while (rs.next()) {
+
+                System.out.println(rs.getInt("id") + " \t " + rs.getString("name") + " \t " +
+                        rs.getString("surname") + " \t " + rs.getString("faculty") + " \t " + rs.getString("group_id"));
                 System.out.println("");
 
             }
@@ -354,7 +384,7 @@ public class StudentsController {
                 name = rs.getString("name");
                 surname = rs.getString("surname");
                 faculty = rs.getString("faculty");
-                group = rs.getString("group");
+                group = rs.getString("group_id");
                 student.setId(studentsID);
 
                 System.out.println(studentsID + " \t " + name + " \t " + surname + " \t " + faculty + " \t " + group);
