@@ -210,7 +210,7 @@ public class SubMenu {
         System.out.println("what do you want to see\n");
 
         System.out.println("1. Employee");
-        System.out.println("2. Lectors");
+        System.out.println("2. Lecturers");
         System.out.println("3. Students");
         System.out.println("4. Scores");
         System.out.println("5. Events\n");
@@ -223,7 +223,7 @@ public class SubMenu {
                observeEmployee();
                 break;
             case 2:
-                observeLectors();
+                observeLecturers();
                 break;
             case 3:
                 observeStudents();
@@ -294,7 +294,7 @@ public class SubMenu {
         }
     }
 
-    public static void observeLectors(){}
+    public static void observeLecturers(){}
 
     public static void observeStudents(){
         Scanner scanner = new Scanner(System.in);
