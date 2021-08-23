@@ -254,9 +254,7 @@ public class EmployeesController {
         while (rs.next()) {
                 employeeID = rs.getInt("id");
 ;
-
                 System.out.println(employeeID + " \t " + rs.getString("first_name") + " \t " + rs.getString("last_name") + " \t " + rs.getString("position"));
-                System.out.println("");
 
         }
             return employee;
