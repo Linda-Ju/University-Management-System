@@ -352,9 +352,91 @@ employee.setId(employeeID);
 
     }
 
-    public static void getLecturerBySubject(){}
+    //needs to be tested
+    public static void getLecturersBySubject(){
+        System.out.println("Choose a subject");
+        System.out.println("1. Mathematics");
+        System.out.println("2. Physics");
+        System.out.println("3. Chemistry");
+        System.out.println("4. History");
+        System.out.println("5. English");
+        System.out.println("6. Spanish");
 
-    public static void getLecturerByStudentGroup(){}
+        System.out.print("Retype subject name: ");
+        String subject = scanner.next().trim();
+
+        try {
+            ps = DbConnection.user().prepareStatement("SELECT DISTINCT lecturers_id FROM scores WHERE subject ='" + subject +"'");
+            rs = ps.executeQuery();
+
+            System.out.println(subject + "Lecturers");
+            System.out.println("Name \t Surname");
+
+            while (rs.next()) {
+                try {
+                    ps = DbConnection.user().prepareStatement("SELECT  first_name , last_name FROM employees WHERE id =" + rs.getInt("lecturers_id") );
+                    rs = ps.executeQuery();
+                    while(rs.next()) {
+                        System.out.println(rs.getString("first_name") + " \t " +
+                                rs.getString("last_name"));
+                    }
+                } catch (SQLException throwables) {
+                    throwables.printStackTrace();
+
+                }
+
+            }
+
+        }
+
+
+        catch (SQLException throwables) {
+            throwables.printStackTrace();
+
+        }
+    }
+//not sure will it work, need data in database to check it
+    public static void getLecturerByStudentGroup(){
+        System.out.print("Type group: ");
+        String groupID = scanner.next().trim();
+        try {
+            ps = DbConnection.user().prepareStatement("SELECT DISTINCT id FROM students WHERE  ='" + groupID +"'");
+            rs = ps.executeQuery();
+
+            System.out.println(groupID + "Lecturers");
+            System.out.println("Name \t Surname ");
+while(rs.next()){
+    try{
+        ps = DbConnection.user().prepareStatement("SELECT DISTINCT id FROM scores WHERE  = " + rs.getInt("id"));
+        rs = ps.executeQuery();
+            while (rs.next()) {
+                try {
+                    ps = DbConnection.user().prepareStatement("SELECT  first_name , last_name FROM employees WHERE id =" + rs.getInt("lecturers_id"));
+                    rs = ps.executeQuery();
+                    while (rs.next()) {
+                        System.out.println(rs.getString("first_name") + " \t " +
+                                rs.getString("last_name"));
+                    }
+                } catch (SQLException throwables) {
+                    throwables.printStackTrace();
+
+                }
+            }
+            } catch (SQLException throwables) {
+        throwables.printStackTrace();
+
+    }
+
+            }
+
+        }
+
+
+        catch (SQLException throwables) {
+            throwables.printStackTrace();
+
+        }
+    }
 
     public static String getRandomNumberString() {
         //Password generator
