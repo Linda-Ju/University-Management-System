@@ -352,6 +352,10 @@ employee.setId(employeeID);
 
     }
 
+    public static void getLecturerBySubject(){}
+
+    public static void getLecturerByStudentGroup(){}
+
     public static String getRandomNumberString() {
         //Password generator
         // It will generate 6 digit random Number.
