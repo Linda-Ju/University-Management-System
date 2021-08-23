@@ -60,7 +60,7 @@ public class Menu {
         }
     }
 
-    public static void lectorAccessMenu(){
+    public static void lecturerAccessMenu(){
         //add/edit/delete scores, observe students, groups
     }
 
