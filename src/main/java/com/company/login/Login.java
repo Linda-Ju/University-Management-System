@@ -1,6 +1,7 @@
 package com.company.login;
 
 import com.company.dbhelper.DbConnection;
+import com.company.menu.Menu;
 import com.company.objects.Objects;
 
 import java.sql.PreparedStatement;
@@ -17,7 +18,7 @@ public class Login {
 
 
     public static void userLogin() {
-        System.out.println("Hello, you!");//Welcome message
+        System.out.println("Welcome to website!");//Welcome message
         System.out.println("");
 
         //request username from user
@@ -37,7 +38,7 @@ public class Login {
 
             // Check if provided username exists in database
             if (rs.next()) {
-                System.out.println("Username excepted.");
+                System.out.println("Username accepted.");
                 System.out.println("");
 
                 //asking for password from user
@@ -52,14 +53,31 @@ public class Login {
                 if (correct) {
                     System.out.println("Access granted.");
 
+                    String access = rs.getString("access");
 
+                        switch (access) {
+                            case "admin":
+                                Menu.adminMainMenu();
+                                break;
+                            case "administration":
+                                Menu.administrationMainMenu();
+                                break;
+                            case "lecturer":
+                                Menu.lectorAccessMenu();
+                                break;
+                            case "student":
+                                Menu.studentAccessMenu();
+                                break;
+                            default:
+                                System.out.println("You don't have an access. Please contact administration for more details!");
+                        }
 
                 } else {
                     System.out.println("Login failed. Check password");
                 }
                 System.out.println("");
             } else {
-                System.out.println("Username doesn't exists");
+                System.out.println("Username doesn't exist");
                 System.out.println("");
 
             }
@@ -71,6 +89,8 @@ public class Login {
         }
 
     }
+
+
 
     }
 
