@@ -11,7 +11,7 @@ public class ScoresController {
     private static PreparedStatement ps;
     private static ResultSet rs;
 
-    public static boolean addNewDrug() {
+    public static boolean addNewScore() {
 
         System.out.println("Enter the student's id: ");
         int studentID = scanner.nextInt();
