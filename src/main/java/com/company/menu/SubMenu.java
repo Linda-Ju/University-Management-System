@@ -200,4 +200,8 @@ public class SubMenu {
                 }
         }
     }
+
+    public static void observeData(){
+
+    }
 }
