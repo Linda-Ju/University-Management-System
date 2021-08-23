@@ -251,6 +251,34 @@ public class StudentsController {
         System.out.println("");
         if (option.equals("Y")) {
             try {
+                ps = DbConnection.user().prepareStatement("SELECT * FROM employees WHERE id = " + id);
+
+                rs = ps.executeQuery();
+
+
+                while(rs.next()) {
+                    String name = rs.getString("name");
+                    String surname =rs.getString("surname");
+                    String login = name.substring(0, 3) + surname.substring(0, 3) + id;//
+
+
+                    try {
+                        ps = DbConnection.user().prepareStatement("DELETE FROM users WHERE username = '" + login+ "'");
+                        ps.execute();
+
+
+                    } catch (Exception e) {
+                        e.printStackTrace();
+
+                    }
+
+
+                }
+
+
+            } catch (Exception e) {
+                e.printStackTrace();}
+            try {
 
                 ps = DbConnection.user().prepareStatement("DELETE FROM students WHERE id = " + id);
                 ps.execute();

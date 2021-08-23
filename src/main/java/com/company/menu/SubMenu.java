@@ -40,7 +40,9 @@ public class SubMenu {
             case 5:
                 StudentsController.editStudentGroup();
                 break;
-
+            case 6:
+                StudentsController.deleteStudent();
+                break;
             default:
                 System.out.println("Invalid option\n");
                 System.out.println("Do you wish to try again Y/N");
