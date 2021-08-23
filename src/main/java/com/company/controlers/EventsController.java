@@ -89,9 +89,8 @@ public class EventsController {
 
 
             System.out.println("Enter edited date(format dd.mm.yyyy):");
-            String update = scanner.next().trim();
-            System.out.println("");
 
+            String update = scanner.next().trim();
 
             try {
 
@@ -100,7 +99,6 @@ public class EventsController {
 
 
                 System.out.println("successfully updated");
-                System.out.println("");
 
 
             } catch (Exception e) {
@@ -136,7 +134,6 @@ public class EventsController {
 
 
                 System.out.println("successfully updated");
-                System.out.println("");
 
 
             } catch (Exception e) {
@@ -163,7 +160,6 @@ public class EventsController {
                 ps.execute();
 
                 System.out.println("successfully removed to database");
-                System.out.println("");
 
 
             } catch (Exception e) {
@@ -250,7 +246,6 @@ public class EventsController {
 
                 System.out.println(rs.getString("event_date") + " \t " +
                         rs.getString("label") + " \t " + rs.getString("description"));
-                System.out.println("");
 
             }
 
@@ -279,7 +274,7 @@ public class EventsController {
 
                 System.out.println(rs.getString("event_date") + " \t " +
                         rs.getString("label") + " \t " + rs.getString("description"));
-                System.out.println("");
+
 
             }
 
@@ -296,7 +291,7 @@ public class EventsController {
     public static Objects getEventByID() {
         System.out.println("\nEnter the events id: ");
         int id = scanner.nextInt();
-        System.out.println("");
+
 
         try {
             ps = DbConnection.user().prepareStatement("SELECT * FROM events WHERE id =" + id);
@@ -310,7 +305,6 @@ public class EventsController {
 
                 System.out.println( eventID + " \t " + rs.getString("event_date") + " \t " +
                         rs.getString("label") + " \t " + rs.getString("description"));
-                System.out.println("");
                 event.setId(eventID);
 
             }
