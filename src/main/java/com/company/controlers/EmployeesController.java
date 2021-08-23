@@ -240,7 +240,6 @@ public class EmployeesController {
     public static Objects getEmployeeByID() {
         System.out.println("\nEnter the employee's id: ");
      int id = scanner.nextInt();
-    System.out.println("");
 
     try {
         ps = DbConnection.user().prepareStatement("SELECT * FROM employees WHERE id =" + id);
@@ -253,7 +252,7 @@ public class EmployeesController {
             Objects employee = new Objects();
         while (rs.next()) {
                 employeeID = rs.getInt("id");
-;
+
                 System.out.println(employeeID + " \t " + rs.getString("first_name") + " \t " + rs.getString("last_name") + " \t " + rs.getString("position"));
 
         }
@@ -269,6 +268,60 @@ public class EmployeesController {
     }
 
 }
+
+    public static void getEmployeeBySurname(){
+        System.out.println("\nEnter the employee's surname: ");
+        String searchValue = scanner.next().trim();
+
+        try {
+            ps = DbConnection.user().prepareStatement("SELECT * FROM employees WHERE last_name = '" + searchValue +"'");
+            rs = ps.executeQuery();
+
+            System.out.println("id \t  name  \t surname \t position ");
+
+            Objects employee = new Objects();
+            while (rs.next()) {
+
+                System.out.println( rs.getInt("id") + " \t " + rs.getString("first_name") + " \t " + rs.getString("last_name") + " \t " + rs.getString("position"));
+
+            }
+
+
+        }
+
+
+        catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
+    }
+
+    public static void getEmployeeByPosition(){
+        System.out.println("\nEnter the employee's position: ");
+        String searchValue = scanner.next().trim();
+
+        try {
+            ps = DbConnection.user().prepareStatement("SELECT * FROM employees WHERE position= '" + searchValue +"'");
+            rs = ps.executeQuery();
+
+            System.out.println("id \t  name  \t surname \t position ");
+
+            Objects employee = new Objects();
+            while (rs.next()) {
+
+                System.out.println( rs.getInt("id") + " \t " + rs.getString("first_name") + " \t " + rs.getString("last_name") + " \t " + rs.getString("position"));
+
+            }
+
+
+        }
+
+
+        catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
+    }
 
     public static String getRandomNumberString() {
         //Password generator
