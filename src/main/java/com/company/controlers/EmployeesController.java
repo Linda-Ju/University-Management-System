@@ -352,7 +352,7 @@ employee.setId(employeeID);
 
     }
 
-    //needs to be tested
+
     public static void getLecturersBySubject() {
         System.out.println("Choose a subject");
         System.out.println("1. Mathematics");
@@ -390,9 +390,9 @@ employee.setId(employeeID);
 
         if (subject != (null)) {
             try {
-                ps = DbConnection.user().prepareStatement("SELECT DISTINCT employees.first_name, employees.first_name FROM scores INNER JOIN employees ON scores.lecturers_id = employee.id WHERE subject = '" + subject + "'");
+                ps = DbConnection.user().prepareStatement("SELECT DISTINCT employees.first_name, employees.last_name FROM scores INNER JOIN employees ON scores.lecturers_id = employees.id WHERE subject = '" + subject + "'");
                 rs = ps.executeQuery();
-                System.out.println("Mathematica");
+                System.out.println(subject);
                 System.out.println("Name \t Surname");
                 while (rs.next()) {
                     System.out.println(rs.getString("first_name") + " \t " +
@@ -414,18 +414,20 @@ employee.setId(employeeID);
 
         }
     }
+
+
 //not sure will it work, need data in database to check it
     public static void getLecturerByStudentGroup() {
             System.out.print("Type group: ");
             String groupID = scanner.next().trim();
         try {
-            ps = DbConnection.user().prepareStatement("SELECT DISTINCT employees.first_name, employees.first_name FROM ((scores INNER JOIN employees ON scores.lecturers_id = employee.id) INNER JOIN students ON scores.student_id = students.id) WHERE group_id = '" + groupID);
+            ps = DbConnection.user().prepareStatement("SELECT DISTINCT employees.first_name, employees.last_name, scores.subject FROM scores INNER JOIN employees ON scores.lecturers_id = employees.id LEFT JOIN students ON scores.student_id = students.id WHERE group_id = '" + groupID + "'");
             rs = ps.executeQuery();
-            System.out.println("Mathematica");
-            System.out.println("Name \t Surname");
+            System.out.println(groupID);
+            System.out.println("Name \t Surname \t Subject");
             while (rs.next()) {
                 System.out.println(rs.getString("first_name") + " \t " +
-                        rs.getString("last_name"));
+                        rs.getString("last_name")+ " \t " + rs.getString("subject"));
             }
         } catch (SQLException throwables) {
             throwables.printStackTrace();
