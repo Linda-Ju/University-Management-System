@@ -416,7 +416,7 @@ employee.setId(employeeID);
     }
 
 
-//not sure will it work, need data in database to check it
+
     public static void getLecturerByStudentGroup() {
             System.out.print("Type group: ");
             String groupID = scanner.next().trim();
