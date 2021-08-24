@@ -1,9 +1,12 @@
 package com.company.controlers;
 
 import com.company.dbhelper.DbConnection;
+import com.company.objects.Score;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Scanner;
 
 public class ScoresController {
@@ -13,8 +16,14 @@ public class ScoresController {
 
     public static void addNewScore() {
 
-        System.out.println("Enter the student's ID: ");
+        String strDate = dateFormat();
+
+        System.out.print("Enter the student's ID: ");
         int studentID = scanner.nextInt();
+        System.out.println("");
+
+        System.out.print("Enter the lecturer's ID: ");
+        int lecturerID = scanner.nextInt();
         System.out.println("");
 
         System.out.println("Choose a subject");
@@ -28,76 +37,47 @@ public class ScoresController {
         System.out.print("Select an option: ");
         int subject = scanner.nextInt();
 
-        System.out.print("Enter the day assignment was submitted : ");
-        String submitted = scanner.next();
+        String subjectName = "";
 
-        System.out.println("Enter a score: ");
+        System.out.print("Enter a score: ");
         int score = scanner.nextInt();
         System.out.println("");
 
         switch (subject) {
             case 1:
-                try {
-                    ps = DbConnection.user().prepareStatement("INSERT INTO scores(score, submitted) VALUES " + score + ", '" + submitted + "' WHERE students_id=" + studentID + "AND subject= Mathematics");
-                    ps.execute();
-                    System.out.println("New score has been added");
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
+                subjectName = "Mathematics";
                 break;
             case 2:
-                try {
-                    ps = DbConnection.user().prepareStatement("INSERT INTO scores(score, submitted) VALUES " + score + ", '" + submitted + "' WHERE students_id=" + studentID + "AND subject= Physics");
-                    ps.execute();
-                    System.out.println("New score has been added");
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
+                subjectName = "Physics";
                 break;
             case 3:
-                try {
-                    ps = DbConnection.user().prepareStatement("INSERT INTO scores(score, submitted) VALUES " + score + ", '" + submitted + "' WHERE students_id=" + studentID + "AND subject= Chemistry");
-                    ps.execute();
-                    System.out.println("New score has been added");
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
+                subjectName = "Chemistry";
                 break;
             case 4:
-                try {
-                    ps = DbConnection.user().prepareStatement("INSERT INTO scores(score, submitted) VALUES " + score + ", '" + submitted + "' WHERE students_id=" + studentID + "AND subject= History");
-                    ps.execute();
-                    System.out.println("New score has been added");
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
+                subjectName = "History";
                 break;
             case 5:
-                try {
-                    ps = DbConnection.user().prepareStatement("INSERT INTO scores(score, submitted) VALUES " + score + ", '" + submitted + "' WHERE students_id=" + studentID + "AND subject= Spanish");
-                    ps.execute();
-                    System.out.println("New score has been added");
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
+                subjectName = "English";
                 break;
             case 6:
-                try {
-                    ps = DbConnection.user().prepareStatement("INSERT INTO scores(score, submitted) VALUES " + score + ", '" + submitted + "' WHERE students_id=" + studentID + "AND subject= English");
-                    ps.execute();
-                    System.out.println("New score has been added");
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
+                subjectName = "Spanish";
                 break;
             default:
                 System.out.println("Invalid input, try again!");
+        }
+
+        try {
+            ps = DbConnection.user().prepareStatement("INSERT INTO scores(subject, lecturers_id, student_id, score, submitted) VALUES ('" + subjectName + "', " + lecturerID + ", " + studentID + ", " + score + ", '" + strDate + "')");
+            ps.execute();
+            System.out.println("New score has been added");
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
     public static void deleteScore() {
 
-        System.out.println("Enter the student's ID: ");
+        System.out.print("Enter the student's ID: ");
         int studentID = scanner.nextInt();
         System.out.println("");
 
@@ -112,76 +92,50 @@ public class ScoresController {
         System.out.print("Select an option: ");
         int subject = scanner.nextInt();
 
-        System.out.print("Enter the day assignment was submitted : ");
-        String submitted = scanner.next();
+        String subjectName = "";
 
-        System.out.println("Enter a lecturer's ID: ");
+        System.out.print("Enter a lecturer's ID: ");
         String lecturerID = scanner.next();
         System.out.println("");
 
+        System.out.print("Enter the date (dd/MM/yyyy): ");
+        String date = scanner.next();
+
         switch (subject) {
             case 1:
-                try {
-                    ps = DbConnection.user().prepareStatement("DELETE FROM scores WHERE subject= Mathematics AND students_id=" + studentID + " AND lecturer_id=" + lecturerID + "AND submitted=" + submitted);
-                    ps.execute();
-                    System.out.println("Successfully deleted score!");
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
+                subjectName = "Mathematics";
                 break;
             case 2:
-                try {
-                    ps = DbConnection.user().prepareStatement("DELETE FROM scores WHERE subject= Physics AND students_id=" + studentID + " AND lecturer_id=" + lecturerID + "AND submitted=" + submitted);
-                    ps.execute();
-                    System.out.println("Successfully deleted score!");
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
+                subjectName = "Physics";
                 break;
             case 3:
-                try {
-                    ps = DbConnection.user().prepareStatement("DELETE FROM scores WHERE subject= Chemistry AND students_id=" + studentID + " AND lecturer_id=" + lecturerID + "AND submitted=" + submitted);
-                    ps.execute();
-                    System.out.println("Successfully deleted score!");
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
+                subjectName = "Chemistry";
                 break;
             case 4:
-                try {
-                    ps = DbConnection.user().prepareStatement("DELETE FROM scores WHERE subject= History AND students_id=" + studentID + " AND lecturer_id=" + lecturerID + "AND submitted=" + submitted);
-                    ps.execute();
-                    System.out.println("Successfully deleted score!");
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
+                subjectName = "History";
                 break;
             case 5:
-                try {
-                    ps = DbConnection.user().prepareStatement("DELETE FROM scores WHERE subject= English AND students_id=" + studentID + " AND lecturer_id=" + lecturerID + "AND submitted=" + submitted);
-                    ps.execute();
-                    System.out.println("Successfully deleted score!");
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
+                subjectName = "English";
                 break;
             case 6:
-                try {
-                    ps = DbConnection.user().prepareStatement("DELETE FROM scores WHERE subject= Spanish AND students_id=" + studentID + " AND lecturer_id=" + lecturerID + "AND submitted=" + submitted);
-                    ps.execute();
-                    System.out.println("Successfully deleted score!");
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
+                subjectName = "Spanish";
                 break;
             default:
                 System.out.println("Invalid input, try again!");
+        }
+
+        try {
+            ps = DbConnection.user().prepareStatement("DELETE FROM scores WHERE subject = '" + subjectName + "' AND student_id = " + studentID + " AND lecturers_id = " + lecturerID + " AND submitted = '" + date + "'");
+            ps.execute();
+            System.out.println("Successfully deleted score!");
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
     public static void editScore() {
 
-        System.out.println("Enter the student's ID: ");
+        System.out.print("Enter the student's ID: ");
         int studentID = scanner.nextInt();
         System.out.println("");
 
@@ -195,76 +149,53 @@ public class ScoresController {
 
         System.out.print("Select an option: ");
         int subject = scanner.nextInt();
+        String subjectName = "";
 
         System.out.print("Enter the day assignment was submitted : ");
-        String submitted = scanner.next();
+        String date = scanner.next();
+        System.out.println("");
 
-        System.out.println("Enter a lecturer's ID: ");
+        System.out.print("Enter a lecturer's ID: ");
+        int lecturersID = scanner.nextInt();
+        System.out.println("");
+
+        System.out.print("Enter a new score: ");
         int score = scanner.nextInt();
         System.out.println("");
 
         switch (subject) {
             case 1:
-                try {
-                    ps = DbConnection.user().prepareStatement("UPDATE scores SET score = " + score + "WHERE subject= Mathematics AND students_id=" + studentID + "submitted=" + submitted);
-                    ps.execute();
-                    System.out.println("Successfully edited score!");
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
+                subjectName = "Mathematics";
                 break;
             case 2:
-                try {
-                    ps = DbConnection.user().prepareStatement("UPDATE scores SET score = " + score + "WHERE subject= Physics AND students_id=" + studentID + "submitted=" + submitted);
-                    ps.execute();
-                    System.out.println("Successfully edited score!");
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
+                subjectName = "Physics";
                 break;
             case 3:
-                try {
-                    ps = DbConnection.user().prepareStatement("UPDATE scores SET score = " + score + "WHERE subject= Chemistry AND students_id=" + studentID + "submitted=" + submitted);
-                    ps.execute();
-                    System.out.println("Successfully edited score!");
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
+                subjectName = "Chemistry";
                 break;
             case 4:
-                try {
-                    ps = DbConnection.user().prepareStatement("UPDATE scores SET score = " + score + "WHERE subject= History AND students_id=" + studentID + "submitted=" + submitted);
-                    ps.execute();
-                    System.out.println("Successfully edited score!");
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
+                subjectName = "History";
                 break;
             case 5:
-                try {
-                    ps = DbConnection.user().prepareStatement("UPDATE scores SET score = " + score + "WHERE subject= English AND students_id=" + studentID + "submitted=" + submitted);
-                    ps.execute();
-                    System.out.println("Successfully edited score!");
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
+                subjectName = "English";
                 break;
             case 6:
-                try {
-                    ps = DbConnection.user().prepareStatement("UPDATE scores SET score = " + score + "WHERE subject= Spanish AND students_id=" + studentID + "submitted=" + submitted);
-                    ps.execute();
-                    System.out.println("Successfully edited score!");
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
+                subjectName = "Spanish";
                 break;
             default:
                 System.out.println("Invalid input, try again!");
         }
+        try {
+            ps = DbConnection.user().prepareStatement("UPDATE scores SET score = " + score + " WHERE subject = '" + subjectName + "'  AND student_id = " + studentID + " AND submitted = '" + date + "' AND lecturers_id = " + lecturersID);
+            ps.execute();
+            System.out.println("Successfully edited score!");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public static void getScoreByStudentID() {
-        System.out.println("Enter the student's ID: ");
+        System.out.print("Enter the student's ID: ");
         int studentID = scanner.nextInt();
         System.out.println("");
 
@@ -275,67 +206,66 @@ public class ScoresController {
         System.out.println("4. History");
         System.out.println("5. English");
         System.out.println("6. Spanish");
+        System.out.println("");
 
         System.out.print("Select an option: ");
         int subject = scanner.nextInt();
+        System.out.println("");
+        String subjectName = "";
 
         switch (subject) {
             case 1:
-                try {
-                    ps = DbConnection.user().prepareStatement("SELECT * FROM scores WHERE students_id = " + studentID + "AND subject= Mathematics");
-                    ps.execute();
-                    System.out.println("score \t submitted");
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
+                subjectName = "Mathematics";
                 break;
             case 2:
-                try {
-                    ps = DbConnection.user().prepareStatement("SELECT * FROM scores WHERE students_id = " + studentID + "AND subject= Physics");
-                    ps.execute();
-                    System.out.println("score \t submitted");
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
+                subjectName = "Physics";
                 break;
             case 3:
-                try {
-                    ps = DbConnection.user().prepareStatement("SELECT * FROM scores WHERE students_id = " + studentID + "AND subject= Chemistry");
-                    ps.execute();
-                    System.out.println("score \t submitted");
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
+                subjectName = "Chemistry";
                 break;
             case 4:
-                try {
-                    ps = DbConnection.user().prepareStatement("SELECT * FROM scores WHERE students_id = " + studentID + "AND subject= History");
-                    ps.execute();
-                    System.out.println("score \t submitted");
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
+                subjectName = "History";
                 break;
             case 5:
-                try {
-                    ps = DbConnection.user().prepareStatement("SELECT * FROM scores WHERE students_id = " + studentID + "AND subject= English");
-                    ps.execute();
-                    System.out.println("score \t submitted");
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
+                subjectName = "English";
                 break;
             case 6:
-                try {
-                    ps = DbConnection.user().prepareStatement("SELECT * FROM scores WHERE students_id = " + studentID + "AND subject= Spanish");
-                    ps.execute();
-                    System.out.println("score \t submitted");
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
+                subjectName = "Spanish";
                 break;
             default:
                 System.out.println("Invalid input, try again!");
         }
+
+
+        try {
+            ps = DbConnection.user().prepareStatement("SELECT * FROM scores WHERE student_id = " + studentID + " AND subject = '" + subjectName + "'");
+            rs = ps.executeQuery();
+            int score;
+            String date;
+            Score scores = new Score();
+            while (rs.next()){
+                score = rs.getInt("score");
+                date = rs.getString("submitted");
+                scores.setScore(score);
+                scores.setDate(date);
+                System.out.println(score + "\t" + date + "\t");
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
+
+    public static String dateFormat() {
+        Date date = new Date();
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+        return formatter.format(date);
+    }
+
+//    public static void main(String[] args) {
+//        addNewScore();
+//        deleteScore();
+//        editScore();
+//        getScoreByStudentID();
+//    }
 }
