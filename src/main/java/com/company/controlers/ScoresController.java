@@ -1,7 +1,6 @@
 package com.company.controlers;
 
 import com.company.dbhelper.DbConnection;
-import com.company.objects.Score;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -65,7 +64,6 @@ public class ScoresController {
             default:
                 System.out.println("Invalid input, try again!");
         }
-
         try {
             ps = DbConnection.user().prepareStatement("INSERT INTO scores(subject, lecturers_id, student_id, score, submitted) VALUES ('" + subjectName + "', " + lecturerID + ", " + studentID + ", " + score + ", '" + strDate + "')");
             ps.execute();
@@ -123,7 +121,6 @@ public class ScoresController {
             default:
                 System.out.println("Invalid input, try again!");
         }
-
         try {
             ps = DbConnection.user().prepareStatement("DELETE FROM scores WHERE subject = '" + subjectName + "' AND student_id = " + studentID + " AND lecturers_id = " + lecturerID + " AND submitted = '" + date + "'");
             ps.execute();
@@ -238,19 +235,15 @@ public class ScoresController {
 
 
         try {
-            ps = DbConnection.user().prepareStatement("SELECT * FROM scores WHERE student_id = " + studentID + " AND subject = '" + subjectName + "'");
+            ps = DbConnection.user().prepareStatement("SELECT score, submitted FROM scores WHERE student_id = " + studentID + " AND subject = '" + subjectName + "'");
             rs = ps.executeQuery();
             int score;
             String date;
-            Score scores = new Score();
             while (rs.next()){
                 score = rs.getInt("score");
                 date = rs.getString("submitted");
-                scores.setScore(score);
-                scores.setDate(date);
                 System.out.println(score + "\t" + date + "\t");
             }
-
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -261,11 +254,4 @@ public class ScoresController {
         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
         return formatter.format(date);
     }
-
-//    public static void main(String[] args) {
-//        addNewScore();
-//        deleteScore();
-//        editScore();
-//        getScoreByStudentID();
-//    }
 }
