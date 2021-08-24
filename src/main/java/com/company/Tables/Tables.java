@@ -12,7 +12,7 @@ public class Tables {
     /*
 
     ++++USERS+++
-    CREATE TABLE doctors (
+    CREATE TABLE users (
 	id INT auto_increment NOT NULL,
 	username varchar(20) NOT NULL,
 	password varchar(10) NOT NULL,
@@ -54,8 +54,8 @@ CREATE TABLE mit_database.students (
 	name varchar(20) NOT NULL,
 	surname varchar(50) NOT NULL,
 	user_id INT NOT NULL,
-	faculty varchar(100) NOT NULL,
-	`group` varchar(100) NOT NULL,
+	faculty varchar(100) NULL,
+	group_id varchar(100) NULL,
 	CONSTRAINT students_PK PRIMARY KEY (id),
 	CONSTRAINT students_FK FOREIGN KEY (user_id) REFERENCES mit_database.users(id) ON UPDATE CASCADE
 )
@@ -88,7 +88,7 @@ CREATE TABLE mit_database.students (
      */
 
     /*
-    CREATE TABLE mit_database.Events (
+    CREATE TABLE mit_database.events (
 	event_date varchar(50) NULL,
 	event varchar(100) NOT NULL,
 	description varchar(300) NULL
