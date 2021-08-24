@@ -28,6 +28,7 @@ public class EventsController {
 
 
         System.out.println("\nEnter description: ");
+        scanner.nextLine();
         String description = scanner.nextLine();
 
 
@@ -119,11 +120,13 @@ public class EventsController {
 
         System.out.println("\nDo you wish to edit this data Y/N");
         String option = scanner.next().trim();
+
         if (option.equals("Y")) {
 
 
-            System.out.println("Enter edited activity");
-            String update = scanner.next();
+            System.out.println("\nEnter edited description");
+            scanner.nextLine();
+            String update = scanner.nextLine();
 
 
 
