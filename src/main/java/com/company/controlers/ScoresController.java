@@ -2,11 +2,10 @@ package com.company.controlers;
 
 import com.company.dbhelper.DbConnection;
 import com.company.helpers.SantasLittleHelpers;
+import com.company.menu.SubMenu;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.Scanner;
 
 public class ScoresController {
@@ -16,7 +15,7 @@ public class ScoresController {
 
     public static void addNewScore() {
 
-        String strDate = dateFormat();
+        String strDate = SantasLittleHelpers.dateFormat();
 
         System.out.print("Enter the student's ID: ");
         int studentID = scanner.nextInt();
@@ -26,19 +25,30 @@ public class ScoresController {
         int lecturerID = scanner.nextInt();
         System.out.println("");
 
-        String subjectName = SantasLittleHelpers.subjectCases();
-
         System.out.print("Enter a score: ");
         int score = scanner.nextInt();
         System.out.println("");
 
-        try {
-            ps = DbConnection.user().prepareStatement("INSERT INTO scores(subject, lecturers_id, student_id, score, submitted) " +
-                    "VALUES ('" + subjectName + "', " + lecturerID + ", " + studentID + ", " + score + ", '" + strDate + "')");
-            ps.execute();
-            System.out.println("New score has been added");
-        } catch (Exception e) {
-            e.printStackTrace();
+        String subjectName = SantasLittleHelpers.subjectCases();
+
+        if (subjectName != null) {
+            try {
+                ps = DbConnection.user().prepareStatement("INSERT INTO scores(subject, lecturers_id, student_id, score, submitted) " +
+                        "VALUES ('" + subjectName + "', " + lecturerID + ", " + studentID + ", " + score + ", '" + strDate + "')");
+                ps.execute();
+                System.out.println("New score has been added");
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        } else {
+            System.out.println("Do you wish to start over Y/N");
+            String proceed = scanner.next().trim().toUpperCase();
+            if (proceed.equals("Y")) {
+                addNewScore();
+            } else {
+                System.out.println("Redirecting to start menu");
+                SubMenu.scoreSubMenu();
+            }
         }
     }
 
@@ -48,14 +58,14 @@ public class ScoresController {
         int studentID = scanner.nextInt();
         System.out.println("");
 
-        String subjectName = SantasLittleHelpers.subjectCases();
-
         System.out.print("Enter a lecturer's ID: ");
         String lecturerID = scanner.next();
         System.out.println("");
 
         System.out.print("Enter the date (dd/MM/yyyy): ");
         String date = scanner.next();
+
+        String subjectName = SantasLittleHelpers.subjectCases();
 
         try {
             ps = DbConnection.user().prepareStatement("DELETE FROM scores WHERE subject = '" + subjectName +
@@ -73,8 +83,6 @@ public class ScoresController {
         int studentID = scanner.nextInt();
         System.out.println("");
 
-        String subjectName = SantasLittleHelpers.subjectCases();
-
         System.out.print("Enter the day assignment was submitted : ");
         String date = scanner.next();
         System.out.println("");
@@ -83,16 +91,29 @@ public class ScoresController {
         int lecturersID = scanner.nextInt();
         System.out.println("");
 
-        System.out.print("Enter a new score: ");
-        int score = scanner.nextInt();
-        System.out.println("");
+        String subjectName = SantasLittleHelpers.subjectCases();
 
-        try {
-            ps = DbConnection.user().prepareStatement("UPDATE scores SET score = " + score + " WHERE subject = '" + subjectName + "'  AND student_id = " + studentID + " AND submitted = '" + date + "' AND lecturers_id = " + lecturersID);
-            ps.execute();
-            System.out.println("Successfully edited score!");
-        } catch (Exception e) {
-            e.printStackTrace();
+        if (subjectName != null) {
+            System.out.print("Enter a new score: ");
+            int score = scanner.nextInt();
+            System.out.println("");
+
+            try {
+                ps = DbConnection.user().prepareStatement("UPDATE scores SET score = " + score + " WHERE subject = '" + subjectName + "'  AND student_id = " + studentID + " AND submitted = '" + date + "' AND lecturers_id = " + lecturersID);
+                ps.execute();
+                System.out.println("Successfully edited score!");
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        } else {
+            System.out.println("Do you wish to start over Y/N");
+            String proceed = scanner.next().trim().toUpperCase();
+            if (proceed.equals("Y")) {
+                editScore();
+            } else {
+                System.out.println("Redirecting to start menu");
+                SubMenu.scoreSubMenu();
+            }
         }
     }
 
@@ -116,11 +137,5 @@ public class ScoresController {
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }
-
-    public static String dateFormat() {
-        Date date = new Date();
-        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
-        return formatter.format(date);
     }
 }

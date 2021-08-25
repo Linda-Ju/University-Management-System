@@ -1,5 +1,7 @@
 package com.company.helpers;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Scanner;
 
 public class SantasLittleHelpers {
@@ -39,8 +41,17 @@ public class SantasLittleHelpers {
                 subjectName = "Spanish";
                 break;
             default:
+                subjectName = null;
                 System.out.println("Invalid input, try again!");
         }
+
         return subjectName;
+    }
+
+
+    public static String dateFormat() {
+        Date date = new Date();
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+        return formatter.format(date);
     }
 }
