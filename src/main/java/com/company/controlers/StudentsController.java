@@ -398,7 +398,7 @@ public class StudentsController {
             ps = DbConnection.user().prepareStatement("SELECT * FROM students WHERE id =" + id);
             rs = ps.executeQuery();
 
-            System.out.println("id \t  name  \t surname \t faculty \t group");
+            System.out.printf("%-3.5s %-9.12s %-13.13s %-27.27s %-20.24s%n", "id", "name", "surname", "faculty", "group");
 
             int studentsID;
 
@@ -406,10 +406,10 @@ public class StudentsController {
             while (rs.next()) {
                 studentsID = rs.getInt("id");
 
-                System.out.println(studentsID + " \t " + rs.getString("name")+ " \t "
-                        + rs.getString("surname") + " \t "
-                        + rs.getString("faculty") + " \t "
-                        + rs.getString("group_id"));
+                System.out.printf("%-3.5s %-9.12s %-13.13s %-27.27s %-20.20s%n", studentsID, rs.getString("name"),
+                        rs.getString("surname"),
+                       rs.getString("faculty"),
+                        rs.getString("group_id"));
                 System.out.println("");
                 student.setId(studentsID);
             }
