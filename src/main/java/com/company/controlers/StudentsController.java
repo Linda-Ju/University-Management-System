@@ -1,6 +1,7 @@
 package com.company.controlers;
 
 import com.company.dbhelper.DbConnection;
+import com.company.helpers.SantasLittleHelpers;
 import com.company.objects.Objects;
 
 import java.sql.PreparedStatement;
@@ -60,7 +61,7 @@ public class StudentsController {
 
                     int studentsID = rs.getInt("id");
 
-                    String password = EmployeesController.getRandomNumberString();
+                    String password = SantasLittleHelpers.getRandomNumberString();
                     String login = name.substring(0, 3) + surname.substring(0, 3) + studentsID;//
 
                     try {
