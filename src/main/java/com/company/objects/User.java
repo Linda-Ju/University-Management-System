@@ -1,4 +1,5 @@
 package com.company.objects;
+
 //NOT SURE THAT WE'LL BE USING THIS
 public class User {
 
@@ -7,7 +8,8 @@ public class User {
     private String password;
     private String access;
 
-    public User(){}
+    public User() {
+    }
 
     public User(int id, String username, String password, String access) {
         this.id = id;

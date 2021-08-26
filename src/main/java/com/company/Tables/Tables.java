@@ -19,34 +19,31 @@ public class Tables {
 	access varchar(20) NOT NULL,
 	PRIMARY KEY (id));
 	*/
-     public static void getUsersTable() {
+    public static void getUsersTable() {
 
-         try {
-             ps = DbConnection.user().prepareStatement("SELECT * FROM users");
-             rs = ps.executeQuery();
-             System.out.println("");
+        try {
+            ps = DbConnection.user().prepareStatement("SELECT * FROM users");
+            rs = ps.executeQuery();
+            System.out.println("");
 
-             System.out.println("ID \t  Login  \t  Password \t  Access");
+            System.out.println("ID \t  Login  \t  Password \t  Access");
 
-             int usersID;
-             String login, password, access;
+            int usersID;
+            String login, password, access;
 
+            while (rs.next()) {
+                usersID = rs.getInt("id");
+                login = rs.getString("username");
+                password = rs.getString("password");
+                access = rs.getString("access");
 
-             while (rs.next()) {
-
-                 usersID = rs.getInt("id");
-                 login = rs.getString("username");
-                 password = rs.getString("password");
-                 access = rs.getString("access");
-
-
-                 System.out.println(usersID + " \t " + login + " \t " + password + " \t " + access);
-                 System.out.println("");
-             }
-         } catch (SQLException throwables) {
-             throwables.printStackTrace();
-         }
-     }
+                System.out.println(usersID + " \t " + login + " \t " + password + " \t " + access);
+                System.out.println("");
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+    }
 /*
     ++++STUDENTS++++
 CREATE TABLE mit_database.students (

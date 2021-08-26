@@ -19,7 +19,7 @@ public class Menu {
         System.out.println("5. Events data");
         System.out.println("6. Observe data\n");
 
-        System.out.println("Select an option");
+        System.out.print("\nSelect an option");
         int option = scanner.nextInt();
 
         switch (option) {
@@ -44,23 +44,20 @@ public class Menu {
 
             default:
                 System.out.println("Invalid option\n");
-                
-        }
-        System.out.println("Do you wish to proceed Y/N");
-        String endSession = scanner.next().trim();
-        if (endSession.equals("Y")) {
 
+        }
+        System.out.print("\nDo you wish to proceed Y/N");
+        String endSession = scanner.next().trim().toUpperCase();
+        if (endSession.equals("Y")) {
             System.out.println("redirecting to start..\n");
             adminMainMenu();
         } else {
             System.out.println("End of session. User logout.");
-
         }
     }
 
-    public static void administrationMainMenu(){
+    public static void administrationMainMenu() {
         //add/edit/delete events, users, students, scores, observe those
-
 
         System.out.println("Administration menu\n");
 
@@ -92,23 +89,18 @@ public class Menu {
 
             default:
                 System.out.println("Invalid option\n");
-                
         }
-        System.out.println("Do you wish to proceed Y/N");
-        String endSession = scanner.next().trim();
+        System.out.print("\nDo you wish to proceed Y/N");
+        String endSession = scanner.next().trim().toUpperCase();
         if (endSession.equals("Y")) {
-
             System.out.println("redirecting to start..\n");
             administrationMainMenu();
-        }
-
-        else{
+        } else {
             System.out.println("End of session. User logout.");
-
         }
     }
 
-    public static void lecturerAccessMenu(){
+    public static void lecturerAccessMenu() {
         //add/edit/delete scores, observe students, groups
         System.out.println("Lecturers menu\n");
 
@@ -116,7 +108,7 @@ public class Menu {
         System.out.println("2. Observe students scores");
         System.out.println("3. Observe events\n");
 
-        System.out.println("Select an option");
+        System.out.print("Select an option");
         int option = scanner.nextInt();
 
         switch (option) {
@@ -133,17 +125,13 @@ public class Menu {
             default:
                 System.out.println("Invalid option\n");
         }
-        System.out.println("Do you wish to proceed Y/N");
-        String endSession = scanner.next().trim();
+        System.out.print("\nDo you wish to proceed Y/N");
+        String endSession = scanner.next().trim().toUpperCase();
         if (endSession.equals("Y")) {
-
             System.out.println("redirecting to start..\n");
             lecturerAccessMenu();
-        }
-
-        else{
+        } else {
             System.out.println("End of session. User logout.");
-
         }
     }
 
@@ -171,19 +159,14 @@ public class Menu {
 
             default:
                 System.out.println("Invalid option\n");
-               
         }
-        System.out.println("Do you wish to proceed Y/N");
-        String endSession = scanner.next().trim();
+        System.out.print("\nDo you wish to proceed Y/N");
+        String endSession = scanner.next().trim().toUpperCase();
         if (endSession.equals("Y")) {
-
             System.out.println("redirecting to main menu..\n");
             studentAccessMenu();
-        }
-
-        else{
+        } else {
             System.out.println("End of session. User logout.");
-
         }
     }
 }

@@ -4,8 +4,9 @@ package com.company.objects;
 public class Objects {
     private int id;
 
-    public Objects(){
-}
+    public Objects() {
+    }
+
     public Objects(int id) {
         this.id = id;
     }

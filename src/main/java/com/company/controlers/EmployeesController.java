@@ -21,38 +21,29 @@ public class EmployeesController {
 
     public static void addNewEmployee() {
 
-
-        System.out.println("\nEnter the employee's name: ");
+        System.out.print("\nEnter the employee's name: ");
         String name = scanner.next();
 
 
-        System.out.println("\nEnter the employee's surname: ");
+        System.out.print("\nEnter the employee's surname: ");
         String surname = scanner.next();
 
 
-        System.out.println("\nEnter the employee's position: ");
+        System.out.print("\nEnter the employee's position: ");
         String position = scanner.next();
 
-
         try {
-
             ps = DbConnection.user().prepareStatement("INSERT INTO employees(first_name, last_name, position)" +
                     "VALUES ('" + name + "', '" + surname + "' , '" + position + "')");
-
             ps.execute();
             System.out.println("\nData been added to database. Generating users account...\n");
-
-
         } catch (Exception e) {
             e.printStackTrace();
-
         }
         try {
             ps = DbConnection.user().prepareStatement("SELECT * FROM employees WHERE first_name = '" + name +
                     "' AND last_name = '" + surname + "' AND position = '" + position + "';");
-
             rs = ps.executeQuery();
-
 
             while (rs.next()) {
 
@@ -63,213 +54,147 @@ public class EmployeesController {
                 try {
                     ps = DbConnection.user().prepareStatement("INSERT INTO users(username, password, access)" +
                             "VALUES ('" + login + "', '" + password + "', '" + position + "')");
-
                     ps.execute();
                     System.out.println("New account has been set.\n Username: " + login + "\n Password: " + password +
                             "\n\n Don't forget to write those down.");
-
-
                 } catch (Exception e) {
                     e.printStackTrace();
-
                 }
-
                 try {
                     ps = DbConnection.user().prepareStatement("SELECT * FROM users WHERE username = '" + login + "';");
                     rs = ps.executeQuery();
                     while (rs.next()) {
                         int usersID = rs.getInt("id");
-
                         try {
                             ps = DbConnection.user().prepareStatement("UPDATE employees SET user_id = " + usersID + " WHERE id =" + employeesID);
                             ps.execute();
-
                         } catch (Exception e) {
                             e.printStackTrace();
-
                         }
-
                     }
-
                 } catch (SQLException throwables) {
                     throwables.printStackTrace();
                 }
             }
-
-
         } catch (Exception e) {
             e.printStackTrace();
-
         }
-
     }
 
     public static void editEmployeeName() {
         int id = getEmployeeByID().getId();
 
-        System.out.println("\nDo you wish to edit this data Y/N");
-        String option = scanner.next().trim();
+        System.out.print("\nDo you wish to edit this data Y/N");
+        String option = scanner.next().trim().toUpperCase();
         if (option.equals("Y")) {
 
-
-            System.out.println("Enter edited name");
+            System.out.print("\nEnter edited name");
             String update = scanner.next().trim();
-            System.out.println("");
-
 
             try {
-
                 ps = DbConnection.user().prepareStatement("UPDATE employees SET first_name = '" + update + "' WHERE id =" + id);
                 ps.execute();
-
-
-                System.out.println("successfully updated");
-                System.out.println("");
-
-
+                System.out.println("\nsuccessfully updated");
             } catch (Exception e) {
                 e.printStackTrace();
-
             }
-
-
         } else {
             System.out.println("Person data remains unchanged");
         }
-
     }
 
     public static void editEmployeeSurname() {
         int id = getEmployeeByID().getId();
 
-        System.out.println("\nDo you wish to edit this data Y/N");
-        String option = scanner.next().trim();
+        System.out.print("\nDo you wish to edit this data Y/N");
+        String option = scanner.next().trim().toUpperCase();
         if (option.equals("Y")) {
 
-
-            System.out.println("Enter edited surname");
+            System.out.print("\nEnter edited surname");
             String update = scanner.next().trim();
-            System.out.println("");
-
 
             try {
-
                 ps = DbConnection.user().prepareStatement("UPDATE employees SET last_name = '" + update + "' WHERE id =" + id);
                 ps.execute();
 
-
-                System.out.println("successfully updated");
-                System.out.println("");
-
+                System.out.println("\nsuccessfully updated");
 
             } catch (Exception e) {
                 e.printStackTrace();
-
             }
-
-
         } else {
             System.out.println("Person data remains unchanged");
         }
-
     }
 
     public static void editEmployeePosition() {
         int id = getEmployeeByID().getId();
 
-        System.out.println("\nDo you wish to edit this data Y/N");
-        String option = scanner.next().trim();
+        System.out.print("\nDo you wish to edit this data Y/N");
+        String option = scanner.next().trim().toUpperCase();
         if (option.equals("Y")) {
-
 
             System.out.println("Enter new position");
             String update = scanner.next().trim();
 
-
             try {
-
                 ps = DbConnection.user().prepareStatement("UPDATE employees SET position = '" + update + "' WHERE id =" + id);
                 ps.execute();
-
 
                 System.out.println("successfully updated");
                 System.out.println("");
 
-
             } catch (Exception e) {
                 e.printStackTrace();
-
             }
-
-
         } else {
             System.out.println("Person data remains unchanged");
         }
-
     }
 
     public static void deleteEmployee() {
 
         int id = getEmployeeByID().getId();
 
-        System.out.println("\nDo you wish to delete this data Y/N");
-        String option = scanner.next().trim();
-        System.out.println("");
+        System.out.print("\nDo you wish to delete this data Y/N");
+        String option = scanner.next().trim().toUpperCase();
         if (option.equals("Y")) {
 
             try {
                 ps = DbConnection.user().prepareStatement("SELECT * FROM employees WHERE id = " + id);
-
                 rs = ps.executeQuery();
-
 
                 while (rs.next()) {
                     String name = rs.getString("first_name");
                     String surname = rs.getString("last_name");
                     String login = name.substring(0, 3) + surname.substring(0, 3) + id;//
-
-
                     try {
                         ps = DbConnection.user().prepareStatement("DELETE FROM users WHERE username = '" + login + "'");
                         ps.execute();
-
-
                     } catch (Exception e) {
                         e.printStackTrace();
-
                     }
-
-
                 }
-
-
             } catch (Exception e) {
                 e.printStackTrace();
             }
             try {
-
                 ps = DbConnection.user().prepareStatement("DELETE FROM employees WHERE id = " + id);
                 ps.execute();
 
-                System.out.println("successfully removed to database");
-                System.out.println("");
-
+                System.out.println("\nsuccessfully removed to database");
 
             } catch (Exception e) {
                 e.printStackTrace();
             }
-
-
         } else {
             System.out.println("Person remained in database");
             System.out.println("");
         }
-
-
     }
 
     public static Objects getEmployeeByID() {
-        System.out.println("\nEnter the employee's id: ");
+        System.out.print("\nEnter the employee's id: ");
         int id = scanner.nextInt();
 
         try {
@@ -279,7 +204,6 @@ public class EmployeesController {
             System.out.println("id \t  name  \t surname \t position ");
 
             int employeeID;
-
             Objects employee = new Objects();
             while (rs.next()) {
                 employeeID = rs.getInt("id");
@@ -288,17 +212,14 @@ public class EmployeesController {
                 employee.setId(employeeID);
             }
             return employee;
-
-
         } catch (SQLException throwables) {
             throwables.printStackTrace();
             return null;
         }
-
     }
 
     public static void selectEmployeeBySurname() {
-        System.out.println("\nEnter the employee's surname: ");
+        System.out.print("\nEnter the employee's surname: ");
         String searchValue = scanner.next().trim();
 
         try {
@@ -311,18 +232,14 @@ public class EmployeesController {
             while (rs.next()) {
 
                 System.out.println(rs.getInt("id") + " \t " + rs.getString("first_name") + " \t " + rs.getString("last_name") + " \t " + rs.getString("position"));
-
             }
-
-
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
-
     }
 
     public static void selectEmployeeByPosition() {
-        System.out.println("\nEnter the employee's position: ");
+        System.out.print("\nEnter the employee's position: ");
         String searchValue = scanner.next().trim();
 
         try {
@@ -333,16 +250,11 @@ public class EmployeesController {
 
             Objects employee = new Objects();
             while (rs.next()) {
-
                 System.out.println(rs.getInt("id") + " \t " + rs.getString("first_name") + " \t " + rs.getString("last_name") + " \t " + rs.getString("position"));
-
             }
-
-
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
-
     }
 
 
@@ -361,25 +273,22 @@ public class EmployeesController {
                 }
             } catch (SQLException throwables) {
                 throwables.printStackTrace();
-
             }
         } else {
-            System.out.println("Do you wish to start over Y/N?");
-            String proceed = scanner.next().trim();
+            System.out.print("\nDo you wish to start over Y/N?");
+            String proceed = scanner.next().trim().toUpperCase();
 
             if (proceed.equals("Y")) {
                 selectLecturersBySubject();
             } else {
                 System.out.println("redirecting to start menu");
             }
-
         }
     }
 
-
     public static void selectLecturersByStudentGroup() {
-        System.out.print("Type group: ");
-        String groupID = scanner.next().trim();
+        System.out.print("\nEnter the name of your group: ");
+        String groupID = scanner.next().trim().toUpperCase();
         try {
             ps = DbConnection.user().prepareStatement("SELECT DISTINCT employees.first_name, employees.last_name, scores.subject FROM scores INNER JOIN employees ON scores.lecturers_id = employees.id LEFT JOIN students ON scores.student_id = students.id WHERE group_id = '" + groupID + "'");
             rs = ps.executeQuery();
@@ -391,7 +300,6 @@ public class EmployeesController {
             }
         } catch (SQLException throwables) {
             throwables.printStackTrace();
-
         }
     }
 }
