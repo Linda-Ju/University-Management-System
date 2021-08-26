@@ -28,6 +28,7 @@ public class EventsController {
 
 
         System.out.println("\nEnter description: ");
+        scanner.nextLine();
         String description = scanner.nextLine();
 
 
@@ -89,9 +90,8 @@ public class EventsController {
 
 
             System.out.println("Enter edited date(format dd.mm.yyyy):");
-            String update = scanner.next().trim();
-            System.out.println("");
 
+            String update = scanner.next().trim();
 
             try {
 
@@ -100,7 +100,6 @@ public class EventsController {
 
 
                 System.out.println("successfully updated");
-                System.out.println("");
 
 
             } catch (Exception e) {
@@ -121,11 +120,13 @@ public class EventsController {
 
         System.out.println("\nDo you wish to edit this data Y/N");
         String option = scanner.next().trim();
+
         if (option.equals("Y")) {
 
 
-            System.out.println("Enter edited activity");
-            String update = scanner.next();
+            System.out.println("\nEnter edited description");
+            scanner.nextLine();
+            String update = scanner.nextLine();
 
 
 
@@ -136,7 +137,6 @@ public class EventsController {
 
 
                 System.out.println("successfully updated");
-                System.out.println("");
 
 
             } catch (Exception e) {
@@ -163,7 +163,6 @@ public class EventsController {
                 ps.execute();
 
                 System.out.println("successfully removed to database");
-                System.out.println("");
 
 
             } catch (Exception e) {
@@ -250,7 +249,6 @@ public class EventsController {
 
                 System.out.println(rs.getString("event_date") + " \t " +
                         rs.getString("label") + " \t " + rs.getString("description"));
-                System.out.println("");
 
             }
 
@@ -279,7 +277,7 @@ public class EventsController {
 
                 System.out.println(rs.getString("event_date") + " \t " +
                         rs.getString("label") + " \t " + rs.getString("description"));
-                System.out.println("");
+
 
             }
 
@@ -296,7 +294,7 @@ public class EventsController {
     public static Objects getEventByID() {
         System.out.println("\nEnter the events id: ");
         int id = scanner.nextInt();
-        System.out.println("");
+
 
         try {
             ps = DbConnection.user().prepareStatement("SELECT * FROM events WHERE id =" + id);
@@ -310,7 +308,6 @@ public class EventsController {
 
                 System.out.println( eventID + " \t " + rs.getString("event_date") + " \t " +
                         rs.getString("label") + " \t " + rs.getString("description"));
-                System.out.println("");
                 event.setId(eventID);
 
             }
