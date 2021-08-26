@@ -7,13 +7,13 @@ import com.company.objects.Objects;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Random;
 import java.util.Scanner;
 
 public class EmployeesController {
     private static Scanner scanner = new Scanner(System.in);
     private static PreparedStatement ps;
     private static ResultSet rs;
+    //selection/edition can be done in single method by case option
 
     public static void addNewEmployee() {
 
@@ -292,7 +292,7 @@ public class EmployeesController {
 
     }
 
-    public static void getEmployeeBySurname() {
+    public static void selectEmployeeBySurname() {
         System.out.println("\nEnter the employee's surname: ");
         String searchValue = scanner.next().trim();
 
@@ -316,7 +316,7 @@ public class EmployeesController {
 
     }
 
-    public static void getEmployeeByPosition() {
+    public static void selectEmployeeByPosition() {
         System.out.println("\nEnter the employee's position: ");
         String searchValue = scanner.next().trim();
 
@@ -341,40 +341,8 @@ public class EmployeesController {
     }
 
 
-    public static void getLecturersBySubject() {
-        System.out.println("Choose a subject");
-        System.out.println("1. Mathematics");
-        System.out.println("2. Physics");
-        System.out.println("3. Chemistry");
-        System.out.println("4. History");
-        System.out.println("5. English");
-        System.out.println("6. Spanish");
-
-        System.out.print("Choose option: ");
-        int option = scanner.nextInt();
-        String subject = null;
-        switch (option) {
-            case 1:
-                subject = "Mathematics";
-                break;
-            case 2:
-                subject = "Physics";
-                break;
-            case 3:
-                subject = "Chemistry";
-                break;
-            case 4:
-                subject = "History";
-                break;
-            case 5:
-                subject = "English";
-                break;
-            case 6:
-                subject = "Spanish";
-                break;
-            default:
-                System.out.println("invalid option");
-        }
+    public static void selectLecturersBySubject() {
+        String subject = SantasLittleHelpers.subjectCases();
 
         if (subject != (null)) {
             try {
@@ -395,7 +363,7 @@ public class EmployeesController {
             String proceed = scanner.next().trim();
 
             if (proceed.equals("Y")) {
-                getLecturersBySubject();
+                selectLecturersBySubject();
             } else {
                 System.out.println("redirecting to start menu");
             }
@@ -404,7 +372,7 @@ public class EmployeesController {
     }
 
 
-    public static void getLecturerByStudentGroup() {
+    public static void selectLecturerByStudentGroup() {
         System.out.print("Type group: ");
         String groupID = scanner.next().trim();
         try {
