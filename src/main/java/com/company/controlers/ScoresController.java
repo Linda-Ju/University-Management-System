@@ -17,8 +17,8 @@ public class ScoresController {
     // for submission change - date and lecturersID(that can be sign automatically
     //if we figure out proper login method)
 //needs a couple of methods:
-// get individual average score by every subject
-// get individual average
+// get individual average score by every subject(tip for SQL:select subject, avg(id) as score from scores where student_id = ** group by subject)
+// get individual average (tip for SQL: select avg(t.score) from (select username, avg(id) as score from users scores student_id = ** group by access) as t)
 // get average for all students(can be used for scholarship and budget places)
     public static void addNewScore() {
 
