@@ -117,6 +117,7 @@ public class ScoresController {
         }
     }
 
+
     public static void getScoreByStudentID() {
         System.out.print("Enter the student's ID: ");
         int studentID = scanner.nextInt();
