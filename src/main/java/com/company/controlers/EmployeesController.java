@@ -1,6 +1,7 @@
 package com.company.controlers;
 
 import com.company.dbhelper.DbConnection;
+import com.company.helpers.SantasLittleHelpers;
 import com.company.objects.Objects;
 
 import java.sql.PreparedStatement;
@@ -29,8 +30,6 @@ public class EmployeesController {
         String position = scanner.next();
 
 
-
-
         try {
             ps = DbConnection.user().prepareStatement("INSERT INTO employees(first_name, last_name, position)" +
                     "VALUES ('" + name + "', '" + surname + "' , '" + position + "')");
@@ -39,70 +38,68 @@ public class EmployeesController {
             System.out.println("\nData been added to database. Generating users account...\n");
 
 
+        } catch (Exception e) {
+            e.printStackTrace();
+
+        }
+        try {
+            ps = DbConnection.user().prepareStatement("SELECT * FROM employees WHERE first_name = '" + name +
+                    "' AND last_name = '" + surname + "' AND position = '" + position + "';");
+
+            rs = ps.executeQuery();
+
+
+            while (rs.next()) {
+
+                int employeesID = rs.getInt("id");
+                String login = name.substring(0, 3) + surname.substring(0, 3) + employeesID;//
+                String password = SantasLittleHelpers.getRandomNumberString();
+
+                try {
+                    ps = DbConnection.user().prepareStatement("INSERT INTO users(username, password, access)" +
+                            "VALUES ('" + login + "', '" + password + "', '" + position + "')");
+
+                    ps.execute();
+                    System.out.println("New account has been set.\n Username: " + login + "\n Password: " + password +
+                            "\n\n Don't forget to write those down.");
+
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+
+                }
+
+                try {
+                    ps = DbConnection.user().prepareStatement("SELECT * FROM users WHERE username = '" + login + "';");
+                    rs = ps.executeQuery();
+                    while (rs.next()) {
+                        int usersID = rs.getInt("id");
+
+                        try {
+                            ps = DbConnection.user().prepareStatement("UPDATE employees SET user_id = " + usersID + " WHERE id =" + employeesID);
+                            ps.execute();
+
+                        } catch (Exception e) {
+                            e.printStackTrace();
+
+                        }
+
+                    }
+
+                } catch (SQLException throwables) {
+                    throwables.printStackTrace();
+                }
+            }
 
 
         } catch (Exception e) {
             e.printStackTrace();
 
         }
-            try {
-                ps = DbConnection.user().prepareStatement("SELECT * FROM employees WHERE first_name = '" + name +
-                        "' AND last_name = '" + surname + "' AND position = '" + position + "';");
-
-                rs = ps.executeQuery();
-
-
-                while(rs.next()) {
-
-                    int employeesID = rs.getInt("id");
-                    String login = name.substring(0, 3) + surname.substring(0, 3) + employeesID;//
-                    String password = getRandomNumberString();
-
-                    try {
-                        ps = DbConnection.user().prepareStatement("INSERT INTO users(username, password, access)" +
-                                "VALUES ('" + login + "', '" + password + "', '" + position + "')");
-
-                        ps.execute();
-                        System.out.println("New account has been set.\n Username: " + login + "\n Password: " + password +
-                                "\n\n Don't forget to write those down.");
-
-
-                    } catch (Exception e) {
-                        e.printStackTrace();
-
-                    }
-
-                    try {
-                        ps = DbConnection.user().prepareStatement("SELECT * FROM users WHERE username = '" + login +"';");
-                        rs = ps.executeQuery();
-                        while(rs.next()){
-                            int usersID = rs.getInt("id");
-
-                            try{
-                                ps = DbConnection.user().prepareStatement("UPDATE employees SET user_id = "+ usersID +" WHERE id =" + employeesID);
-                                ps.execute();
-
-                            } catch (Exception e) {
-                                e.printStackTrace();
-
-                            }
-
-                        }
-
-                    } catch (SQLException throwables) {
-                        throwables.printStackTrace();
-                    }
-                }
-
-
-            } catch (Exception e) {
-                e.printStackTrace();
-
-            }
 
     }
 
-    public static void editEmployeeName(){
+    public static void editEmployeeName() {
         int id = getEmployeeByID().getId();
 
         System.out.println("\nDo you wish to edit this data Y/N");
@@ -137,7 +134,7 @@ public class EmployeesController {
 
     }
 
-    public static void editEmployeeSurname(){
+    public static void editEmployeeSurname() {
         int id = getEmployeeByID().getId();
 
         System.out.println("\nDo you wish to edit this data Y/N");
@@ -172,7 +169,7 @@ public class EmployeesController {
 
     }
 
-    public static void editEmployeePosition(){
+    public static void editEmployeePosition() {
         int id = getEmployeeByID().getId();
 
         System.out.println("\nDo you wish to edit this data Y/N");
@@ -182,7 +179,6 @@ public class EmployeesController {
 
             System.out.println("Enter new position");
             String update = scanner.next().trim();
-
 
 
             try {
@@ -207,7 +203,7 @@ public class EmployeesController {
 
     }
 
-    public static void deleteEmployee(){
+    public static void deleteEmployee() {
 
         int id = getEmployeeByID().getId();
 
@@ -222,14 +218,14 @@ public class EmployeesController {
                 rs = ps.executeQuery();
 
 
-                while(rs.next()) {
+                while (rs.next()) {
                     String name = rs.getString("first_name");
-                    String surname =rs.getString("last_name");
+                    String surname = rs.getString("last_name");
                     String login = name.substring(0, 3) + surname.substring(0, 3) + id;//
 
 
                     try {
-                        ps = DbConnection.user().prepareStatement("DELETE FROM users WHERE username = '" + login+ "'");
+                        ps = DbConnection.user().prepareStatement("DELETE FROM users WHERE username = '" + login + "'");
                         ps.execute();
 
 
@@ -243,7 +239,8 @@ public class EmployeesController {
 
 
             } catch (Exception e) {
-                e.printStackTrace();}
+                e.printStackTrace();
+            }
             try {
 
                 ps = DbConnection.user().prepareStatement("DELETE FROM employees WHERE id = " + id);
@@ -268,42 +265,39 @@ public class EmployeesController {
 
     public static Objects getEmployeeByID() {
         System.out.println("\nEnter the employee's id: ");
-     int id = scanner.nextInt();
+        int id = scanner.nextInt();
 
-    try {
-        ps = DbConnection.user().prepareStatement("SELECT * FROM employees WHERE id =" + id);
-        rs = ps.executeQuery();
+        try {
+            ps = DbConnection.user().prepareStatement("SELECT * FROM employees WHERE id =" + id);
+            rs = ps.executeQuery();
 
             System.out.println("id \t  name  \t surname \t position ");
 
             int employeeID;
 
             Objects employee = new Objects();
-        while (rs.next()) {
+            while (rs.next()) {
                 employeeID = rs.getInt("id");
 
                 System.out.println(employeeID + " \t " + rs.getString("first_name") + " \t " + rs.getString("last_name") + " \t " + rs.getString("position"));
-employee.setId(employeeID);
-        }
+                employee.setId(employeeID);
+            }
             return employee;
 
 
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+            return null;
+        }
+
     }
 
-
-     catch (SQLException throwables) {
-        throwables.printStackTrace();
-        return null;
-    }
-
-}
-
-    public static void getEmployeeBySurname(){
+    public static void getEmployeeBySurname() {
         System.out.println("\nEnter the employee's surname: ");
         String searchValue = scanner.next().trim();
 
         try {
-            ps = DbConnection.user().prepareStatement("SELECT * FROM employees WHERE last_name = '" + searchValue +"'");
+            ps = DbConnection.user().prepareStatement("SELECT * FROM employees WHERE last_name = '" + searchValue + "'");
             rs = ps.executeQuery();
 
             System.out.println("id \t  name  \t surname \t position ");
@@ -311,26 +305,23 @@ employee.setId(employeeID);
             Objects employee = new Objects();
             while (rs.next()) {
 
-                System.out.println( rs.getInt("id") + " \t " + rs.getString("first_name") + " \t " + rs.getString("last_name") + " \t " + rs.getString("position"));
+                System.out.println(rs.getInt("id") + " \t " + rs.getString("first_name") + " \t " + rs.getString("last_name") + " \t " + rs.getString("position"));
 
             }
 
 
-        }
-
-
-        catch (SQLException throwables) {
+        } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
 
     }
 
-    public static void getEmployeeByPosition(){
+    public static void getEmployeeByPosition() {
         System.out.println("\nEnter the employee's position: ");
         String searchValue = scanner.next().trim();
 
         try {
-            ps = DbConnection.user().prepareStatement("SELECT * FROM employees WHERE position= '" + searchValue +"'");
+            ps = DbConnection.user().prepareStatement("SELECT * FROM employees WHERE position= '" + searchValue + "'");
             rs = ps.executeQuery();
 
             System.out.println("id \t  name  \t surname \t position ");
@@ -338,21 +329,18 @@ employee.setId(employeeID);
             Objects employee = new Objects();
             while (rs.next()) {
 
-                System.out.println( rs.getInt("id") + " \t " + rs.getString("first_name") + " \t " + rs.getString("last_name") + " \t " + rs.getString("position"));
+                System.out.println(rs.getInt("id") + " \t " + rs.getString("first_name") + " \t " + rs.getString("last_name") + " \t " + rs.getString("position"));
 
             }
 
 
-        }
-
-
-        catch (SQLException throwables) {
+        } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
 
     }
 
-    //needs to be tested
+
     public static void getLecturersBySubject() {
         System.out.println("Choose a subject");
         System.out.println("1. Mathematics");
@@ -390,9 +378,9 @@ employee.setId(employeeID);
 
         if (subject != (null)) {
             try {
-                ps = DbConnection.user().prepareStatement("SELECT DISTINCT employees.first_name, employees.first_name FROM scores INNER JOIN employees ON scores.lecturers_id = employee.id WHERE subject = '" + subject + "'");
+                ps = DbConnection.user().prepareStatement("SELECT DISTINCT employees.first_name, employees.last_name FROM scores INNER JOIN employees ON scores.lecturers_id = employees.id WHERE subject = '" + subject + "'");
                 rs = ps.executeQuery();
-                System.out.println("Mathematica");
+                System.out.println(subject);
                 System.out.println("Name \t Surname");
                 while (rs.next()) {
                     System.out.println(rs.getString("first_name") + " \t " +
@@ -414,33 +402,23 @@ employee.setId(employeeID);
 
         }
     }
-//not sure will it work, need data in database to check it
+
+
     public static void getLecturerByStudentGroup() {
-            System.out.print("Type group: ");
-            String groupID = scanner.next().trim();
+        System.out.print("Type group: ");
+        String groupID = scanner.next().trim();
         try {
-            ps = DbConnection.user().prepareStatement("SELECT DISTINCT employees.first_name, employees.first_name FROM ((scores INNER JOIN employees ON scores.lecturers_id = employee.id) INNER JOIN students ON scores.student_id = students.id) WHERE group_id = '" + groupID);
+            ps = DbConnection.user().prepareStatement("SELECT DISTINCT employees.first_name, employees.last_name, scores.subject FROM scores INNER JOIN employees ON scores.lecturers_id = employees.id LEFT JOIN students ON scores.student_id = students.id WHERE group_id = '" + groupID + "'");
             rs = ps.executeQuery();
-            System.out.println("Mathematica");
-            System.out.println("Name \t Surname");
+            System.out.println(groupID);
+            System.out.println("Name \t Surname \t Subject");
             while (rs.next()) {
                 System.out.println(rs.getString("first_name") + " \t " +
-                        rs.getString("last_name"));
+                        rs.getString("last_name") + " \t " + rs.getString("subject"));
             }
         } catch (SQLException throwables) {
             throwables.printStackTrace();
 
         }
-        }
-
-    public static String getRandomNumberString() {
-        //Password generator
-        // It will generate 6 digit random Number.
-        // from 0 to 999999
-        Random rnd = new Random();
-        int number = rnd.nextInt(999999);
-
-        // this will convert any number sequence into 6 character.
-        return String.format("%06d", number);
     }
 }
