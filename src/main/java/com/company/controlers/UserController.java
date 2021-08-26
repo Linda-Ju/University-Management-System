@@ -2,6 +2,7 @@ package com.company.controlers;
 ///THIS IS COPY FROM OTHER PROJECT, NEEDS TO BE UPDATED
 
 import com.company.dbhelper.DbConnection;
+import com.company.menu.SubMenu;
 import com.company.objects.Objects;
 
 import java.sql.PreparedStatement;
@@ -13,6 +14,7 @@ public class UserController {
     private static Scanner scanner = new Scanner(System.in);
     private static PreparedStatement ps;
     private static ResultSet rs;
+    //password validation can be as helper method that returns password.
 
    /*
    Since users are automatically not sure that we need new user registration option
@@ -98,16 +100,22 @@ public class UserController {
 
                     }
                 } else {
-                    System.out.println("Password doesn't match");
+                    System.out.println("Do you wish to start over Y/N");
+                    String proceed = scanner.next().trim().toUpperCase();
+                    if (proceed.equals("Y")) {
+                        changeUserPassword();
+                    } else {
+                        System.out.println("Redirecting to start menu");
+                    }
 
                 }
-//            Menu.mainMenu();
+
             }
 
 
         } catch (Exception e) {
             e.printStackTrace();
-
+           System.out.println("Redirecting to start menu");
         }
     }
 
