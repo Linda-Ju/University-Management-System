@@ -13,6 +13,7 @@ public class StudentsController {
     private static Scanner scanner = new Scanner(System.in);
     private static PreparedStatement ps;
     private static ResultSet rs;
+    //selection/edition can be done in single method by case option
 
     public static void addNewStudent() {
 
@@ -31,7 +32,7 @@ public class StudentsController {
 
 
 
-
+//adding data to table students
         try {
             ps = DbConnection.user().prepareStatement("INSERT INTO students(name, surname, faculty)" +
                     "VALUES ('" + name + "', '" + surname + "' , '" + faculty +  "')");
@@ -46,10 +47,7 @@ public class StudentsController {
 
         }
 
-
-//        System.out.println("Welcome message");
-
-
+// adding new user to database
             try {
                 ps = DbConnection.user().prepareStatement("SELECT * FROM students WHERE name = '" + name +
                         "' AND surname = '" + surname + "' AND faculty = '" + faculty + "';");
@@ -60,7 +58,7 @@ public class StudentsController {
                 while (rs.next()) {
 
                     int studentsID = rs.getInt("id");
-
+                    System.out.println("Students ID: " + studentsID);
                     String password = SantasLittleHelpers.getRandomNumberString();
                     String login = name.substring(0, 3) + surname.substring(0, 3) + studentsID;//
 
@@ -98,9 +96,14 @@ public class StudentsController {
 
 
             } catch (Exception e) {
-                e.printStackTrace();
-
-            }
+                e.printStackTrace();}
+        System.out.println("Are you ready to assign group(Students ID will be needed)? Y/N");
+        String option = scanner.next().trim();
+        if (option.equals("Y")) {
+            editStudentGroup();
+        } else {
+            System.out.println("Redirecting to start menu...");
+        }
     }
 
     public static void editStudentName(){
