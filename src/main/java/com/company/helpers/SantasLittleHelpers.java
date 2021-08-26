@@ -2,6 +2,7 @@ package com.company.helpers;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Random;
 import java.util.Scanner;
 
 public class SantasLittleHelpers {
@@ -19,7 +20,7 @@ public class SantasLittleHelpers {
 
         System.out.print("Select an option: ");
         int subject = scanner.nextInt();
-        String subjectName = "";
+        String subjectName;
 
         switch (subject) {
             case 1:
@@ -48,10 +49,20 @@ public class SantasLittleHelpers {
         return subjectName;
     }
 
-
     public static String dateFormat() {
         Date date = new Date();
         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
         return formatter.format(date);
+    }
+
+    public static String getRandomNumberString() {
+        //Password generator
+        // It will generate 6 digit random Number.
+        // from 0 to 999999
+        Random rnd = new Random();
+        int number = rnd.nextInt(999999);
+
+        // this will convert any number sequence into 6 character.
+        return String.format("%06d", number);
     }
 }

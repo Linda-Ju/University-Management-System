@@ -12,7 +12,14 @@ public class ScoresController {
     private static Scanner scanner = new Scanner(System.in);
     private static PreparedStatement ps;
     private static ResultSet rs;
-
+    //need to think about getScoresByStudentsID, that method can be used for edit method,
+    //but it must pass subjectName, studentsID so the only thing that will be needed
+    // for submission change - date and lecturersID(that can be sign automatically
+    //if we figure out proper login method)
+//needs a couple of methods:
+// get individual average score by every subject(tip for SQL:select subject, avg(id) as score from scores where student_id = ** group by subject)
+// get individual average (tip for SQL: select avg(t.score) from (select username, avg(id) as score from users scores student_id = ** group by access) as t)
+// get average for all students(can be used for scholarship and budget places)
     public static void addNewScore() {
 
         String strDate = SantasLittleHelpers.dateFormat();
@@ -118,7 +125,7 @@ public class ScoresController {
     }
 
 
-    public static void getScoreByStudentID() {
+    public static void selectScoresBySubjectAndStudentID() {
         System.out.print("Enter the student's ID: ");
         int studentID = scanner.nextInt();
         System.out.println("");
@@ -130,10 +137,12 @@ public class ScoresController {
             rs = ps.executeQuery();
             int score;
             String date;
+            System.out.println(subjectName);
+            System.out.println(" score \t submission date");
             while (rs.next()) {
                 score = rs.getInt("score");
                 date = rs.getString("submitted");
-                System.out.println(score + "\t" + date + "\t");
+                System.out.println(score + "\t" + date );
             }
         } catch (Exception e) {
             e.printStackTrace();

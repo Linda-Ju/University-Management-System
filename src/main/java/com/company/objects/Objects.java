@@ -1,5 +1,6 @@
 package com.company.objects;
 
+
 public class Objects {
     private int id;
 
