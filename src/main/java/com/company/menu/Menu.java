@@ -2,7 +2,6 @@ package com.company.menu;
 
 
 import com.company.controlers.EmployeesController;
-import com.company.controlers.UserController;
 
 import java.util.Scanner;
 
@@ -45,16 +44,17 @@ public class Menu {
 
             default:
                 System.out.println("Invalid option\n");
-                System.out.println("Do you wish to try again Y/N");
-                String endSession = scanner.next().trim();
-                if (endSession.equals("Y")) {
+                
+        }
+        System.out.println("Do you wish to proceed Y/N");
+        String endSession = scanner.next().trim();
+        if (endSession.equals("Y")) {
 
-                    System.out.println("redirecting to start..\n");
-                    adminMainMenu();
-                } else {
-                    System.out.println("End of session. User logout.");
+            System.out.println("redirecting to start..\n");
+            adminMainMenu();
+        } else {
+            System.out.println("End of session. User logout.");
 
-                }
         }
     }
 
@@ -92,18 +92,19 @@ public class Menu {
 
             default:
                 System.out.println("Invalid option\n");
-                System.out.println("Do you wish to try again Y/N");
-                String endSession = scanner.next().trim();
-                if (endSession.equals("Y")) {
+                
+        }
+        System.out.println("Do you wish to proceed Y/N");
+        String endSession = scanner.next().trim();
+        if (endSession.equals("Y")) {
 
-                    System.out.println("redirecting to start..\n");
-                    administrationMainMenu();
-                }
+            System.out.println("redirecting to start..\n");
+            administrationMainMenu();
+        }
 
-                else{
-                    System.out.println("End of session. User logout.");
+        else{
+            System.out.println("End of session. User logout.");
 
-                }
         }
     }
 
@@ -131,18 +132,18 @@ public class Menu {
 
             default:
                 System.out.println("Invalid option\n");
-                System.out.println("Do you wish to try again Y/N");
-                String endSession = scanner.next().trim();
-                if (endSession.equals("Y")) {
+        }
+        System.out.println("Do you wish to proceed Y/N");
+        String endSession = scanner.next().trim();
+        if (endSession.equals("Y")) {
 
-                    System.out.println("redirecting to start..\n");
-                    lecturerAccessMenu();
-                }
+            System.out.println("redirecting to start..\n");
+            lecturerAccessMenu();
+        }
 
-                else{
-                    System.out.println("End of session. User logout.");
+        else{
+            System.out.println("End of session. User logout.");
 
-                }
         }
     }
 
@@ -170,18 +171,19 @@ public class Menu {
 
             default:
                 System.out.println("Invalid option\n");
-                System.out.println("Do you wish to try again Y/N");
-                String endSession = scanner.next().trim();
-                if (endSession.equals("Y")) {
+               
+        }
+        System.out.println("Do you wish to proceed Y/N");
+        String endSession = scanner.next().trim();
+        if (endSession.equals("Y")) {
 
-                    System.out.println("redirecting to main menu..\n");
-                    studentAccessMenu();
-                }
+            System.out.println("redirecting to main menu..\n");
+            studentAccessMenu();
+        }
 
-                else{
-                    System.out.println("End of session. User logout.");
+        else{
+            System.out.println("End of session. User logout.");
 
-                }
         }
     }
 }
