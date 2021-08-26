@@ -5,14 +5,14 @@ import com.company.controlers.*;
 import java.util.Scanner;
 
 public class SubMenu {
-   private static  Scanner scanner = new Scanner(System.in);
+    private static Scanner scanner = new Scanner(System.in);
 
-    public static void userSubMenu(){
-        System.out.println("what do you want to see\n");
+    public static void userSubMenu() {
+        System.out.println("What do you want to do?");
 
         System.out.println("1. Remind password");
-        System.out.println("5. Change password\n");
-        System.out.println("Select an option");
+        System.out.println("5. Change password");
+        System.out.print("Select an option");
         int option = scanner.nextInt();
 
         switch (option) {
@@ -25,20 +25,18 @@ public class SubMenu {
 
             default:
                 System.out.println("Invalid option\n");
-
         }
-        System.out.println("Do you wish to do another action with users data Y/N");
-        String endSession = scanner.next().trim();
+        System.out.print("Do you wish to do another action with users data Y/N");
+        String endSession = scanner.next().trim().toUpperCase();
         if (endSession.equals("Y")) {
-
-            System.out.println("redirecting to start..\n");
+            System.out.println("Redirecting to start..\n");
             userSubMenu();
         }
     }
 
-    public static void studentSubMenu(){
+    public static void studentSubMenu() {
 
-        System.out.println("Student data\n");
+        System.out.println("Student data:\n");
 
         System.out.println("1. Add new student");
         System.out.println("2. Edit name ");
@@ -47,7 +45,7 @@ public class SubMenu {
         System.out.println("5. Change group");
         System.out.println("6. Delete student\n");
 
-        System.out.println("Select an option");
+        System.out.print("Select an option");
         int option = scanner.nextInt();
 
         switch (option) {
@@ -71,20 +69,18 @@ public class SubMenu {
                 break;
             default:
                 System.out.println("Invalid option\n");
-
-                }
+        }
         System.out.println("Do you wish to do it again Y/N");
-        String endSession = scanner.next().trim();
+        String endSession = scanner.next().trim().toUpperCase();
         if (endSession.equals("Y")) {
-
-            System.out.println("redirecting to start..\n");
+            System.out.println("Redirecting to start..\n");
             studentSubMenu();
         }
     }
 
-    public static void employeeSubMenu(){
+    public static void employeeSubMenu() {
 
-        System.out.println("Employee data\n");
+        System.out.println("Employee data:\n");
 
         System.out.println("1. Add new employee");
         System.out.println("2. Edit name ");
@@ -92,7 +88,7 @@ public class SubMenu {
         System.out.println("4. Change position");
         System.out.println("5. Delete employee\n");
 
-        System.out.println("Select an option");
+        System.out.print("\nSelect an option");
         int option = scanner.nextInt();
 
         switch (option) {
@@ -103,10 +99,10 @@ public class SubMenu {
                 EmployeesController.editEmployeeName();
                 break;
             case 3:
-               EmployeesController.editEmployeeSurname();
+                EmployeesController.editEmployeeSurname();
                 break;
             case 4:
-               EmployeesController.editEmployeePosition();
+                EmployeesController.editEmployeePosition();
                 break;
             case 5:
                 EmployeesController.deleteEmployee();
@@ -114,20 +110,18 @@ public class SubMenu {
 
             default:
                 System.out.println("Invalid option\n");
-
-                }
+        }
         System.out.println("Do you wish to do it again Y/N");
-        String endSession = scanner.next().trim();
+        String endSession = scanner.next().trim().toUpperCase();
         if (endSession.equals("Y")) {
-
-            System.out.println("redirecting to start..\n");
+            System.out.println("Redirecting to start..\n");
             employeeSubMenu();
         }
     }
 
-    public static void eventSubMenu(){
+    public static void eventSubMenu() {
 
-        System.out.println("Event data\n");
+        System.out.println("Event data:\n");
 
         System.out.println("1. Add new event");
         System.out.println("2. Edit label ");
@@ -148,7 +142,7 @@ public class SubMenu {
                 EventsController.editEventDate();
                 break;
             case 4:
-               EventsController.editEventDescription();
+                EventsController.editEventDescription();
                 break;
             case 5:
                 EventsController.deleteEvent();
@@ -156,20 +150,18 @@ public class SubMenu {
 
             default:
                 System.out.println("Invalid option\n");
-
         }
         System.out.println("Do you wish to do it again Y/N");
-        String endSession = scanner.next().trim();
+        String endSession = scanner.next().trim().toUpperCase();
         if (endSession.equals("Y")) {
-
-            System.out.println("redirecting to start..\n");
+            System.out.println("Redirecting to start..\n");
             eventSubMenu();
         }
     }
 
-    public static void scoreSubMenu(){
+    public static void scoreSubMenu() {
 
-        System.out.println("Scores data\n");
+        System.out.println("Scores data:\n");
 
         System.out.println("1. Add new score");
         System.out.println("2. Edit score");
@@ -188,24 +180,20 @@ public class SubMenu {
             case 3:
                 ScoresController.deleteScore();
                 break;
-
-
             default:
                 System.out.println("Invalid option\n");
-
         }
         System.out.println("Do you wish to do it again Y/N");
-        String endSession = scanner.next().trim();
+        String endSession = scanner.next().trim().toUpperCase();
         if (endSession.equals("Y")) {
-
-            System.out.println("redirecting to start..\n");
+            System.out.println("Redirecting to start..\n");
             scoreSubMenu();
         }
     }
 
-    public static void observeData(){
+    public static void observeData() {
 
-        System.out.println("what do you want to see\n");
+        System.out.println("What do you want to see?\n");
 
         System.out.println("1. Employee");
         System.out.println("2. Lecturers");
@@ -218,7 +206,7 @@ public class SubMenu {
 
         switch (option) {
             case 1:
-               observeChoiceEmployee();
+                observeChoiceEmployee();
                 break;
             case 2:
                 observeChoiceLecturers();
@@ -230,28 +218,25 @@ public class SubMenu {
                 observeChoiceScores();
                 break;
             case 5:
-               observeChoiceEvents();
+                observeChoiceEvents();
                 System.out.println("End of this session. Redirecting to start...");
                 observeData();
                 break;
 
             default:
                 System.out.println("Invalid option\n");
-
-
         }
         System.out.println("Do you wish to do it again Y/N");
-        String endSession = scanner.next().trim();
+        String endSession = scanner.next().trim().toUpperCase();
         if (endSession.equals("Y")) {
-
-            System.out.println("redirecting to start..\n");
+            System.out.println("Redirecting to start..\n");
             observeData();
         }
     }
 
-    public static void observeChoiceEmployee(){
+    public static void observeChoiceEmployee() {
 
-        System.out.println("what do you want to see\n");
+        System.out.println("What do you want to see?\n");
 
         System.out.println("1. Get employee by id");
         System.out.println("2. Get employee by surname");
@@ -269,34 +254,27 @@ public class SubMenu {
             case 3:
                 EmployeesController.selectEmployeeByPosition();
                 break;
-
-
             default:
                 System.out.println("Invalid option\n");
-
         }
         System.out.println("Do you wish to do it again Y/N");
-        String endSession = scanner.next().trim();
+        String endSession = scanner.next().trim().toUpperCase();
         if (endSession.equals("Y")) {
-
-            System.out.println("redirecting to start..\n");
+            System.out.println("Redirecting to start..\n");
             observeChoiceEmployee();
-        }
-
-        else{
+        } else {
             System.out.println("End of this session. Redirecting to start...");
-
         }
     }
 
-    public static void observeChoiceLecturers(){
-        System.out.println("what do you want to see\n");
+    public static void observeChoiceLecturers() {
+        System.out.println("What do you want to see?\n");
 
         System.out.println("1. Get lecturer by id");
         System.out.println("2. Get lecturer surname");
         System.out.println("3. Get lecturers by subject");
         System.out.println("4. Get lecturers by student group\n");
-        System.out.println("Select an option");
+        System.out.print("\nSelect an option");
         int option = scanner.nextInt();
 
         switch (option) {
@@ -312,34 +290,28 @@ public class SubMenu {
             case 4:
                 EmployeesController.selectLecturersByStudentGroup();
                 break;
-
             default:
                 System.out.println("Invalid option\n");
-
         }
         System.out.println("Do you wish to do it again Y/N");
-        String endSession = scanner.next().trim();
+        String endSession = scanner.next().trim().toUpperCase();
         if (endSession.equals("Y")) {
-
             System.out.println("redirecting to start..\n");
             observeChoiceEmployee();
-        }
-
-        else{
+        } else {
             System.out.println("End of this session. Redirecting to start...");
-
         }
     }
 
-    public static void observeChoiceStudents(){
+    public static void observeChoiceStudents() {
 
-        System.out.println("what do you want to see\n");
+        System.out.println("What do you want to see?\n");
 
         System.out.println("1. Get student by id");
         System.out.println("2. Get student by surname");
         System.out.println("3. Get students list by group");
         System.out.println("4. Get students list by faculty\n");
-        System.out.println("Select an option");
+        System.out.print("\nSelect an option");
         int option = scanner.nextInt();
 
         switch (option) {
@@ -355,27 +327,22 @@ public class SubMenu {
             case 4:
                 StudentsController.selectStudentsByFaculty();
                 break;
-
             default:
                 System.out.println("Invalid option\n");
-
         }
         System.out.println("Do you wish to do it again Y/N");
-        String endSession = scanner.next().trim();
+        String endSession = scanner.next().trim().toUpperCase();
         if (endSession.equals("Y")) {
-
-            System.out.println("redirecting to start..\n");
+            System.out.println("Redirecting to start..\n");
             observeChoiceStudents();
-        }
-
-        else{
+        } else {
             System.out.println("End of this session. Redirecting to start...");
             observeData();
         }
     }
 
-    public static void observeChoiceScores(){
-        System.out.println("what do you want to see\n");
+    public static void observeChoiceScores() {
+        System.out.println("What do you want to see?\n");
 
         System.out.println("1. Get scores by subject");
         System.out.println("2. Get final score by subjects");
@@ -387,42 +354,36 @@ public class SubMenu {
             case 1:
                 ScoresController.selectScoresBySubjectAndStudentID();
                 break;
-            case 2 :
+            case 2:
                 System.out.println("this option still developing");
                 break;
             case 3:
                 System.out.println("this option is not ready");
                 break;
-
-
             default:
                 System.out.println("Invalid option\n");
-
         }
         System.out.println("Do you wish to do it again Y/N");
-        String endSession = scanner.next().trim();
+        String endSession = scanner.next().trim().toUpperCase();
         if (endSession.equals("Y")) {
-
             System.out.println("redirecting to start..\n");
             observeChoiceStudents();
-        }
-
-        else{
+        } else {
             System.out.println("End of this session. Redirecting to start...");
             observeData();
         }
     }
 
-    public static void observeChoiceEvents(){
+    public static void observeChoiceEvents() {
 
-        System.out.println("what do you want to see\n");
+        System.out.println("What do you want to see?\n");
 
         System.out.println("1. Get event by id");
         System.out.println("2. Get event by date");
         System.out.println("3. Get events by month");
         System.out.println("4. Get events by year");
         System.out.println("5. Get event by label\n");
-        System.out.println("Select an option");
+        System.out.print("Select an option");
         int option = scanner.nextInt();
 
         switch (option) {
@@ -441,23 +402,17 @@ public class SubMenu {
             case 5:
                 EventsController.selectEventByLabel();
                 break;
-
             default:
                 System.out.println("Invalid option\n");
-
-                }
-         System.out.println("Do you wish to do it again Y/N");
-        String endSession = scanner.next().trim();
-        if (endSession.equals("Y")) {
-
-            System.out.println("redirecting to start..\n");
-            observeChoiceStudents();
         }
-
-        else{
+        System.out.println("Do you wish to do it again Y/N");
+        String endSession = scanner.next().trim().toUpperCase();
+        if (endSession.equals("Y")) {
+            System.out.println("Redirecting to start..\n");
+            observeChoiceStudents();
+        } else {
             System.out.println("End of this session. Redirecting to start...");
             observeData();
         }
     }
-
 }
