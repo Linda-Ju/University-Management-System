@@ -15,7 +15,7 @@ public class EventsController {
     private static PreparedStatement ps;
     private static ResultSet rs;
 //selection/edition can be done in single method by case option
-    public static void addNewEvent() {
+  public static void addNewEvent() {
 
 
         System.out.println("\nEnter event: ");

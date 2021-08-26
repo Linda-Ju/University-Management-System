@@ -15,6 +15,10 @@ public class EmployeesController {
     private static ResultSet rs;
     //selection/edition can be done in single method by case option
 
+    // method selectActiveLecturers can be added
+// (SQL tip:select employees.first_name, employees.last_name, scores.subject from scores inner join employees on scores.lecturers_id = employees.id group by scores.lecturers_id;)
+
+
     public static void addNewEmployee() {
 
 
@@ -31,6 +35,7 @@ public class EmployeesController {
 
 
         try {
+
             ps = DbConnection.user().prepareStatement("INSERT INTO employees(first_name, last_name, position)" +
                     "VALUES ('" + name + "', '" + surname + "' , '" + position + "')");
 
@@ -372,7 +377,7 @@ public class EmployeesController {
     }
 
 
-    public static void selectLecturerByStudentGroup() {
+    public static void selectLecturersByStudentGroup() {
         System.out.print("Type group: ");
         String groupID = scanner.next().trim();
         try {
