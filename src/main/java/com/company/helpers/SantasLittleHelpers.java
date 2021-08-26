@@ -20,7 +20,7 @@ public class SantasLittleHelpers {
 
         System.out.print("Select an option: ");
         int subject = scanner.nextInt();
-        String subjectName = "";
+        String subjectName;
 
         switch (subject) {
             case 1:
