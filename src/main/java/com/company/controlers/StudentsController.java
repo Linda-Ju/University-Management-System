@@ -218,11 +218,11 @@ public class StudentsController {
         System.out.print("\nEnter the student's surname: ");
         String surname = scanner.next().trim();
         try {
-            ps = DbConnection.user().prepareStatement("SELECT * FROM students WHERE surname = '" + surname + "'");
+            ps = DbConnection.user().prepareStatement("SELECT * FROM students WHERE surname = '" + surname + "' ORDER BY name");
             rs = ps.executeQuery();
             System.out.printf("%-3.5s %-9.12s %-13.13s %-8.8s %-20.24s%n", "id", "name", "surname", "group", "faculty");
             while (rs.next()) {
-                System.out.printf("%-3.5s %-9.12s %-13.13s %-8.8s %-20.20s%n", rs.getInt("id"), rs.getString("name"),
+                System.out.printf("%-3.5s %-9.12s %-13.13s %-8.8s %-25.25s%n", rs.getInt("id"), rs.getString("name"),
                         rs.getString("surname"),
                         rs.getString("group_id"),
                         rs.getString("faculty"));
@@ -238,16 +238,16 @@ public class StudentsController {
         String faculty = scanner.nextLine().trim();
 
         try {
-            ps = DbConnection.user().prepareStatement("SELECT * FROM students WHERE faculty = '" + faculty + "'");
+            ps = DbConnection.user().prepareStatement("SELECT * FROM students WHERE faculty = '" + faculty + "' ORDER BY  group_id, name");
             rs = ps.executeQuery();
-
-            System.out.printf("%-3.5s %-9.12s %-13.13s %-8.8s %-20.24s%n", "id", "name", "surname", "group", "faculty");
-
+            System.out.println(faculty);
+            System.out.printf("%-3.5s %-9.12s %-13.13s %-8.8s%n", "#", "name", "surname", "group");
+            int count = 1;
             while (rs.next()) {
-                System.out.printf("%-3.5s %-9.12s %-13.13s %-8.8s %-20.20s%n", rs.getInt("id"), rs.getString("name"),
+                System.out.printf("%-3.5s %-9.12s %-13.13s %-8.8s%n", count, rs.getString("name"),
                         rs.getString("surname"),
-                        rs.getString("group_id"),
-                        rs.getString("faculty"));
+                        rs.getString("group_id"));
+                count++;
             }
         } catch (SQLException throwables) {
             throwables.printStackTrace();
@@ -255,21 +255,20 @@ public class StudentsController {
     }
 
     public static void selectStudentsByGroup() {
-        System.out.print("\nEnter the student's faculty: ");
-        String faculty = scanner.nextLine().trim();
+
         System.out.print("\nEnter the student's group: ");
         String group = scanner.next().trim();
         try {
-            ps = DbConnection.user().prepareStatement("SELECT * FROM students WHERE faculty = '" + faculty + "' AND group_id = '" + group + "'");
+            ps = DbConnection.user().prepareStatement("SELECT * FROM students WHERE  group_id = '" + group + "' ORDER BY name");
             rs = ps.executeQuery();
-
-            System.out.printf("%-3.5s %-9.12s %-13.13s %-8.8s %-20.24s%n", "id", "name", "surname", "group", "faculty");
+            int count = 1;
+            System.out.printf("%-3.5s %-9.12s %-13.13s %-8.8s %-20.24s%n", "#", "name", "surname", "group", "faculty");
             while (rs.next()) {
-                System.out.printf("%-3.5s %-9.12s %-13.13s %-8.8s %-20.20s%n", rs.getInt("id"), rs.getString("name"),
+                System.out.printf("%-3.5s %-9.12s %-13.13s %-8.8s %-25.25s%n", count, rs.getString("name"),
                         rs.getString("surname"),
                         rs.getString("group_id"),
                         rs.getString("faculty"));
-
+                count++;
             }
         } catch (SQLException throwables) {
             throwables.printStackTrace();
@@ -279,26 +278,22 @@ public class StudentsController {
     public static int getStudentByID() {
         System.out.print("\nEnter the student's id: ");
         int check = scanner.nextInt();
-int id=0;
+        int id = 0;
         try {
             ps = DbConnection.user().prepareStatement("SELECT * FROM students WHERE id =" + check);
             rs = ps.executeQuery();
 
 
             System.out.printf("%-3.5s %-9.12s %-13.13s %-8.8s %-20.24s%n", "id", "name", "surname", "group", "faculty");
-         
-            
+
+
             while (rs.next()) {
                 id = rs.getInt("id");
 
-                System.out.printf("%-3.5s %-9.12s %-13.13s %-8.8s %-20.20s%n", id, rs.getString("name"),
+                System.out.printf("%-3.5s %-9.12s %-13.13s %-8.8s %-25.25s%n", id, rs.getString("name"),
                         rs.getString("surname"),
                         rs.getString("group_id"),
                         rs.getString("faculty"));
-
-             
-
-            System.out.printf("%-3.5s %-9.12s %-13.13s %-27.27s %-20.24s%n", "id", "name", "surname", "faculty", "group");
 
 
             }
@@ -307,6 +302,6 @@ int id=0;
             throwables.printStackTrace();
 
         }
-       return id;
+        return id;
     }
 }
