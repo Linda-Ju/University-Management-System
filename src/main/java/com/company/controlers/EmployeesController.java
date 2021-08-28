@@ -65,7 +65,7 @@ public class EmployeesController {
                     while (rs.next()) {
                         int usersID = rs.getInt("id");
                         try {
-                            ps = DbConnection.user().prepareStatement("UPDATE employees SET user_id = " + usersID + " WHERE id =" + employeesID);
+                            ps = DbConnection.user().prepareStatement("UPDATE employees SET user_id = " + usersID + " WHERE id = " + employeesID);
                             ps.execute();
                         } catch (Exception e) {
                             e.printStackTrace();
@@ -82,71 +82,70 @@ public class EmployeesController {
     public static void editEmployeeName() {
         int id = getEmployeeByID();
 
-        System.out.print("\nDo you wish to edit this data Y/N");
+        System.out.print("\nDo you wish to edit this data? Y/N : ");
         String option = scanner.next().trim().toUpperCase();
         if (option.equals("Y")) {
 
-            System.out.print("\nEnter edited name");
+            System.out.print("\nEnter new employee's name: ");
             String update = scanner.next().trim();
 
             try {
                 ps = DbConnection.user().prepareStatement("UPDATE employees SET first_name = '" + update + "' WHERE id =" + id);
                 ps.execute();
-                System.out.println("\nsuccessfully updated");
+                System.out.println("\nSuccessfully updated employee's name.");
             } catch (Exception e) {
                 e.printStackTrace();
             }
         } else {
-            System.out.println("Person data remains unchanged");
+            System.out.println("The employee's data remained unchanged.");
         }
     }
 
     public static void editEmployeeSurname() {
         int id = getEmployeeByID();
 
-        System.out.print("\nDo you wish to edit this data Y/N");
+        System.out.print("\nDo you wish to edit this data? Y/N : ");
         String option = scanner.next().trim().toUpperCase();
         if (option.equals("Y")) {
 
-            System.out.print("\nEnter edited surname");
+            System.out.print("\nEnter new employee's surname: ");
             String update = scanner.next().trim();
 
             try {
                 ps = DbConnection.user().prepareStatement("UPDATE employees SET last_name = '" + update + "' WHERE id =" + id);
                 ps.execute();
 
-                System.out.println("\nsuccessfully updated");
+                System.out.println("\nSuccessfully updated employee's surname.");
 
             } catch (Exception e) {
                 e.printStackTrace();
             }
         } else {
-            System.out.println("Person data remains unchanged");
+            System.out.println("The employee's data remained unchanged.");
         }
     }
 
     public static void editEmployeePosition() {
         int id = getEmployeeByID();
 
-        System.out.print("\nDo you wish to edit this data Y/N");
+        System.out.print("\nDo you wish to edit this data? Y/N : ");
         String option = scanner.next().trim().toUpperCase();
         if (option.equals("Y")) {
 
-            System.out.println("Enter new position");
+            System.out.println("Enter new employee's position.");
             String update = scanner.next().trim();
 
             try {
                 ps = DbConnection.user().prepareStatement("UPDATE employees SET position = '" + update + "' WHERE id =" + id);
                 ps.execute();
 
-                System.out.println("successfully updated");
-                System.out.println("");
+                System.out.println("\nSuccessfully updated employee's position.");
 
             } catch (Exception e) {
                 e.printStackTrace();
             }
         } else {
-            System.out.println("Person data remains unchanged");
+            System.out.println("The employee's data remained unchanged.");
         }
     }
 
@@ -154,7 +153,7 @@ public class EmployeesController {
 
         int id = getEmployeeByID();
 
-        System.out.print("\nDo you wish to delete this data Y/N");
+        System.out.print("\nDo you wish to delete this data? Y/N : ");
         String option = scanner.next().trim().toUpperCase();
         if (option.equals("Y")) {
 
@@ -180,14 +179,14 @@ public class EmployeesController {
                 ps = DbConnection.user().prepareStatement("DELETE FROM employees WHERE id = " + id);
                 ps.execute();
 
-                System.out.println("\nsuccessfully removed to database");
+                System.out.println("\nThe employee was successfully removed from the database.");
 
             } catch (Exception e) {
                 e.printStackTrace();
             }
         } else {
-            System.out.println("Person remained in database");
-            System.out.println("");
+            System.out.println("The employee stayed in the database.");
+
         }
     }
 
@@ -199,12 +198,15 @@ int id = 0;
             ps = DbConnection.user().prepareStatement("SELECT * FROM employees WHERE id =" + check);
             rs = ps.executeQuery();
 
-            System.out.println("id \t  name  \t surname \t position ");
+            System.out.printf("%-3.5s %-9.12s %-13.13s %-20.24s%n", "id", "name", "surname", "position");
 
 
             while (rs.next()) {
 id = rs.getInt("id");
-                System.out.println(id + " \t " + rs.getString("first_name") + " \t " + rs.getString("last_name") + " \t " + rs.getString("position"));
+
+                System.out.printf("%-3.5s %-9.12s %-13.13s %-20.24s%n",employeeID, rs.getString("first_name"),
+                        rs.getString("last_name"), rs.getString("position"));
+                employee.setId(employeeID);
 
             }
 
@@ -222,11 +224,12 @@ id = rs.getInt("id");
             ps = DbConnection.user().prepareStatement("SELECT * FROM employees WHERE last_name = '" + searchValue + "'");
             rs = ps.executeQuery();
 
-            System.out.println("id \t  name  \t surname \t position ");
+            System.out.printf("%-3.5s %-9.12s %-13.13s %-20.24s%n", "id", "name", "surname", "position");
 
             while (rs.next()) {
 
-                System.out.println(rs.getInt("id") + " \t " + rs.getString("first_name") + " \t " + rs.getString("last_name") + " \t " + rs.getString("position"));
+                System.out.printf("%-3.5s %-9.12s %-13.13s %-20.24s%n",rs.getInt("id"), rs.getString("first_name"),
+                         rs.getString("last_name"), rs.getString("position"));
             }
         } catch (SQLException throwables) {
             throwables.printStackTrace();
@@ -241,9 +244,12 @@ id = rs.getInt("id");
             ps = DbConnection.user().prepareStatement("SELECT * FROM employees WHERE position= '" + searchValue + "'");
             rs = ps.executeQuery();
 
-            System.out.println("id \t  name  \t surname \t position ");
+            System.out.printf("%-3.5s %-9.12s %-13.13s %-20.24s%n", "id", "name", "surname", "position");
+
             while (rs.next()) {
-                System.out.println(rs.getInt("id") + " \t " + rs.getString("first_name") + " \t " + rs.getString("last_name") + " \t " + rs.getString("position"));
+                System.out.printf("%-3.5s %-9.12s %-13.13s %-20.24s%n", rs.getInt("id"),
+                        rs.getString("first_name"), rs.getString("last_name"),
+                        rs.getString("position"));
             }
         } catch (SQLException throwables) {
             throwables.printStackTrace();
@@ -257,38 +263,38 @@ id = rs.getInt("id");
             try {
                 ps = DbConnection.user().prepareStatement("SELECT DISTINCT employees.first_name, employees.last_name FROM scores INNER JOIN employees ON scores.lecturers_id = employees.id WHERE subject = '" + subject + "'");
                 rs = ps.executeQuery();
-                System.out.println(subject);
-                System.out.println("Name \t Surname");
+                System.out.println("\n" + subject + " lecturers:");
+                System.out.printf("%-9.12s %-13.13s%n","Name","Surname");
                 while (rs.next()) {
-                    System.out.println(rs.getString("first_name") + " \t " +
+                    System.out.printf("%-9.12s %-13.13s%n", rs.getString("first_name"),
                             rs.getString("last_name"));
                 }
             } catch (SQLException throwables) {
                 throwables.printStackTrace();
             }
         } else {
-            System.out.print("\nDo you wish to start over Y/N?");
+            System.out.print("\nDo you wish to start over? Y/N :  ");
             String proceed = scanner.next().trim().toUpperCase();
 
             if (proceed.equals("Y")) {
                 selectLecturersBySubject();
             } else {
-                System.out.println("redirecting to start menu");
+                System.out.println("Redirecting to start menu.");
             }
         }
     }
 
     public static void selectLecturersByStudentGroup() {
-        System.out.print("\nEnter the name of your group: ");
+        System.out.print("\nEnter the name of the group: ");
         String groupID = scanner.next().trim().toUpperCase();
         try {
             ps = DbConnection.user().prepareStatement("SELECT DISTINCT employees.first_name, employees.last_name, scores.subject FROM scores INNER JOIN employees ON scores.lecturers_id = employees.id LEFT JOIN students ON scores.student_id = students.id WHERE group_id = '" + groupID + "'");
             rs = ps.executeQuery();
             System.out.println(groupID);
-            System.out.println("Name \t Surname \t Subject");
+            System.out.printf("%-9.12s %-13.13s %-20.24s%n","Name", "Surname", "Subject");
             while (rs.next()) {
-                System.out.println(rs.getString("first_name") + " \t " +
-                        rs.getString("last_name") + " \t " + rs.getString("subject"));
+                System.out.printf("%-9.12s %-13.13s %-20.24s%n", rs.getString("first_name"),
+                        rs.getString("last_name"), rs.getString("subject"));
             }
         } catch (SQLException throwables) {
             throwables.printStackTrace();
