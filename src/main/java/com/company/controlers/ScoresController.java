@@ -113,7 +113,7 @@ public class ScoresController {
         }
     }
 
-    public static void selectScoresBySubjectAndStudentID() {
+    public static void selectStudentScoresBySubject() {
         String subjectName = SantasLittleHelpers.subjectCases();
 
         try {

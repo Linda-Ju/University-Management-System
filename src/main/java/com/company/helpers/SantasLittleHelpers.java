@@ -51,7 +51,7 @@ public class SantasLittleHelpers {
 
     public static String dateFormat() {
         Date date = new Date();
-        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+        SimpleDateFormat formatter = new SimpleDateFormat("dd.MM.yyyy");
         return formatter.format(date);
     }
 

@@ -2,7 +2,6 @@ package com.company.controlers;
 
 import com.company.dbhelper.DbConnection;
 import com.company.helpers.SantasLittleHelpers;
-import com.company.objects.Objects;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -26,7 +25,7 @@ public class StudentsController {
         System.out.print("\nEnter the student's faculty: ");
         String faculty = scanner.next();
 
-//adding data to table students
+////adding data to table students
         try {
             ps = DbConnection.user().prepareStatement("INSERT INTO students(name, surname, faculty)" +
                     "VALUES ('" + name + "', '" + surname + "' , '" + faculty + "')");
@@ -87,7 +86,7 @@ public class StudentsController {
     }
 
     public static void editStudentName() {
-        int id = getStudentByID().getId();
+        int id = getStudentByID();
 
         System.out.println("\nDo you wish to edit this data: Y/N");
         String option = scanner.next().trim().toUpperCase();
@@ -110,7 +109,7 @@ public class StudentsController {
     }
 
     public static void editStudentSurname() {
-        int id = getStudentByID().getId();
+        int id = getStudentByID();
 
         System.out.println("\nDo you wish to edit this data Y/N");
         String option = scanner.next().trim().toUpperCase();
@@ -134,7 +133,7 @@ public class StudentsController {
     }
 
     public static void editStudentFaculty() {
-        int id = getStudentByID().getId();
+        int id = getStudentByID();
 
         System.out.print("\nDo you wish to edit this data Y/N");
         String option = scanner.next().trim().toUpperCase();
@@ -156,7 +155,7 @@ public class StudentsController {
     }
 
     public static void editStudentGroup() {
-        int id = getStudentByID().getId();
+        int id = getStudentByID();
 
         System.out.print("\nDo you wish to edit this data Y/N");
         String option = scanner.next().trim().toUpperCase();
@@ -179,7 +178,7 @@ public class StudentsController {
 
     public static void deleteStudent() {
 
-        int id = getStudentByID().getId();
+        int id = getStudentByID();
 
         System.out.print("\nDo you wish to delete this data Y/N");
         String option = scanner.next().trim().toUpperCase();
@@ -277,31 +276,30 @@ public class StudentsController {
         }
     }
 
-    public static Objects getStudentByID() {
+    public static int getStudentByID() {
         System.out.print("\nEnter the student's id: ");
-        int id = scanner.nextInt();
-
+        int check = scanner.nextInt();
+int id=0;
         try {
-            ps = DbConnection.user().prepareStatement("SELECT * FROM students WHERE id =" + id);
+            ps = DbConnection.user().prepareStatement("SELECT * FROM students WHERE id =" + check);
             rs = ps.executeQuery();
 
             System.out.printf("%-3.5s %-9.12s %-13.13s %-27.27s %-20.24s%n", "id", "name", "surname", "faculty", "group");
-            int studentsID;
-            Objects student = new Objects();
-            while (rs.next()) {
-                studentsID = rs.getInt("id");
 
-                System.out.printf("%-3.5s %-9.12s %-13.13s %-27.27s %-20.20s%n", studentsID, rs.getString("name"),
+
+            while (rs.next()) {
+id = rs.getInt("id");
+                System.out.printf("%-3.5s %-9.12s %-13.13s %-27.27s %-20.20s%n", id, rs.getString("name"),
                         rs.getString("surname"),
                         rs.getString("faculty"),
                         rs.getString("group_id"));
                 System.out.println("");
-                student.setId(studentsID);
             }
-            return student;
+
         } catch (SQLException throwables) {
             throwables.printStackTrace();
-            return null;
+
         }
+       return id;
     }
 }
