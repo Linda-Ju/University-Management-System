@@ -6,6 +6,7 @@ import com.company.helpers.SantasLittleHelpers;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.SQLOutput;
 import java.util.Scanner;
 
 public class StudentsController {
@@ -240,14 +241,13 @@ public class StudentsController {
         try {
             ps = DbConnection.user().prepareStatement("SELECT * FROM students WHERE faculty = '" + faculty + "'");
             rs = ps.executeQuery();
-
-            System.out.printf("%-3.5s %-9.12s %-13.13s %-8.8s %-20.24s%n", "id", "name", "surname", "group", "faculty");
+            System.out.println(faculty);
+            System.out.printf("%-3.5s %-9.12s %-13.13s %-8.8s%n", "id", "name", "surname", "group");
 
             while (rs.next()) {
-                System.out.printf("%-3.5s %-9.12s %-13.13s %-8.8s %-25.25s%n", rs.getInt("id"), rs.getString("name"),
+                System.out.printf("%-3.5s %-9.12s %-13.13s %-8.8s%n", rs.getInt("id"), rs.getString("name"),
                         rs.getString("surname"),
-                        rs.getString("group_id"),
-                        rs.getString("faculty"));
+                        rs.getString("group_id"));
             }
         } catch (SQLException throwables) {
             throwables.printStackTrace();
