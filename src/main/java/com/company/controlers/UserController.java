@@ -2,8 +2,6 @@ package com.company.controlers;
 ///THIS IS COPY FROM OTHER PROJECT, NEEDS TO BE UPDATED
 
 import com.company.dbhelper.DbConnection;
-import com.company.menu.SubMenu;
-import com.company.objects.Objects;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -14,8 +12,7 @@ public class UserController {
     private static Scanner scanner = new Scanner(System.in);
     private static PreparedStatement ps;
     private static ResultSet rs;
-    //password validation can be as helper method that returns password.
-
+//selection options can be added- such as review all users and select users by access lvl
    /*
    Since users are automatically not sure that we need new user registration option
    Also user can be deleted on cascade with the person, so not sure if we need delete option
@@ -25,10 +22,10 @@ public class UserController {
 
     public static void findUserByUsername() {//can access only from admin panel
         System.out.print("\nEnter the username: ");
-        String password = scanner.next().trim();
+        String username = scanner.next().trim();
 
         try {
-            ps = DbConnection.user().prepareStatement("SELECT * FROM users WHERE username ='" + password + "'");
+            ps = DbConnection.user().prepareStatement("SELECT * FROM users WHERE username ='" + username + "'");
             rs = ps.executeQuery();
 
             System.out.println("id \t  username \t password \t access lvl");

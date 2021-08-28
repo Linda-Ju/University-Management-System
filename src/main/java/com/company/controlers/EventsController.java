@@ -2,8 +2,6 @@ package com.company.controlers;
 
 import com.company.dbhelper.DbConnection;
 
-import com.company.objects.Objects;
-
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -39,7 +37,7 @@ public class EventsController {
     }
 
     public static void editEventLabel() {
-        int id = getEventByID().getId();
+        int id = getEventByID();
         if (id != 0) {
             System.out.print("\nDo you wish to edit this data? Y/N : ");
             String option = scanner.next().trim().toUpperCase();
@@ -73,7 +71,7 @@ public class EventsController {
     }
 
     public static void editEventDate() {
-        int id = getEventByID().getId();
+        int id = getEventByID();
         if (id != 0) {
             System.out.print("\nDo you wish to edit this data? Y/N : ");
             String option = scanner.next().trim().toUpperCase();
@@ -105,7 +103,7 @@ public class EventsController {
     }
 
     public static void editEventDescription() {
-        int id = getEventByID().getId();
+        int id = getEventByID();
         if (id != 0) {
             System.out.print("\nDo you wish to edit this data? Y/N : ");
             String option = scanner.next().trim().toUpperCase();
@@ -226,13 +224,18 @@ public class EventsController {
         }
     }
 
-    public static Objects getEventByID() {
-        System.out.print("\nEnter the event's id: ");
-        int id = scanner.nextInt();
+
+
+
+    public static int getEventByID() {
+        System.out.print("\nEnter the events id: ");
+        int check = scanner.nextInt();
+        int id = 0;
 
         try {
-            ps = DbConnection.user().prepareStatement("SELECT * FROM events WHERE id =" + id);
+            ps = DbConnection.user().prepareStatement("SELECT * FROM events WHERE id =" + check);
             rs = ps.executeQuery();
+
 
             System.out.printf("%-3.5s %-12.12s %-25.25s %-15.100s%n", "id","date","event","description");
             int eventID;
@@ -242,11 +245,13 @@ public class EventsController {
                 System.out.printf("%-3.5s %-12.12s %-25.25s %-15.100s%n", eventID, rs.getString("event_date"),
                         rs.getString("label"), rs.getString("description"));
                 event.setId(eventID);
+
             }
-            return event;
+
         } catch (SQLException throwables) {
             throwables.printStackTrace();
-            return null;
+
         }
+        return  id;
     }
 }

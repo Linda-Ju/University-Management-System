@@ -352,7 +352,7 @@ public class SubMenu {
 
         switch (option) {
             case 1:
-                ScoresController.selectScoresBySubjectAndStudentID();
+                ScoresController.selectStudentScoresBySubject();
                 break;
             case 2:
                 System.out.println("this option still developing");
