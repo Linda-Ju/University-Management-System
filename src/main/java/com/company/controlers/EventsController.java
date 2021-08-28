@@ -238,13 +238,13 @@ public class EventsController {
 
 
             System.out.printf("%-3.5s %-12.12s %-25.25s %-15.100s%n", "id","date","event","description");
-            int eventID;
-            Objects event = new Objects();
+
+
             while (rs.next()) {
-                eventID = rs.getInt("id");
-                System.out.printf("%-3.5s %-12.12s %-25.25s %-15.100s%n", eventID, rs.getString("event_date"),
+                id = rs.getInt("id");
+                System.out.printf("%-3.5s %-12.12s %-25.25s %-15.100s%n", id, rs.getString("event_date"),
                         rs.getString("label"), rs.getString("description"));
-                event.setId(eventID);
+
 
             }
 

@@ -222,7 +222,7 @@ public class StudentsController {
             rs = ps.executeQuery();
             System.out.printf("%-3.5s %-9.12s %-13.13s %-8.8s %-20.24s%n", "id", "name", "surname", "group", "faculty");
             while (rs.next()) {
-                System.out.printf("%-3.5s %-9.12s %-13.13s %-8.8s %-20.20s%n", rs.getInt("id"), rs.getString("name"),
+                System.out.printf("%-3.5s %-9.12s %-13.13s %-8.8s %-25.25s%n", rs.getInt("id"), rs.getString("name"),
                         rs.getString("surname"),
                         rs.getString("group_id"),
                         rs.getString("faculty"));
@@ -244,7 +244,7 @@ public class StudentsController {
             System.out.printf("%-3.5s %-9.12s %-13.13s %-8.8s %-20.24s%n", "id", "name", "surname", "group", "faculty");
 
             while (rs.next()) {
-                System.out.printf("%-3.5s %-9.12s %-13.13s %-8.8s %-20.20s%n", rs.getInt("id"), rs.getString("name"),
+                System.out.printf("%-3.5s %-9.12s %-13.13s %-8.8s %-25.25s%n", rs.getInt("id"), rs.getString("name"),
                         rs.getString("surname"),
                         rs.getString("group_id"),
                         rs.getString("faculty"));
@@ -265,7 +265,7 @@ public class StudentsController {
 
             System.out.printf("%-3.5s %-9.12s %-13.13s %-8.8s %-20.24s%n", "id", "name", "surname", "group", "faculty");
             while (rs.next()) {
-                System.out.printf("%-3.5s %-9.12s %-13.13s %-8.8s %-20.20s%n", rs.getInt("id"), rs.getString("name"),
+                System.out.printf("%-3.5s %-9.12s %-13.13s %-8.8s %-25.25s%n", rs.getInt("id"), rs.getString("name"),
                         rs.getString("surname"),
                         rs.getString("group_id"),
                         rs.getString("faculty"));
@@ -291,14 +291,11 @@ int id=0;
             while (rs.next()) {
                 id = rs.getInt("id");
 
-                System.out.printf("%-3.5s %-9.12s %-13.13s %-8.8s %-20.20s%n", id, rs.getString("name"),
+                System.out.printf("%-3.5s %-9.12s %-13.13s %-8.8s %-25.25s%n", id, rs.getString("name"),
                         rs.getString("surname"),
                         rs.getString("group_id"),
                         rs.getString("faculty"));
 
-             
-
-            System.out.printf("%-3.5s %-9.12s %-13.13s %-27.27s %-20.24s%n", "id", "name", "surname", "faculty", "group");
 
 
             }
