@@ -30,7 +30,7 @@ public class Menu {
                 SubMenu.employeeSubMenu();
                 break;
             case 3:
-                SubMenu.studentSubMenu();
+//                SubMenu.studentSubMenu();
                 break;
             case 4:
                 SubMenu.scoreSubMenu();
@@ -75,7 +75,7 @@ public class Menu {
                 SubMenu.employeeSubMenu();
                 break;
             case 2:
-                SubMenu.studentSubMenu();
+//                SubMenu.studentSubMenu();
                 break;
             case 3:
                 SubMenu.scoreSubMenu();

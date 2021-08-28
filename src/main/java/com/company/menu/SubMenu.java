@@ -34,49 +34,49 @@ public class SubMenu {
         }
     }
 
-    public static void studentSubMenu() {
-
-        System.out.println("Student data:\n");
-
-        System.out.println("1. Add new student");
-        System.out.println("2. Edit name ");
-        System.out.println("3. Edit surname");
-        System.out.println("4. Change faculty");
-        System.out.println("5. Change group");
-        System.out.println("6. Delete student\n");
-
-        System.out.print("Select an option");
-        int option = scanner.nextInt();
-
-        switch (option) {
-            case 1:
-                StudentsController.addNewStudent();
-                break;
-            case 2:
-                StudentsController.editStudentName();
-                break;
-            case 3:
-                StudentsController.editStudentSurname();
-                break;
-            case 4:
-                StudentsController.editStudentFaculty();
-                break;
-            case 5:
-                StudentsController.editStudentGroup();
-                break;
-            case 6:
-                StudentsController.deleteStudent();
-                break;
-            default:
-                System.out.println("Invalid option\n");
-        }
-        System.out.println("Do you wish to do it again Y/N");
-        String endSession = scanner.next().trim().toUpperCase();
-        if (endSession.equals("Y")) {
-            System.out.println("Redirecting to start..\n");
-            studentSubMenu();
-        }
-    }
+//    public static void studentSubMenu() {
+//
+//        System.out.println("Student data:\n");
+//
+//        System.out.println("1. Add new student");
+//        System.out.println("2. Edit name ");
+//        System.out.println("3. Edit surname");
+//        System.out.println("4. Change faculty");
+//        System.out.println("5. Change group");
+//        System.out.println("6. Delete student\n");
+//
+//        System.out.print("Select an option");
+//        int option = scanner.nextInt();
+//
+//        switch (option) {
+//            case 1:
+//                StudentsController.addNewStudent();
+//                break;
+//            case 2:
+//                StudentsController.editStudentName();
+//                break;
+//            case 3:
+//                StudentsController.editStudentSurname();
+//                break;
+//            case 4:
+//                StudentsController.editStudentFaculty();
+//                break;
+//            case 5:
+//                StudentsController.editStudentGroup();
+//                break;
+//            case 6:
+//                StudentsController.deleteStudent();
+//                break;
+//            default:
+//                System.out.println("Invalid option\n");
+//        }
+//        System.out.println("Do you wish to do it again Y/N");
+//        String endSession = scanner.next().trim().toUpperCase();
+//        if (endSession.equals("Y")) {
+//            System.out.println("Redirecting to start..\n");
+//            studentSubMenu();
+//        }
+//    }
 
     public static void employeeSubMenu() {
 
