@@ -6,6 +6,7 @@ import com.company.dbhelper.DbConnection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.SQLOutput;
 import java.util.Scanner;
 
 public class UserController {
@@ -87,6 +88,43 @@ public class UserController {
         } catch (Exception e) {
             e.printStackTrace();
             System.out.println("Redirecting to start menu");
+        }
+    }
+
+    public static void findUsersByAccess(){
+        System.out.println("\n1. Admin");
+        System.out.println("2. Administrator");
+        System.out.println("3. Lecturer");
+        System.out.println("4. Student");
+        System.out.println(" OR any Press other digit to exit");
+        int option = scanner.nextInt();
+        String access;
+        switch(option){
+            case 1: access ="admin"; break;
+            case 2: access ="administration";break;
+            case 3: access ="lecturer"; break;
+            case 4: access ="student"; break;
+            default:
+                access = null;
+        }
+        if(access != null){
+            try {
+                ps = DbConnection.user().prepareStatement("SELECT * FROM users WHERE access ='" + access + "'");
+                rs = ps.executeQuery();
+
+                System.out.println("id \t  username \t password");
+
+                while (rs.next()) {
+                    System.out.println(access + " level");
+                    System.out.println(rs.getInt("id") + " \t " +
+                            rs.getString("username") + " \t " + rs.getString("password"));
+                    System.out.println("");
+                }
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            }
+        } else {
+            System.out.println("redirecting.. User Line");
         }
     }
 }//end of class

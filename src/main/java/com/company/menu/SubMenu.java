@@ -11,7 +11,8 @@ public class SubMenu {
         System.out.println("What do you want to do?");
 
         System.out.println("1. Remind password");
-        System.out.println("5. Change password");
+        System.out.println("2. Change password");
+        System.out.println("3. See users by access level");
         System.out.print("Select an option");
         int option = scanner.nextInt();
 
@@ -21,6 +22,9 @@ public class SubMenu {
                 break;
             case 2:
                 UserController.changeUserPassword();
+                break;
+            case 3:
+                UserController.findUsersByAccess();
                 break;
 
             default:
