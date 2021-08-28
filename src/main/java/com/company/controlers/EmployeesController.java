@@ -2,7 +2,6 @@ package com.company.controlers;
 
 import com.company.dbhelper.DbConnection;
 import com.company.helpers.SantasLittleHelpers;
-import com.company.objects.Objects;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -80,9 +79,8 @@ public class EmployeesController {
             e.printStackTrace();
         }
     }
-
     public static void editEmployeeName() {
-        int id = getEmployeeByID().getId();
+        int id = getEmployeeByID();
 
         System.out.print("\nDo you wish to edit this data Y/N");
         String option = scanner.next().trim().toUpperCase();
@@ -104,7 +102,7 @@ public class EmployeesController {
     }
 
     public static void editEmployeeSurname() {
-        int id = getEmployeeByID().getId();
+        int id = getEmployeeByID();
 
         System.out.print("\nDo you wish to edit this data Y/N");
         String option = scanner.next().trim().toUpperCase();
@@ -128,7 +126,7 @@ public class EmployeesController {
     }
 
     public static void editEmployeePosition() {
-        int id = getEmployeeByID().getId();
+        int id = getEmployeeByID();
 
         System.out.print("\nDo you wish to edit this data Y/N");
         String option = scanner.next().trim().toUpperCase();
@@ -154,7 +152,7 @@ public class EmployeesController {
 
     public static void deleteEmployee() {
 
-        int id = getEmployeeByID().getId();
+        int id = getEmployeeByID();
 
         System.out.print("\nDo you wish to delete this data Y/N");
         String option = scanner.next().trim().toUpperCase();
@@ -193,29 +191,27 @@ public class EmployeesController {
         }
     }
 
-    public static Objects getEmployeeByID() {
+    public static int getEmployeeByID() {
         System.out.print("\nEnter the employee's id: ");
-        int id = scanner.nextInt();
-
+        int check = scanner.nextInt();
+int id = 0;
         try {
-            ps = DbConnection.user().prepareStatement("SELECT * FROM employees WHERE id =" + id);
+            ps = DbConnection.user().prepareStatement("SELECT * FROM employees WHERE id =" + check);
             rs = ps.executeQuery();
 
             System.out.println("id \t  name  \t surname \t position ");
 
-            int employeeID;
-            Objects employee = new Objects();
-            while (rs.next()) {
-                employeeID = rs.getInt("id");
 
-                System.out.println(employeeID + " \t " + rs.getString("first_name") + " \t " + rs.getString("last_name") + " \t " + rs.getString("position"));
-                employee.setId(employeeID);
+            while (rs.next()) {
+id = rs.getInt("id");
+                System.out.println(id + " \t " + rs.getString("first_name") + " \t " + rs.getString("last_name") + " \t " + rs.getString("position"));
+
             }
-            return employee;
+
         } catch (SQLException throwables) {
             throwables.printStackTrace();
-            return null;
         }
+        return id;
     }
 
     public static void selectEmployeeBySurname() {
@@ -228,7 +224,6 @@ public class EmployeesController {
 
             System.out.println("id \t  name  \t surname \t position ");
 
-            Objects employee = new Objects();
             while (rs.next()) {
 
                 System.out.println(rs.getInt("id") + " \t " + rs.getString("first_name") + " \t " + rs.getString("last_name") + " \t " + rs.getString("position"));
@@ -247,8 +242,6 @@ public class EmployeesController {
             rs = ps.executeQuery();
 
             System.out.println("id \t  name  \t surname \t position ");
-
-            Objects employee = new Objects();
             while (rs.next()) {
                 System.out.println(rs.getInt("id") + " \t " + rs.getString("first_name") + " \t " + rs.getString("last_name") + " \t " + rs.getString("position"));
             }
@@ -256,7 +249,6 @@ public class EmployeesController {
             throwables.printStackTrace();
         }
     }
-
 
     public static void selectLecturersBySubject() {
         String subject = SantasLittleHelpers.subjectCases();

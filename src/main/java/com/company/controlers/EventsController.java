@@ -2,8 +2,6 @@ package com.company.controlers;
 
 import com.company.dbhelper.DbConnection;
 
-import com.company.objects.Objects;
-
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -39,7 +37,7 @@ public class EventsController {
     }
 
     public static void editEventLabel() {
-        int id = getEventByID().getId();
+        int id = getEventByID();
         if (id != 0) {
             System.out.print("\nDo you wish to edit this data Y/N");
             String option = scanner.next().trim();
@@ -73,7 +71,7 @@ public class EventsController {
     }
 
     public static void editEventDate() {
-        int id = getEventByID().getId();
+        int id = getEventByID();
         if (id != 0) {
             System.out.print("\nDo you wish to edit this data Y/N");
             String option = scanner.next().trim();
@@ -105,7 +103,7 @@ public class EventsController {
     }
 
     public static void editEventDescription() {
-        int id = getEventByID().getId();
+        int id = getEventByID();
         if (id != 0) {
             System.out.print("\nDo you wish to edit this data Y/N");
             String option = scanner.next().trim().toUpperCase();
@@ -227,27 +225,28 @@ public class EventsController {
         }
     }
 
-    public static Objects getEventByID() {
+    public static int getEventByID() {
         System.out.print("\nEnter the events id: ");
-        int id = scanner.nextInt();
-
+        int check = scanner.nextInt();
+        int id = 0;
         try {
-            ps = DbConnection.user().prepareStatement("SELECT * FROM events WHERE id =" + id);
+            ps = DbConnection.user().prepareStatement("SELECT * FROM events WHERE id =" + check);
             rs = ps.executeQuery();
 
             System.out.println("id \t date \t  event \t description");
-            int eventID;
-            Objects event = new Objects();
+
+
             while (rs.next()) {
-                eventID = rs.getInt("id");
-                System.out.println(eventID + " \t " + rs.getString("event_date") + " \t " +
+                id = rs.getInt("id");
+                System.out.println(id + " \t " + rs.getString("event_date") + " \t " +
                         rs.getString("label") + " \t " + rs.getString("description"));
-                event.setId(eventID);
+
             }
-            return event;
+
         } catch (SQLException throwables) {
             throwables.printStackTrace();
-            return null;
+
         }
+        return  id;
     }
 }
