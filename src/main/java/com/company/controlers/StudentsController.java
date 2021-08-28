@@ -76,7 +76,7 @@ public class StudentsController {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        System.out.print("\nAre you ready to assign group (Students ID will be needed)? Y/N");
+        System.out.print("\nAre you ready to assign group (Students ID will be needed)? Y/N : ");
         String option = scanner.next().trim().toUpperCase();
         if (option.equals("Y")) {
             editStudentGroup();
@@ -88,11 +88,11 @@ public class StudentsController {
     public static void editStudentName() {
         int id = getStudentByID();
 
-        System.out.println("\nDo you wish to edit this data: Y/N");
+        System.out.print("\nDo you wish to edit this data? Y/N : ");
         String option = scanner.next().trim().toUpperCase();
         if (option.equals("Y")) {
 
-            System.out.print("\nEnter edited name:");
+            System.out.print("\nEnter edited name: ");
             String update = scanner.next().trim();
 
             try {
@@ -104,18 +104,18 @@ public class StudentsController {
                 e.printStackTrace();
             }
         } else {
-            System.out.println("The student's data remained unchanged. ");
+            System.out.println("The student's data remained unchanged.");
         }
     }
 
     public static void editStudentSurname() {
         int id = getStudentByID();
 
-        System.out.println("\nDo you wish to edit this data Y/N");
+        System.out.print("\nDo you wish to edit this data? Y/N : ");
         String option = scanner.next().trim().toUpperCase();
         if (option.equals("Y")) {
 
-            System.out.print("\nEnter edited surname:");
+            System.out.print("\nEnter edited surname: ");
             String update = scanner.next().trim();
 
             try {
@@ -135,10 +135,10 @@ public class StudentsController {
     public static void editStudentFaculty() {
         int id = getStudentByID();
 
-        System.out.print("\nDo you wish to edit this data Y/N");
+        System.out.print("\nDo you wish to edit this data? Y/N : ");
         String option = scanner.next().trim().toUpperCase();
         if (option.equals("Y")) {
-            System.out.print("\nEnter new faculty:");
+            System.out.print("\nEnter new faculty: ");
             String update = scanner.next().trim();
             try {
                 ps = DbConnection.user().prepareStatement("UPDATE students SET faculty = '" + update + "' WHERE id =" + id);
@@ -157,10 +157,10 @@ public class StudentsController {
     public static void editStudentGroup() {
         int id = getStudentByID();
 
-        System.out.print("\nDo you wish to edit this data Y/N");
+        System.out.print("\nDo you wish to edit this data Y/N : ");
         String option = scanner.next().trim().toUpperCase();
         if (option.equals("Y")) {
-            System.out.print("\nEnter new group:");
+            System.out.print("\nEnter new group: ");
             String update = scanner.next().trim();
 
             try {
@@ -180,7 +180,7 @@ public class StudentsController {
 
         int id = getStudentByID();
 
-        System.out.print("\nDo you wish to delete this data Y/N");
+        System.out.print("\nDo you wish to delete this data? Y/N : ");
         String option = scanner.next().trim().toUpperCase();
 
         if (option.equals("Y")) {
@@ -220,13 +220,13 @@ public class StudentsController {
         try {
             ps = DbConnection.user().prepareStatement("SELECT * FROM students WHERE surname = '" + surname + "'");
             rs = ps.executeQuery();
-            System.out.printf("%-3.5s %-9.12s %-13.13s %-27.27s %-20.24s%n", "id", "name", "surname", "faculty", "group");
+            System.out.printf("%-3.5s %-9.12s %-13.13s %-8.8s %-20.24s%n", "id", "name", "surname", "group", "faculty");
             while (rs.next()) {
-                System.out.printf("%-3.5s %-9.12s %-13.13s %-27.27s %-20.20s%n", rs.getInt("id"), rs.getString("name"),
+                System.out.printf("%-3.5s %-9.12s %-13.13s %-8.8s %-20.20s%n", rs.getInt("id"), rs.getString("name"),
                         rs.getString("surname"),
-                        rs.getString("faculty"),
-                        rs.getString("group_id"));
-                System.out.println("");
+                        rs.getString("group_id"),
+                        rs.getString("faculty"));
+
             }
         } catch (SQLException throwables) {
             throwables.printStackTrace();
@@ -241,13 +241,13 @@ public class StudentsController {
             ps = DbConnection.user().prepareStatement("SELECT * FROM students WHERE faculty = '" + faculty + "'");
             rs = ps.executeQuery();
 
-            System.out.printf("%-3.5s %-9.12s %-13.13s %-27.27s %-20.24s%n", "id", "name", "surname", "faculty", "group");
+            System.out.printf("%-3.5s %-9.12s %-13.13s %-8.8s %-20.24s%n", "id", "name", "surname", "group", "faculty");
 
             while (rs.next()) {
-                System.out.printf("%-3.5s %-9.12s %-13.13s %-27.27s %-20.20s%n", rs.getInt("id"), rs.getString("name"),
+                System.out.printf("%-3.5s %-9.12s %-13.13s %-8.8s %-20.20s%n", rs.getInt("id"), rs.getString("name"),
                         rs.getString("surname"),
-                        rs.getString("faculty"),
-                        rs.getString("group_id"));
+                        rs.getString("group_id"),
+                        rs.getString("faculty"));
             }
         } catch (SQLException throwables) {
             throwables.printStackTrace();
@@ -263,13 +263,13 @@ public class StudentsController {
             ps = DbConnection.user().prepareStatement("SELECT * FROM students WHERE faculty = '" + faculty + "' AND group_id = '" + group + "'");
             rs = ps.executeQuery();
 
-            System.out.printf("%-3.5s %-9.12s %-13.13s %-27.27s %-20.24s%n", "id", "name", "surname", "faculty", "group");
+            System.out.printf("%-3.5s %-9.12s %-13.13s %-8.8s %-20.24s%n", "id", "name", "surname", "group", "faculty");
             while (rs.next()) {
-                System.out.printf("%-3.5s %-9.12s %-13.13s %-27.27s %-20.20s%n", rs.getInt("id"), rs.getString("name"),
+                System.out.printf("%-3.5s %-9.12s %-13.13s %-8.8s %-20.20s%n", rs.getInt("id"), rs.getString("name"),
                         rs.getString("surname"),
-                        rs.getString("faculty"),
-                        rs.getString("group_id"));
-                System.out.println("");
+                        rs.getString("group_id"),
+                        rs.getString("faculty"));
+
             }
         } catch (SQLException throwables) {
             throwables.printStackTrace();
@@ -284,16 +284,23 @@ int id=0;
             ps = DbConnection.user().prepareStatement("SELECT * FROM students WHERE id =" + check);
             rs = ps.executeQuery();
 
+
+            System.out.printf("%-3.5s %-9.12s %-13.13s %-8.8s %-20.24s%n", "id", "name", "surname", "group", "faculty");
+         
+            
+            while (rs.next()) {
+                id = rs.getInt("id");
+
+                System.out.printf("%-3.5s %-9.12s %-13.13s %-8.8s %-20.20s%n", id, rs.getString("name"),
+                        rs.getString("surname"),
+                        rs.getString("group_id"),
+                        rs.getString("faculty"));
+
+             
+
             System.out.printf("%-3.5s %-9.12s %-13.13s %-27.27s %-20.24s%n", "id", "name", "surname", "faculty", "group");
 
 
-            while (rs.next()) {
-id = rs.getInt("id");
-                System.out.printf("%-3.5s %-9.12s %-13.13s %-27.27s %-20.20s%n", id, rs.getString("name"),
-                        rs.getString("surname"),
-                        rs.getString("faculty"),
-                        rs.getString("group_id"));
-                System.out.println("");
             }
 
         } catch (SQLException throwables) {
