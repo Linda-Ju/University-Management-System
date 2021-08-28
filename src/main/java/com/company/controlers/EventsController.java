@@ -17,7 +17,7 @@ public class EventsController {
     public static void addNewEvent() {
 
         System.out.print("\nEnter event's name: ");
-        String label = scanner.next();
+        String label = scanner.nextLine();
 
         System.out.print("\nEnter event's date(format dd.mm.yyyy): ");
         String date = scanner.next();
@@ -65,7 +65,7 @@ public class EventsController {
             if (choice.equals("Y")) {
                 editEventLabel();
             } else {
-                System.out.println("Redirecting to start menu..\n");
+                System.out.println("Redirecting to start menu.. EvC68\n");
             }
         }
     }
@@ -97,7 +97,7 @@ public class EventsController {
             if (choice.equals("Y")) {
                 editEventLabel();
             } else {
-                System.out.println("Redirecting to start menu..\n");
+                System.out.println("Redirecting to start menu.. EvC100\n");
             }
         }
     }
@@ -131,7 +131,7 @@ public class EventsController {
             if (choice.equals("Y")) {
                 editEventLabel();
             } else {
-                System.out.println("Redirecting to start menu..\n");
+                System.out.println("Redirecting to start menu.. Ev134\n");
             }
         }
     }
@@ -156,9 +156,8 @@ public class EventsController {
         String date = scanner.next().trim();
 
         try {
-            ps = DbConnection.user().prepareStatement("SELECT * FROM events WHERE event_date = '" + date + "'");
+            ps = DbConnection.user().prepareStatement("SELECT * FROM events WHERE event_date = '" + date + "' ORDER BY event_date");
             rs = ps.executeQuery();
-
             System.out.printf("%-12.12s %-25.25s %-15.100s%n", "date", "event", "description");
             while (rs.next()) {
                 System.out.printf("%-12.12s %-25.25s %-15.100s%n",rs.getString("event_date"),
@@ -175,7 +174,7 @@ public class EventsController {
         String date = scanner.next().trim();
 
         try {
-            ps = DbConnection.user().prepareStatement("SELECT * FROM events WHERE event_date LIKE '%." + date + "'");
+            ps = DbConnection.user().prepareStatement("SELECT * FROM events WHERE event_date LIKE '%." + date + "' ORDER BY event_date");
             rs = ps.executeQuery();
 
             System.out.printf("%-12.12s %-25.25s %-15.100s%n", "date", "event", "description");
@@ -192,7 +191,7 @@ public class EventsController {
         System.out.print("\nEnter the event's month: ");
         String date = scanner.next().trim();
         try {
-            ps = DbConnection.user().prepareStatement("SELECT * FROM events WHERE event_date LIKE '%." + date + ".%'");
+            ps = DbConnection.user().prepareStatement("SELECT * FROM events WHERE event_date LIKE '%." + date + ".%' ORDER BY event_date");
             rs = ps.executeQuery();
 
             System.out.printf("%-12.12s %-25.25s %-15.100s%n", "date", "event", "description");
@@ -210,7 +209,7 @@ public class EventsController {
         String label = scanner.next().trim();
 
         try {
-            ps = DbConnection.user().prepareStatement("SELECT * FROM events WHERE label ='" + label + "'");
+            ps = DbConnection.user().prepareStatement("SELECT * FROM events WHERE label ='" + label + "'  ORDER BY event_date");
             rs = ps.executeQuery();
 
             System.out.printf("%-12.12s %-25.25s %-15.100s%n", "date", "event", "description");
