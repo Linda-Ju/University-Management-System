@@ -33,7 +33,7 @@ public class SubMenu {
         System.out.print("Do you wish to do another action with users data Y/N");
         String endSession = scanner.next().trim().toUpperCase();
         if (endSession.equals("Y")) {
-            System.out.println("Redirecting to start..\n");
+            System.out.println("Redirecting to start.. SM36\n");
             userSubMenu();
         }
     }
@@ -77,7 +77,7 @@ public class SubMenu {
         System.out.println("Do you wish to do it again Y/N");
         String endSession = scanner.next().trim().toUpperCase();
         if (endSession.equals("Y")) {
-            System.out.println("Redirecting to start..\n");
+            System.out.println("Redirecting to start.. SM80\n");
             studentSubMenu();
         }
     }
@@ -118,7 +118,7 @@ public class SubMenu {
         System.out.println("Do you wish to do it again Y/N");
         String endSession = scanner.next().trim().toUpperCase();
         if (endSession.equals("Y")) {
-            System.out.println("Redirecting to start..\n");
+            System.out.println("Redirecting to start.. SM 121\n");
             employeeSubMenu();
         }
     }
@@ -158,7 +158,7 @@ public class SubMenu {
         System.out.println("Do you wish to do it again Y/N");
         String endSession = scanner.next().trim().toUpperCase();
         if (endSession.equals("Y")) {
-            System.out.println("Redirecting to start..\n");
+            System.out.println("Redirecting to start.. SM 161\n");
             eventSubMenu();
         }
     }
@@ -190,7 +190,7 @@ public class SubMenu {
         System.out.println("Do you wish to do it again Y/N");
         String endSession = scanner.next().trim().toUpperCase();
         if (endSession.equals("Y")) {
-            System.out.println("Redirecting to start..\n");
+            System.out.println("Redirecting to start.. SM193\n");
             scoreSubMenu();
         }
     }
@@ -233,7 +233,7 @@ public class SubMenu {
         System.out.println("Do you wish to do it again Y/N");
         String endSession = scanner.next().trim().toUpperCase();
         if (endSession.equals("Y")) {
-            System.out.println("Redirecting to start..\n");
+            System.out.println("Redirecting to start.. SM236\n");
             observeData();
         }
     }
@@ -264,10 +264,10 @@ public class SubMenu {
         System.out.println("Do you wish to do it again Y/N");
         String endSession = scanner.next().trim().toUpperCase();
         if (endSession.equals("Y")) {
-            System.out.println("Redirecting to start..\n");
+            System.out.println("Redirecting to start.. SM267\n");
             observeChoiceEmployee();
         } else {
-            System.out.println("End of this session. Redirecting to start...");
+            System.out.println("End of this session. Redirecting to start... SM270");
         }
     }
 
@@ -300,10 +300,10 @@ public class SubMenu {
         System.out.println("Do you wish to do it again Y/N");
         String endSession = scanner.next().trim().toUpperCase();
         if (endSession.equals("Y")) {
-            System.out.println("redirecting to start..\n");
+            System.out.println("redirecting to start.. SM303\n");
             observeChoiceEmployee();
         } else {
-            System.out.println("End of this session. Redirecting to start...");
+            System.out.println("End of this session. Redirecting to start... SM306");
         }
     }
 
@@ -337,10 +337,10 @@ public class SubMenu {
         System.out.println("Do you wish to do it again Y/N");
         String endSession = scanner.next().trim().toUpperCase();
         if (endSession.equals("Y")) {
-            System.out.println("Redirecting to start..\n");
+            System.out.println("Redirecting to start..SM340\n");
             observeChoiceStudents();
         } else {
-            System.out.println("End of this session. Redirecting to start...");
+            System.out.println("End of this session. Redirecting to start... SM343");
             observeData();
         }
     }
@@ -370,10 +370,10 @@ public class SubMenu {
         System.out.println("Do you wish to do it again Y/N");
         String endSession = scanner.next().trim().toUpperCase();
         if (endSession.equals("Y")) {
-            System.out.println("redirecting to start..\n");
+            System.out.println("redirecting to start.. SM373\n");
             observeChoiceStudents();
         } else {
-            System.out.println("End of this session. Redirecting to start...");
+            System.out.println("End of this session. Redirecting to start... SM 376");
             observeData();
         }
     }
@@ -412,10 +412,10 @@ public class SubMenu {
         System.out.println("Do you wish to do it again Y/N");
         String endSession = scanner.next().trim().toUpperCase();
         if (endSession.equals("Y")) {
-            System.out.println("Redirecting to start..\n");
+            System.out.println("Redirecting to start.. SM415\n");
             observeChoiceStudents();
         } else {
-            System.out.println("End of this session. Redirecting to start...");
+            System.out.println("End of this session. Redirecting to start...  SM418");
             observeData();
         }
     }

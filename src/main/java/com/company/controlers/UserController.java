@@ -1,12 +1,10 @@
 package com.company.controlers;
-///THIS IS COPY FROM OTHER PROJECT, NEEDS TO BE UPDATED
 
 import com.company.dbhelper.DbConnection;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.SQLOutput;
 import java.util.Scanner;
 
 public class UserController {
@@ -34,7 +32,7 @@ public class UserController {
             while (rs.next()) {
                 System.out.println(rs.getInt("id") + " \t " +
                         rs.getString("username") + " \t " + rs.getString("password") + " \t " + rs.getString("access"));
-                System.out.println("");
+
             }
         } catch (SQLException throwables) {
             throwables.printStackTrace();
@@ -81,7 +79,7 @@ public class UserController {
                     if (proceed.equals("Y")) {
                         changeUserPassword();
                     } else {
-                        System.out.println("Redirecting to start menu");
+                        System.out.println("Redirecting to start menu UsC82");
                     }
                 }
             }
@@ -91,40 +89,51 @@ public class UserController {
         }
     }
 
-    public static void findUsersByAccess(){
+    public static void findUsersByAccess() {
         System.out.println("\n1. Admin");
         System.out.println("2. Administrator");
         System.out.println("3. Lecturer");
         System.out.println("4. Student");
+        System.out.println("5. All");
         System.out.println(" OR any Press other digit to exit");
         int option = scanner.nextInt();
         String access;
-        switch(option){
-            case 1: access ="admin"; break;
-            case 2: access ="administration";break;
-            case 3: access ="lecturer"; break;
-            case 4: access ="student"; break;
+        switch (option) {
+            case 1:
+                access = "admin";
+                break;
+            case 2:
+                access = "administration";
+                break;
+            case 3:
+                access = "lecturer";
+                break;
+            case 4:
+                access = "student";
+                break;
+            case 5:
+                access = "%%";
+                break;
             default:
                 access = null;
         }
-        if(access != null){
+        if (access != null) {
             try {
-                ps = DbConnection.user().prepareStatement("SELECT * FROM users WHERE access ='" + access + "'");
+                ps = DbConnection.user().prepareStatement(" SELECT * FROM users WHERE access LIKE '" + access + "' order by username");
                 rs = ps.executeQuery();
-
-                System.out.println("id \t  username \t password");
-
+                System.out.println(access + " level");
+                System.out.println("\t  username \t password");
+                int count = 1;
                 while (rs.next()) {
-                    System.out.println(access + " level");
-                    System.out.println(rs.getInt("id") + " \t " +
+                    System.out.println(count + " \t " +
                             rs.getString("username") + " \t " + rs.getString("password"));
-                    System.out.println("");
+                    count++;
                 }
             } catch (SQLException throwables) {
                 throwables.printStackTrace();
             }
         } else {
-            System.out.println("redirecting.. User Line");
+            System.out.println("redirecting.. UsC136");
         }
     }
 }//end of class

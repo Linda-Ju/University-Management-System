@@ -46,16 +46,18 @@ public class ScoresController {
                 e.printStackTrace();
             }
         } else {
-            System.out.print("\nDo you wish to start over Y/N");
+            System.out.print("\nDo you wish to submit another score Y/N");
             String proceed = scanner.next().trim().toUpperCase();
             if (proceed.equals("Y")) {
                 addNewScore();
             } else {
-                System.out.println("Redirecting to start menu");
+                System.out.println("Redirecting to start menu  ");
             }
         }
     }
 
+
+    //case null missing
     public static void deleteScore() {
         String subjectName = SantasLittleHelpers.subjectCases();
 
@@ -107,7 +109,7 @@ public class ScoresController {
             if (proceed.equals("Y")) {
                 editScore();
             } else {
-                System.out.println("Redirecting to start menu");
+                System.out.println("Redirecting to start menu SC110");
                 SubMenu.scoreSubMenu();
             }
         }
@@ -116,23 +118,27 @@ public class ScoresController {
     public static void selectStudentScoresBySubject() {
         String subjectName = SantasLittleHelpers.subjectCases();
 
-        try {
-            System.out.print("\nEnter the student's ID: ");
-            int studentID = scanner.nextInt();
+       if(subjectName != null) {
+           try {
+               System.out.print("\nEnter the student's ID: ");
+               int studentID = scanner.nextInt();
 
-            ps = DbConnection.user().prepareStatement("SELECT score, submitted FROM scores WHERE student_id = " + studentID + " AND subject = '" + subjectName + "'");
-            rs = ps.executeQuery();
-            int score;
-            String date;
-            System.out.println(subjectName);
-            System.out.println("score \t submission date");
-            while (rs.next()) {
-                score = rs.getInt("score");
-                date = rs.getString("submitted");
-                System.out.println(score + "\t" + date);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+               ps = DbConnection.user().prepareStatement("SELECT score, submitted FROM scores WHERE student_id = " + studentID + " AND subject = '" + subjectName + "' ORDER BY submitted DESC");
+               rs = ps.executeQuery();
+               int score;
+               String date;
+               System.out.println(subjectName);
+               System.out.println("score \t submission date");
+               while (rs.next()) {
+                   score = rs.getInt("score");
+                   date = rs.getString("submitted");
+                   System.out.println(score + "\t" + date);
+               }
+           } catch (Exception e) {
+               e.printStackTrace();
+           }
+       } else{
+           System.out.println("Whooopsy(probably need adequate line for output ScC139");
+       }
     }
 }

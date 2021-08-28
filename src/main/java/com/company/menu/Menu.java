@@ -49,7 +49,7 @@ public class Menu {
         System.out.print("\nDo you wish to proceed Y/N");
         String endSession = scanner.next().trim().toUpperCase();
         if (endSession.equals("Y")) {
-            System.out.println("redirecting to start..\n");
+            System.out.println("redirecting to start.. MM52\n");
             adminMainMenu();
         } else {
             System.out.println("End of session. User logout.");
@@ -93,7 +93,7 @@ public class Menu {
         System.out.print("\nDo you wish to proceed Y/N");
         String endSession = scanner.next().trim().toUpperCase();
         if (endSession.equals("Y")) {
-            System.out.println("redirecting to start..\n");
+            System.out.println("redirecting to start.. MM96\n");
             administrationMainMenu();
         } else {
             System.out.println("End of session. User logout.");
@@ -131,7 +131,7 @@ public class Menu {
             System.out.println("redirecting to start..\n");
             lecturerAccessMenu();
         } else {
-            System.out.println("End of session. User logout.");
+            System.out.println("End of session. User logout. MM134");
         }
     }
 
@@ -163,7 +163,7 @@ public class Menu {
         System.out.print("\nDo you wish to proceed Y/N");
         String endSession = scanner.next().trim().toUpperCase();
         if (endSession.equals("Y")) {
-            System.out.println("redirecting to main menu..\n");
+            System.out.println("redirecting to main menu.. MM166\n");
             studentAccessMenu();
         } else {
             System.out.println("End of session. User logout.");
