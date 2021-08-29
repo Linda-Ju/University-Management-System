@@ -31,7 +31,7 @@ public class Menu {
                 SubMenu.employeeSubMenu();
                 break;
             case "3":
-//                SubMenu.studentSubMenu();
+                SubMenu.studentSubMenu();
                 break;
             case "4":
                 SubMenu.scoreSubMenu();
@@ -43,20 +43,15 @@ public class Menu {
                 SubMenu.observeData();
                 break;
             case "X":
-                SubMenu.observeData();
+                System.out.println("End of session. User logout.");
                 break;
 
             default:
                 System.out.println("Invalid option\n");
 
         }
-        System.out.print("\nDo you wish to proceed Y/N");
-        String endSession = scanner.next().trim().toUpperCase();
-        if (endSession.equals("Y")) {
-            System.out.println("redirecting to start.. MM52\n");
-            adminMainMenu();
-        } else {
-            System.out.println("End of session. User logout.");
+        if (option.equals("X")) {//DbConnection close
+        } else { adminMainMenu();
         }
     }
 

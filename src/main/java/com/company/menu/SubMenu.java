@@ -1,6 +1,7 @@
 package com.company.menu;
 
 import com.company.controlers.*;
+import com.company.helpers.OutputMessage;
 
 import java.util.Scanner;
 
@@ -28,14 +29,9 @@ public class SubMenu {
                 break;
 
             default:
-                System.out.println("Invalid option\n");
+                OutputMessage.redirecting();
         }
-        System.out.print("Do you wish to do another action with users data Y/N");
-        String endSession = scanner.next().trim().toUpperCase();
-        if (endSession.equals("Y")) {
-            System.out.println("Redirecting to start.. SM36\n");
-            userSubMenu();
-        }
+
     }
 
     public static void studentSubMenu() {
