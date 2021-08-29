@@ -47,6 +47,24 @@ public class Login {
                     if (correct) {
                         System.out.println("Access granted.");
 
+        String access = rs.getString("access");
+
+        switch (access) {
+            case "admin":
+                Menu.adminMainMenu();
+                break;
+            case "administration":
+                Menu.administrationMainMenu();
+                break;
+            case "lecturer":
+                Menu.lecturerAccessMenu();
+                break;
+            case "student":
+                Menu.studentAccessMenu();
+                break;
+            default:
+                System.out.println("You don't have an access. Please contact administration for more details!");
+        }
 
                     } else {
                         System.out.println("Login failed. Check password");
