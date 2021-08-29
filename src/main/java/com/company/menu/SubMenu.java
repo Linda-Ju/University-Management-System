@@ -32,6 +32,7 @@ public class SubMenu {
                 OutputMessage.redirecting();
         }
 
+
     }
 
     public static void studentSubMenu() {
