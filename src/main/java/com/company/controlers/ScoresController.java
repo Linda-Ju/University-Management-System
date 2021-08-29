@@ -103,15 +103,6 @@ public class ScoresController {
             } catch (Exception e) {
                 e.printStackTrace();
             }
-        } else {
-            System.out.println("Do you wish to start over Y/N");
-            String proceed = scanner.next().trim().toUpperCase();
-            if (proceed.equals("Y")) {
-                editScore();
-            } else {
-                System.out.println("Redirecting to start menu SC110");
-                SubMenu.scoreSubMenu();
-            }
         }
     }
 
@@ -137,8 +128,7 @@ public class ScoresController {
            } catch (Exception e) {
                e.printStackTrace();
            }
-       } else{
-           System.out.println("Whooopsy(probably need adequate line for output ScC139");
        }
+
     }
 }
