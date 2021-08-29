@@ -21,7 +21,7 @@ public class Menu {
         System.out.println("X. Exit");
 
         System.out.print("\nSelect an option");
-        String option = scanner.next();
+        String option = scanner.next().toUpperCase();
 
         switch (option) {
             case "1":
@@ -43,9 +43,8 @@ public class Menu {
                 SubMenu.observeData();
                 break;
             case "X":
-                SubMenu.observeData();
+                System.out.println("Exit");
                 break;
-
             default:
                 System.out.println("Invalid option\n");
 
@@ -72,25 +71,27 @@ public class Menu {
         System.out.println("5. Observe data\n");
 
         System.out.println("Select an option");
-        int option = scanner.nextInt();
+        String option = scanner.next().toUpperCase();
 
         switch (option) {
-            case 1:
+            case "1":
                 SubMenu.employeeSubMenu();
                 break;
-            case 2:
+            case "2":
                 SubMenu.studentSubMenu();
                 break;
-            case 3:
+            case "3":
                 SubMenu.scoreSubMenu();
                 break;
-            case 4:
+            case "4":
                 SubMenu.eventSubMenu();
                 break;
-            case 5:
+            case "5":
                 SubMenu.observeData();
                 break;
-
+            case "X":
+                System.out.println("Exit");
+                break;
             default:
                 System.out.println("Invalid option\n");
         }
@@ -113,19 +114,21 @@ public class Menu {
         System.out.println("3. Observe events\n");
 
         System.out.print("Select an option");
-        int option = scanner.nextInt();
+        String option = scanner.next().toUpperCase();
 
         switch (option) {
-            case 1:
+            case "1":
                 SubMenu.scoreSubMenu();
                 break;
-            case 2:
+            case "2":
                 SubMenu.observeChoiceScores();
                 break;
-            case 3:
+            case "3":
                 SubMenu.observeChoiceEvents();
                 break;
-
+            case "X":
+                System.out.println("Exit");
+                break;
             default:
                 System.out.println("Invalid option\n");
         }
@@ -148,19 +151,21 @@ public class Menu {
         System.out.println("3. Observe events\n");
 
         System.out.println("Select an option");
-        int option = scanner.nextInt();
+        String option = scanner.next().toUpperCase();
 
         switch (option) {
-            case 1:
+            case "1":
                 EmployeesController.selectLecturersByStudentGroup();
                 break;
-            case 2:
+            case "2":
                 SubMenu.observeChoiceScores();
                 break;
-            case 3:
+            case "3":
                 SubMenu.observeChoiceEvents();
                 break;
-
+            case "X":
+                System.out.println("Exit");
+                break;
             default:
                 System.out.println("Invalid option\n");
         }
