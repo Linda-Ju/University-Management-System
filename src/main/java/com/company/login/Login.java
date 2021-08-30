@@ -19,61 +19,60 @@ public class Login {
 
         //request username from user
         System.out.print("\nEnter your username: ");
-        String input= scanner.next().trim();
+        String input = scanner.next().trim();
 
         System.out.print("\nEnter your password: ");
         String password = scanner.next().trim();
 
         //checking login before connecting to database.
         String login = null;
-        if(input.toCharArray().length < 12) { login = input;}  else {
+        if (input.toCharArray().length < 12) {
+            login = input;
+        } else {
             System.out.println("Login failed. Check password");
         }
 
 
+        try {
+            ps = DbConnection.user().prepareStatement("SELECT * FROM users WHERE username = '" + login + "';");
+            rs = ps.executeQuery();
+            //set variable for validation
+            String passwordCheck;
 
-            try {
-                ps = DbConnection.user().prepareStatement("SELECT * FROM users WHERE username = '" + login + "';");
-                rs = ps.executeQuery();
-                //set variable for validation
-                String passwordCheck;
+            //asking for password from user
 
-                //asking for password from user
+            while (rs.next()) {
+                passwordCheck = rs.getString("password");
+                //Check if password is correct
+                boolean correct = password.equals(passwordCheck);
+                if (correct) {
+                    System.out.println("Access granted.");
 
-                while (rs.next()) {
-                    passwordCheck = rs.getString("password");
-                    //Check if password is correct
-                    boolean correct = password.equals(passwordCheck) ;
-                    if (correct) {
-                        System.out.println("Access granted.");
+                    String access = rs.getString("access");
 
-        String access = rs.getString("access");
-
-        switch (access) {
-            case "admin":
-                Menu.adminMainMenu();
-                break;
-            case "administration":
-                Menu.administrationMainMenu();
-                break;
-            case "lecturer":
-                Menu.lecturerAccessMenu();
-                break;
-            case "student":
-                Menu.studentAccessMenu();
-                break;
-            default:
-                System.out.println("You don't have an access. Please contact administration for more details!");
-        }
-
-                    } else {
-                        System.out.println("Login failed. Check password");
+                    switch (access) {
+                        case "admin":
+                            Menu.adminMainMenu();
+                            break;
+                        case "administration":
+                            Menu.administrationMainMenu();
+                            break;
+                        case "lecturer":
+                            Menu.lecturerAccessMenu();
+                            break;
+                        case "student":
+                            Menu.studentAccessMenu();
+                            break;
+                        default:
+                            System.out.println("You don't have an access. Please contact administration for more details!");
                     }
+                } else {
+                    System.out.println("Login failed. Check password");
                 }
-            } catch (Exception e) {
-                e.printStackTrace();
             }
-
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }
 
