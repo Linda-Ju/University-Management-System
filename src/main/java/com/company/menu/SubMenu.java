@@ -1,6 +1,7 @@
 package com.company.menu;
 
 import com.company.controlers.*;
+import com.company.helpers.OutputMessage;
 
 import java.util.Scanner;
 
@@ -30,9 +31,12 @@ public class SubMenu {
                 System.out.println("End of session. User logout.");
                 break;
             default:
+
                 System.out.println("Invalid option, try again\n");
                 userSubMenu();
         }
+
+
     }
 
     public static void studentSubMenu() {

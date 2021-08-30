@@ -31,7 +31,7 @@ public class Menu {
                 SubMenu.employeeSubMenu();
                 break;
             case "3":
-//                SubMenu.studentSubMenu();
+                SubMenu.studentSubMenu();
                 break;
             case "4":
                 SubMenu.scoreSubMenu();
@@ -48,6 +48,10 @@ public class Menu {
             default:
                 System.out.println("Invalid option\n");
 
+        }
+
+        if (option.equals("X")) {//DbConnection close
+        } else { adminMainMenu();
         }
     }
 
