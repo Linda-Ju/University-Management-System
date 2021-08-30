@@ -19,27 +19,31 @@ public class SantasLittleHelpers {
         System.out.println("6. Spanish");
 
         System.out.print("Select an option: ");
-        int subject = scanner.nextInt();
+        String subject = scanner.next().toUpperCase();
         String subjectName;
 
         switch (subject) {
-            case 1:
+            case "1":
                 subjectName = "Mathematics";
                 break;
-            case 2:
+            case "2":
                 subjectName = "Physics";
                 break;
-            case 3:
+            case "3":
                 subjectName = "Chemistry";
                 break;
-            case 4:
+            case "4":
                 subjectName = "History";
                 break;
-            case 5:
+            case "5":
                 subjectName = "English";
                 break;
-            case 6:
+            case "6":
                 subjectName = "Spanish";
+                break;
+            case "X":
+                subjectName = null;
+                System.out.println("End of session. User logout.");
                 break;
             default:
                 subjectName = null;

@@ -21,7 +21,7 @@ public class Menu {
         System.out.println("X. Exit");
 
         System.out.print("\nSelect an option");
-        String option = scanner.next();
+        String option = scanner.next().toUpperCase();
 
         switch (option) {
             case "1":
@@ -45,11 +45,11 @@ public class Menu {
             case "X":
                 System.out.println("End of session. User logout.");
                 break;
-
             default:
                 System.out.println("Invalid option\n");
 
         }
+
         if (option.equals("X")) {//DbConnection close
         } else { adminMainMenu();
         }
@@ -67,35 +67,29 @@ public class Menu {
         System.out.println("5. Observe data\n");
 
         System.out.println("Select an option");
-        int option = scanner.nextInt();
+        String option = scanner.next().toUpperCase();
 
         switch (option) {
-            case 1:
+            case "1":
                 SubMenu.employeeSubMenu();
                 break;
-            case 2:
+            case "2":
                 SubMenu.studentSubMenu();
                 break;
-            case 3:
+            case "3":
                 SubMenu.scoreSubMenu();
                 break;
-            case 4:
+            case "4":
                 SubMenu.eventSubMenu();
                 break;
-            case 5:
+            case "5":
                 SubMenu.observeData();
                 break;
-
+            case "X":
+                System.out.println("End of session. User logout.");
+                break;
             default:
                 System.out.println("Invalid option\n");
-        }
-        System.out.print("\nDo you wish to proceed Y/N");
-        String endSession = scanner.next().trim().toUpperCase();
-        if (endSession.equals("Y")) {
-            System.out.println("redirecting to start.. MM96\n");
-            administrationMainMenu();
-        } else {
-            System.out.println("End of session. User logout.");
         }
     }
 
@@ -108,29 +102,23 @@ public class Menu {
         System.out.println("3. Observe events\n");
 
         System.out.print("Select an option");
-        int option = scanner.nextInt();
+        String option = scanner.next().toUpperCase();
 
         switch (option) {
-            case 1:
+            case "1":
                 SubMenu.scoreSubMenu();
                 break;
-            case 2:
+            case "2":
                 SubMenu.observeChoiceScores();
                 break;
-            case 3:
+            case "3":
                 SubMenu.observeChoiceEvents();
                 break;
-
+            case "X":
+                System.out.println("End of session. User logout.");
+                break;
             default:
                 System.out.println("Invalid option\n");
-        }
-        System.out.print("\nDo you wish to proceed Y/N");
-        String endSession = scanner.next().trim().toUpperCase();
-        if (endSession.equals("Y")) {
-            System.out.println("redirecting to start..\n");
-            lecturerAccessMenu();
-        } else {
-            System.out.println("End of session. User logout. MM134");
         }
     }
 
@@ -143,29 +131,23 @@ public class Menu {
         System.out.println("3. Observe events\n");
 
         System.out.println("Select an option");
-        int option = scanner.nextInt();
+        String option = scanner.next().toUpperCase();
 
         switch (option) {
-            case 1:
+            case "1":
                 EmployeesController.selectLecturersByStudentGroup();
                 break;
-            case 2:
+            case "2":
                 SubMenu.observeChoiceScores();
                 break;
-            case 3:
+            case "3":
                 SubMenu.observeChoiceEvents();
                 break;
-
+            case "X":
+                System.out.println("End of session. User logout.");
+                break;
             default:
                 System.out.println("Invalid option\n");
-        }
-        System.out.print("\nDo you wish to proceed Y/N");
-        String endSession = scanner.next().trim().toUpperCase();
-        if (endSession.equals("Y")) {
-            System.out.println("redirecting to main menu.. MM166\n");
-            studentAccessMenu();
-        } else {
-            System.out.println("End of session. User logout.");
         }
     }
 }
