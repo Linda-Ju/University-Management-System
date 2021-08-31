@@ -2,6 +2,7 @@ package com.company.menu;
 
 
 import com.company.controlers.EmployeesController;
+import com.company.helpers.OutputMessage;
 
 import java.util.Scanner;
 
@@ -17,10 +18,10 @@ public class Menu {
         System.out.println("3. Students data");
         System.out.println("4. Scores data");
         System.out.println("5. Events data");
-        System.out.println("6. Observe data\n");
+        System.out.println("6. Observe data");
         System.out.println("X. Exit");
 
-        System.out.print("\nSelect an option");
+        System.out.print("\nSelect an option: \t");
         String option = scanner.next().toUpperCase();
 
         switch (option) {
@@ -43,16 +44,14 @@ public class Menu {
                 SubMenu.observeData();
                 break;
             case "X":
-                System.out.println("End of session. User logout.");
+                OutputMessage.logout();
                 break;
             default:
-                System.out.println("Invalid option\n");
+                OutputMessage.invalidInput();
+                adminMainMenu();
 
         }
 
-        if (option.equals("X")) {//DbConnection close
-        } else { adminMainMenu();
-        }
     }
 
     public static void administrationMainMenu() {
@@ -64,9 +63,10 @@ public class Menu {
         System.out.println("2. Add/Change/Delete student data");
         System.out.println("3. Add/Change/Delete score data");
         System.out.println("4. Add/Change/Delete event data");
-        System.out.println("5. Observe data\n");
+        System.out.println("5. Observe data");
+        System.out.println("X. Exit");
 
-        System.out.println("Select an option");
+        System.out.print("\nSelect an option: \t");
         String option = scanner.next().toUpperCase();
 
         switch (option) {
@@ -86,22 +86,24 @@ public class Menu {
                 SubMenu.observeData();
                 break;
             case "X":
-                System.out.println("End of session. User logout.");
+                OutputMessage.logout();
                 break;
             default:
-                System.out.println("Invalid option\n");
+                OutputMessage.invalidInput();
+                administrationMainMenu();
         }
     }
 
     public static void lecturerAccessMenu() {
-        //add/edit/delete scores, observe students, groups
+
         System.out.println("Lecturers menu\n");
 
         System.out.println("1. Add/Change/Delete score data");
         System.out.println("2. Observe students scores");
-        System.out.println("3. Observe events\n");
+        System.out.println("3. Observe events");
+        System.out.println("X. Exit");
 
-        System.out.print("Select an option");
+        System.out.print("\nSelect an option: \t");
         String option = scanner.next().toUpperCase();
 
         switch (option) {
@@ -115,10 +117,11 @@ public class Menu {
                 SubMenu.observeChoiceEvents();
                 break;
             case "X":
-                System.out.println("End of session. User logout.");
+                OutputMessage.logout();
                 break;
             default:
-                System.out.println("Invalid option\n");
+                OutputMessage.invalidInput();
+                lecturerAccessMenu();
         }
     }
 
@@ -128,9 +131,10 @@ public class Menu {
 
         System.out.println("1. Observe your lecturers");
         System.out.println("2. Observe scores");
-        System.out.println("3. Observe events\n");
+        System.out.println("3. Observe events");
+        System.out.println("X. Exit");
 
-        System.out.println("Select an option");
+        System.out.print("\nSelect an option: \t");
         String option = scanner.next().toUpperCase();
 
         switch (option) {
@@ -144,10 +148,11 @@ public class Menu {
                 SubMenu.observeChoiceEvents();
                 break;
             case "X":
-                System.out.println("End of session. User logout.");
+                OutputMessage.logout();
                 break;
             default:
-                System.out.println("Invalid option\n");
+                OutputMessage.invalidInput();
+                studentAccessMenu();
         }
     }
 }
