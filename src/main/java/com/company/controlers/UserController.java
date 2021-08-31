@@ -26,16 +26,19 @@ public class UserController {
         try {
             ps = DbConnection.user().prepareStatement("SELECT * FROM users WHERE username ='" + username + "'");
             rs = ps.executeQuery();
-
-            System.out.println("id \t  username \t password \t access lvl");
+            System.out.println("\n====================================");
+            System.out.printf("%-3.5s %-9.12s %-10.10s %-20.24s%n", "id", "username", "password", "access lvl");
+            System.out.println("------------------------------------");
             String userID = null;
             while (rs.next()) {
                 userID = rs.getString("id");
-                System.out.println(userID + " \t " +
-                        rs.getString("username") + " \t " + rs.getString("password") + " \t " + rs.getString("access"));
+                System.out.printf("%-3.5s %-9.12s %-10.10s %-20.24s%n", userID, rs.getString("username"),
+                        rs.getString("password"), rs.getString("access"));
+                System.out.println("====================================");
 
-            }if(userID == null){
-                System.out.println("Such user doesn't exists\n");
+            }
+            if (userID == null) {
+                System.out.println("Such user doesn't exists.\n");
 
             }
         } catch (SQLException throwables) {
@@ -53,7 +56,7 @@ public class UserController {
         String password = scanner.next().trim();
 
         try {
-            ps = DbConnection.user().prepareStatement("SELECT * FROM users WHERE username = '" + login + " AND password = '" + password + "';");
+            ps = DbConnection.user().prepareStatement("SELECT * FROM users WHERE username = '" + login + "' AND password = '" + password + "';");
             rs = ps.executeQuery();
             //set variable for validation
             String passwordCheck;
@@ -63,23 +66,23 @@ public class UserController {
                 System.out.println("Username excepted.");
 
                 //asking for password from user
-                System.out.print("\nEnter password: ");
+                System.out.print("\nEnter your new password: ");
                 String password1 = scanner.next().trim();
 
-                System.out.print("\nRetype your password: ");
+                System.out.print("\nRepeat your new password once again: ");
                 String password2 = scanner.next().trim();
 
                 //check if user is able to type password twice correctly
                 if (password1.equals(password2)) {
                     try {
-                        ps = DbConnection.user().prepareStatement("UPDATE users SET last_name = '" + password1 + "' WHERE username ='" + login + "'");
+                        ps = DbConnection.user().prepareStatement("UPDATE users SET password = '" + password1 + "' WHERE username ='" + login + "'");
                         ps.execute();
-                        System.out.println("successfully updated");
+                        System.out.println("The password has been updated.");
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
                 } else {
-                    System.out.print("\nDo you wish to start over? Y/N");
+                    System.out.print("\nDo you wish to start over? Y/N : ");
                     String proceed = scanner.next().trim().toUpperCase();
                     if (proceed.equals("Y")) {
                         changeUserPassword();
@@ -90,7 +93,7 @@ public class UserController {
             }
         } catch (Exception e) {
             e.printStackTrace();
-            System.out.println("Redirecting to start menu");
+            System.out.println("Redirecting to start menu.");
         }
     }
 
@@ -134,14 +137,17 @@ public class UserController {
             try {
                 ps = DbConnection.user().prepareStatement(" SELECT * FROM users WHERE access LIKE '" + access + "' order by username");
                 rs = ps.executeQuery();
-                System.out.println(access + " level");
-                System.out.println("\t  username \t password");
+                System.out.println("\n" + access.toUpperCase() + " access level: ".toUpperCase());
+                System.out.println("\n===================");
+                System.out.printf("%-9.12s %-10.10s%n", "username", "password");
+                System.out.println("-------------------");
                 int count = 1;
                 while (rs.next()) {
-                    System.out.println(count + " \t " +
-                            rs.getString("username") + " \t " + rs.getString("password"));
+                    System.out.printf("%-9.12s %-10.10s%n", count, rs.getString("username"),
+                            rs.getString("password"));
                     count++;
                 }
+                System.out.println("===================");
             } catch (SQLException throwables) {
                 throwables.printStackTrace();
             }

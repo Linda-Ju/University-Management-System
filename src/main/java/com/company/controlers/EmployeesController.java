@@ -199,7 +199,9 @@ public class EmployeesController {
             ps = DbConnection.user().prepareStatement("SELECT * FROM employees WHERE id =" + check);
             rs = ps.executeQuery();
 
+            System.out.println("\n=====================================");
             System.out.printf("%-3.5s %-9.12s %-13.13s %-20.24s%n", "id", "name", "surname", "position");
+            System.out.println("-------------------------------------");
 
 
             while (rs.next()) {
@@ -207,7 +209,7 @@ public class EmployeesController {
 
                 System.out.printf("%-3.5s %-9.12s %-13.13s %-20.24s%n", id, rs.getString("first_name"),
                         rs.getString("last_name"), rs.getString("position"));
-
+                System.out.println("=====================================");
 
             }
 
@@ -225,12 +227,14 @@ public class EmployeesController {
             ps = DbConnection.user().prepareStatement("SELECT * FROM employees WHERE last_name = '" + searchValue + "' ORDER BY first_name");
             rs = ps.executeQuery();
 
+            System.out.println("\n=====================================");
             System.out.printf("%-3.5s %-9.12s %-13.13s %-20.24s%n", "id", "name", "surname", "position");
-
+            System.out.println("-------------------------------------");
             while (rs.next()) {
 
                 System.out.printf("%-3.5s %-9.12s %-13.13s %-20.24s%n", rs.getInt("id"), rs.getString("first_name"),
                         rs.getString("last_name"), rs.getString("position"));
+                System.out.println("=====================================");
             }
         } catch (SQLException throwables) {
             throwables.printStackTrace();
@@ -245,7 +249,9 @@ public class EmployeesController {
             ps = DbConnection.user().prepareStatement("SELECT * FROM employees WHERE position= '" + searchValue + "' ORDER BY first_name");
             rs = ps.executeQuery();
 
+            System.out.println("\n=====================================");
             System.out.printf("%-3.5s %-9.12s %-13.13s %-20.24s%n", "#", "name", "surname", "position");
+            System.out.println("-------------------------------------");
             int count = 1;
             while (rs.next()) {
                 System.out.printf("%-3.5s %-9.12s %-13.13s %-20.24s%n", count,
@@ -253,6 +259,7 @@ public class EmployeesController {
                         rs.getString("position"));
                 count++;
             }
+            System.out.println("=====================================");
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
@@ -267,12 +274,16 @@ public class EmployeesController {
                 rs = ps.executeQuery();
                 int count = 1;
                 System.out.println("\n" + subject + " lecturers:");
+
+                System.out.println("\n=======================");
                 System.out.printf("%-3.5s %-9.12s %-13.13s %n", "#", "name", "surname");
+                System.out.println("-----------------------");
                 while (rs.next()) {
                     System.out.printf("%-3.5s %-9.12s %-13.13s %n", count, rs.getString("first_name"),
                             rs.getString("last_name"));
                     count++;
                 }
+                System.out.println("=======================");
             } catch (SQLException throwables) {
                 throwables.printStackTrace();
             }
@@ -294,14 +305,18 @@ public class EmployeesController {
         try {
             ps = DbConnection.user().prepareStatement("SELECT DISTINCT employees.first_name, employees.last_name, scores.subject FROM scores INNER JOIN employees ON scores.lecturers_id = employees.id LEFT JOIN students ON scores.student_id = students.id WHERE group_id = '" + groupID + "' ORDER BY scores.subject, employees.first_name");
             rs = ps.executeQuery();
-            int count =1;
-            System.out.println(groupID);
+            int count = 1;
+            System.out.println("\nEntered group name is " + groupID + ".");
+
+            System.out.println("\n=======================================");
             System.out.printf("%-3.5s %-9.12s %-13.13s %-20.24s%n", "#", "Name", "Surname", "Subject");
+            System.out.println("---------------------------------------");
             while (rs.next()) {
-                System.out.printf("%-3.5s %-9.12s %-13.13s %-20.24s%n",count, rs.getString("first_name"),
+                System.out.printf("%-3.5s %-9.12s %-13.13s %-20.24s%n", count, rs.getString("first_name"),
                         rs.getString("last_name"), rs.getString("subject"));
                 count++;
             }
+            System.out.println("=======================================");
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
