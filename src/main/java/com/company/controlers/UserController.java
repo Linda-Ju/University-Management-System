@@ -1,6 +1,7 @@
 package com.company.controlers;
 
 import com.company.dbhelper.DbConnection;
+import com.company.helpers.OutputMessage;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -22,20 +23,24 @@ public class UserController {
     public static void findUserByUsername() {//can access only from admin panel
         System.out.print("\nEnter the username: ");
         String username = scanner.next().trim();
-
         try {
             ps = DbConnection.user().prepareStatement("SELECT * FROM users WHERE username ='" + username + "'");
             rs = ps.executeQuery();
 
             System.out.println("id \t  username \t password \t access lvl");
-
+            String userID = null;
             while (rs.next()) {
-                System.out.println(rs.getInt("id") + " \t " +
+                userID = rs.getString("id");
+                System.out.println(userID + " \t " +
                         rs.getString("username") + " \t " + rs.getString("password") + " \t " + rs.getString("access"));
+
+            }if(userID == null){
+                System.out.println("Such user doesn't exists\n");
 
             }
         } catch (SQLException throwables) {
             throwables.printStackTrace();
+
         }
     }
 
@@ -95,27 +100,35 @@ public class UserController {
         System.out.println("3. Lecturer");
         System.out.println("4. Student");
         System.out.println("5. All");
-        System.out.println(" OR any Press other digit to exit");
-        int option = scanner.nextInt();
+        System.out.println("X. Exit");
+
+        System.out.print("\nSelect an option: \t");
+        String option = scanner.next().toUpperCase();
         String access;
         switch (option) {
-            case 1:
+            case "1":
                 access = "admin";
                 break;
-            case 2:
+            case "2":
                 access = "administration";
                 break;
-            case 3:
+            case "3":
                 access = "lecturer";
                 break;
-            case 4:
+            case "4":
                 access = "student";
                 break;
-            case 5:
+            case "5":
                 access = "%%";
+                break;
+            case "X":
+                access = null;
+                OutputMessage.redirecting();
                 break;
             default:
                 access = null;
+                OutputMessage.invalidInput();
+                findUsersByAccess();
         }
         if (access != null) {
             try {
@@ -132,8 +145,6 @@ public class UserController {
             } catch (SQLException throwables) {
                 throwables.printStackTrace();
             }
-        } else {
-            System.out.println("redirecting.. UsC136");
         }
     }
 }//end of class
