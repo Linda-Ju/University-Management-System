@@ -158,12 +158,18 @@ public class EventsController {
         try {
             ps = DbConnection.user().prepareStatement("SELECT * FROM events WHERE event_date = '" + date + "' ORDER BY event_date");
             rs = ps.executeQuery();
-            System.out.printf("%-12.12s %-25.25s %-15.100s%n", "date", "event", "description");
-            while (rs.next()) {
-                System.out.printf("%-12.12s %-25.25s %-15.100s%n",rs.getString("event_date"),
-                        rs.getString("label"), rs.getString("description"));
 
+            System.out.println("\n===================================");
+            System.out.printf("%-12.12s %-25.25s%n", "date", "event");
+            System.out.println("-----------------------------------");
+            while (rs.next()) {
+                System.out.printf("%-12.12s %-25.25s%n", rs.getString("event_date"),
+                        rs.getString("label"));
+                System.out.println("===================================");
+                System.out.println("\nThe event's description is: " + rs.getString("description"));
             }
+
+
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
@@ -177,11 +183,13 @@ public class EventsController {
             ps = DbConnection.user().prepareStatement("SELECT * FROM events WHERE event_date LIKE '%." + date + "' ORDER BY event_date");
             rs = ps.executeQuery();
 
-            System.out.printf("%-12.12s %-25.25s %-15.100s%n", "date", "event", "description");
             while (rs.next()) {
-                System.out.printf("%-12.12s %-25.25s %-15.100s%n", rs.getString("event_date"),
-                        rs.getString("label"), rs.getString("description"));
+                System.out.printf("\n%-12.12s %-25.25s%n", rs.getString("event_date"),
+                        rs.getString("label"));
+                System.out.println("\t\t" + rs.getString("description") + "\n");
+
             }
+
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
@@ -194,11 +202,13 @@ public class EventsController {
             ps = DbConnection.user().prepareStatement("SELECT * FROM events WHERE event_date LIKE '%." + date + ".%' ORDER BY event_date");
             rs = ps.executeQuery();
 
-            System.out.printf("%-12.12s %-25.25s %-15.100s%n", "date", "event", "description");
             while (rs.next()) {
-                System.out.printf("%-12.12s %-25.25s %-15.100s%n", rs.getString("event_date"),
-                        rs.getString("label"), rs.getString("description"));
+                System.out.printf("\n%-12.12s %-25.25s%n", rs.getString("event_date"),
+                        rs.getString("label"));
+                System.out.println("\t\t" + rs.getString("description") + "\n");
+
             }
+
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
@@ -212,18 +222,16 @@ public class EventsController {
             ps = DbConnection.user().prepareStatement("SELECT * FROM events WHERE label ='" + label + "'  ORDER BY event_date");
             rs = ps.executeQuery();
 
-            System.out.printf("%-12.12s %-25.25s %-15.100s%n", "date", "event", "description");
             while (rs.next()) {
-                System.out.printf("%-12.12s %-25.25s %-15.100s%n", rs.getString("event_date"),
-                        rs.getString("label"), rs.getString("description"));
+                System.out.printf("%-12.12s %-25.25s%n", rs.getString("event_date"),
+                        rs.getString("label"));
+                System.out.println("\t\t" + rs.getString("description"));
             }
 
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
     }
-
-
 
 
     public static int getEventByID() {
@@ -235,15 +243,12 @@ public class EventsController {
             ps = DbConnection.user().prepareStatement("SELECT * FROM events WHERE id =" + check);
             rs = ps.executeQuery();
 
-
-            System.out.printf("%-3.5s %-12.12s %-25.25s %-15.100s%n", "id","date","event","description");
-
-
             while (rs.next()) {
                 id = rs.getInt("id");
-                System.out.printf("%-3.5s %-12.12s %-25.25s %-15.100s%n", id, rs.getString("event_date"),
-                        rs.getString("label"), rs.getString("description"));
+                System.out.printf("\n%-3.5s %-12.12s %-25.25s%n", id, rs.getString("event_date"),
+                        rs.getString("label"));
 
+                System.out.println("\t\t" + rs.getString("description"));
 
             }
 
@@ -251,6 +256,6 @@ public class EventsController {
             throwables.printStackTrace();
 
         }
-        return  id;
+        return id;
     }
 }

@@ -220,14 +220,16 @@ public class StudentsController {
         try {
             ps = DbConnection.user().prepareStatement("SELECT * FROM students WHERE surname = '" + surname + "' ORDER BY name");
             rs = ps.executeQuery();
+            System.out.println("\n=============================================================");
             System.out.printf("%-3.5s %-9.12s %-13.13s %-8.8s %-20.24s%n", "id", "name", "surname", "group", "faculty");
+            System.out.println("-------------------------------------------------------------");
             while (rs.next()) {
                 System.out.printf("%-3.5s %-9.12s %-13.13s %-8.8s %-25.25s%n", rs.getInt("id"), rs.getString("name"),
                         rs.getString("surname"),
                         rs.getString("group_id"),
                         rs.getString("faculty"));
-
             }
+            System.out.println("=============================================================");
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
@@ -240,8 +242,10 @@ public class StudentsController {
         try {
             ps = DbConnection.user().prepareStatement("SELECT * FROM students WHERE faculty = '" + faculty + "' ORDER BY  group_id, name");
             rs = ps.executeQuery();
-            System.out.println(faculty);
+            System.out.println("\nSelected faculty: " + faculty);
+            System.out.println("\n==================================");
             System.out.printf("%-3.5s %-9.12s %-13.13s %-8.8s%n", "#", "name", "surname", "group");
+            System.out.println("----------------------------------");
             int count = 1;
             while (rs.next()) {
                 System.out.printf("%-3.5s %-9.12s %-13.13s %-8.8s%n", count, rs.getString("name"),
@@ -249,6 +253,7 @@ public class StudentsController {
                         rs.getString("group_id"));
                 count++;
             }
+            System.out.println("==================================");
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
@@ -257,12 +262,14 @@ public class StudentsController {
     public static void selectStudentsByGroup() {
 
         System.out.print("\nEnter the student's group: ");
-        String group = scanner.next().trim();
+        String group = scanner.next().trim().toUpperCase();
         try {
             ps = DbConnection.user().prepareStatement("SELECT * FROM students WHERE  group_id = '" + group + "' ORDER BY name");
             rs = ps.executeQuery();
             int count = 1;
+            System.out.println("\n=============================================================");
             System.out.printf("%-3.5s %-9.12s %-13.13s %-8.8s %-20.24s%n", "#", "name", "surname", "group", "faculty");
+            System.out.println("-------------------------------------------------------------");
             while (rs.next()) {
                 System.out.printf("%-3.5s %-9.12s %-13.13s %-8.8s %-25.25s%n", count, rs.getString("name"),
                         rs.getString("surname"),
@@ -270,6 +277,7 @@ public class StudentsController {
                         rs.getString("faculty"));
                 count++;
             }
+            System.out.println("=============================================================");
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
@@ -283,9 +291,9 @@ public class StudentsController {
             ps = DbConnection.user().prepareStatement("SELECT * FROM students WHERE id =" + check);
             rs = ps.executeQuery();
 
-
+            System.out.println("\n=============================================================");
             System.out.printf("%-3.5s %-9.12s %-13.13s %-8.8s %-20.24s%n", "id", "name", "surname", "group", "faculty");
-
+            System.out.println("-------------------------------------------------------------");
 
             while (rs.next()) {
                 id = rs.getInt("id");
@@ -294,9 +302,8 @@ public class StudentsController {
                         rs.getString("surname"),
                         rs.getString("group_id"),
                         rs.getString("faculty"));
-
-
             }
+            System.out.println("=============================================================");
 
         } catch (SQLException throwables) {
             throwables.printStackTrace();
