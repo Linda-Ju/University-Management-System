@@ -42,7 +42,7 @@ public class SubMenu {
 
     public static void studentSubMenu() {
 
-        System.out.println("Student data:\n");
+        System.out.println("Student  DATA:\n");
 
         System.out.println("1. Add new student");
         System.out.println("2. Edit name ");
@@ -85,7 +85,7 @@ public class SubMenu {
 
     public static void employeeSubMenu() {
 
-        System.out.println("Employee data:\n");
+        System.out.println("Employee  DATA:\n");
 
         System.out.println("1. Add new employee");
         System.out.println("2. Edit name ");
@@ -124,7 +124,7 @@ public class SubMenu {
 
     public static void eventSubMenu() {
 
-        System.out.println("Event data:\n");
+        System.out.println("Event  DATA:\n");
 
         System.out.println("1. Add new event");
         System.out.println("2. Edit label ");
@@ -162,7 +162,7 @@ public class SubMenu {
 
     public static void scoreSubMenu() {
 
-        System.out.println("Scores data:\n");
+        System.out.println("Scores  DATA:\n");
 
         System.out.println("1. Add new score");
         System.out.println("2. Edit score");

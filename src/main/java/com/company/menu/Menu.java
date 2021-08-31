@@ -11,7 +11,7 @@ public class Menu {
 
     public static void adminMainMenu() {
         //access to every menu + some extras like getting password for user
-        System.out.println("Admin panel\n");
+        System.out.println("ADMIN PANEL\n");
 
         System.out.println("1. User data");
         System.out.println("2. Employees data");
@@ -60,7 +60,7 @@ public class Menu {
     public static void administrationMainMenu() {
         //add/edit/delete events, users, students, scores, observe those
 
-        System.out.println("Administration menu\n");
+        System.out.println("ADMINISTRATION MENU\n");
 
         System.out.println("1. Add/Change/Delete employee data");
         System.out.println("2. Add/Change/Delete student data");
@@ -102,7 +102,7 @@ public class Menu {
 
     public static void lecturerAccessMenu() {
 
-        System.out.println("Lecturers menu\n");
+        System.out.println("LECTURERS MENU\n");
 
         System.out.println("1. Add/Change/Delete score data");
         System.out.println("2. Observe students scores");
@@ -135,7 +135,7 @@ lecturerAccessMenu();        }
 
     public static void studentAccessMenu() {
         // observe his data, events
-        System.out.println("Students menu\n");
+        System.out.println("STUDENT MENU\n");
 
         System.out.println("1. Observe your lecturers");
         System.out.println("2. Observe scores");
