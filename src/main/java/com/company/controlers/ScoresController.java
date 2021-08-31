@@ -1,6 +1,7 @@
 package com.company.controlers;
 
 import com.company.dbhelper.DbConnection;
+import com.company.helpers.OutputMessage;
 import com.company.helpers.SantasLittleHelpers;
 import com.company.menu.SubMenu;
 
@@ -43,7 +44,9 @@ public class ScoresController {
                 ps.execute();
                 System.out.println("New score has been added.");
             } catch (Exception e) {
-                e.printStackTrace();
+//                e.printStackTrace();
+                OutputMessage.error();
+                addNewScore();
             }
         } else {
             System.out.print("\nDo you wish to submit another score? Y/N : ");
@@ -75,7 +78,9 @@ public class ScoresController {
             ps.execute();
             System.out.println("Successfully deleted score!");
         } catch (Exception e) {
-            e.printStackTrace();
+//            e.printStackTrace();
+            OutputMessage.error();
+            deleteScore();
         }
     }
 
@@ -101,7 +106,9 @@ public class ScoresController {
                 ps.execute();
                 System.out.println("Successfully edited score!");
             } catch (Exception e) {
-                e.printStackTrace();
+//                e.printStackTrace();
+                OutputMessage.error();
+                editScore();
             }
         }
     }
@@ -130,9 +137,10 @@ public class ScoresController {
                 }
                 System.out.println("=======================");
             } catch (Exception e) {
-                e.printStackTrace();
+                //               e.printStackTrace();
+                OutputMessage.error();
+                selectStudentScoresBySubject();
             }
         }
-
     }
 }

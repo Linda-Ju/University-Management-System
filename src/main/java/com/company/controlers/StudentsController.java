@@ -1,6 +1,7 @@
 package com.company.controlers;
 
 import com.company.dbhelper.DbConnection;
+import com.company.helpers.OutputMessage;
 import com.company.helpers.SantasLittleHelpers;
 
 import java.sql.PreparedStatement;
@@ -32,7 +33,9 @@ public class StudentsController {
             ps.execute();
             System.out.println("\nNew student has been added to database. Generating account..");
         } catch (Exception e) {
-            e.printStackTrace();
+//            e.printStackTrace();
+            OutputMessage.error();
+            addNewStudent();
         }
 
 // adding new user to database
@@ -54,8 +57,9 @@ public class StudentsController {
                     System.out.println("New account has been set.\n Username: " + login + "\n Password: " + password +
                             "\n\n Don't forget to write those down.");
                 } catch (Exception e) {
-                    e.printStackTrace();
-
+//                    e.printStackTrace();
+                    OutputMessage.error();
+                    addNewStudent();
                 }
                 try {
                     ps = DbConnection.user().prepareStatement("SELECT * FROM users WHERE username = '" + login + "';");
@@ -66,15 +70,21 @@ public class StudentsController {
                             ps = DbConnection.user().prepareStatement("UPDATE students SET user_id = " + usersID + " WHERE id =" + studentsID);
                             ps.execute();
                         } catch (Exception e) {
-                            e.printStackTrace();
+ //                           e.printStackTrace();
+                            OutputMessage.error();
+                            addNewStudent();
                         }
                     }
                 } catch (SQLException throwables) {
-                    throwables.printStackTrace();
+//                    throwables.printStackTrace();
+                    OutputMessage.error();
+                    addNewStudent();
                 }
             }
         } catch (Exception e) {
-            e.printStackTrace();
+//            e.printStackTrace();
+            OutputMessage.error();
+            addNewStudent();
         }
         System.out.print("\nAre you ready to assign group (Students ID will be needed)? Y/N : ");
         String option = scanner.next().trim().toUpperCase();
@@ -101,7 +111,9 @@ public class StudentsController {
 
                 System.out.println("\nSuccessfully updated student's name.");
             } catch (Exception e) {
-                e.printStackTrace();
+//                e.printStackTrace();
+                OutputMessage.error();
+                editStudentName();
             }
         } else {
             System.out.println("The student's data remained unchanged.");
@@ -125,7 +137,9 @@ public class StudentsController {
                 System.out.print("\nSuccessfully updated student's surname.");
 
             } catch (Exception e) {
-                e.printStackTrace();
+//                e.printStackTrace();
+                OutputMessage.error();
+                editStudentSurname();
             }
         } else {
             System.out.println("The student's data remained unchanged.");
@@ -147,7 +161,9 @@ public class StudentsController {
                 System.out.println("\nSuccessfully updated student's faculty.");
 
             } catch (Exception e) {
-                e.printStackTrace();
+//                e.printStackTrace();
+                OutputMessage.error();
+                editStudentFaculty();
             }
         } else {
             System.out.println("The student's data remained unchanged.");
@@ -169,7 +185,9 @@ public class StudentsController {
 
                 System.out.println("\nSuccessfully updated student's group.");
             } catch (Exception e) {
-                e.printStackTrace();
+//                e.printStackTrace();
+                OutputMessage.error();
+                editStudentGroup();
             }
         } else {
             System.out.println("The student's data remained unchanged.");
@@ -195,11 +213,15 @@ public class StudentsController {
                         ps = DbConnection.user().prepareStatement("DELETE FROM users WHERE username = '" + login + "'");
                         ps.execute();
                     } catch (Exception e) {
-                        e.printStackTrace();
+//                        e.printStackTrace();
+                        OutputMessage.error();
+                        deleteStudent();
                     }
                 }
             } catch (Exception e) {
-                e.printStackTrace();
+//                e.printStackTrace();
+                OutputMessage.error();
+                deleteStudent();
             }
             try {
                 ps = DbConnection.user().prepareStatement("DELETE FROM students WHERE id = " + id);
@@ -207,7 +229,9 @@ public class StudentsController {
 
                 System.out.println("\nThe student was successfully removed from the database.");
             } catch (Exception e) {
-                e.printStackTrace();
+//                e.printStackTrace();
+                OutputMessage.error();
+                deleteStudent();
             }
         } else {
             System.out.println("\nThe student stayed in the database.");
@@ -231,7 +255,9 @@ public class StudentsController {
             }
             System.out.println("=============================================================");
         } catch (SQLException throwables) {
-            throwables.printStackTrace();
+//            throwables.printStackTrace();
+            OutputMessage.error();
+            selectStudentsBySurname();
         }
     }
 
@@ -255,7 +281,9 @@ public class StudentsController {
             }
             System.out.println("==================================");
         } catch (SQLException throwables) {
-            throwables.printStackTrace();
+//            throwables.printStackTrace();
+            OutputMessage.error();
+            selectStudentsByFaculty();
         }
     }
 
@@ -279,7 +307,9 @@ public class StudentsController {
             }
             System.out.println("=============================================================");
         } catch (SQLException throwables) {
-            throwables.printStackTrace();
+//            throwables.printStackTrace();
+            OutputMessage.error();
+            selectStudentsByGroup();
         }
     }
 
@@ -304,10 +334,10 @@ public class StudentsController {
                         rs.getString("faculty"));
             }
             System.out.println("=============================================================");
-
         } catch (SQLException throwables) {
-            throwables.printStackTrace();
-
+//            throwables.printStackTrace();
+            OutputMessage.error();
+            getStudentByID();
         }
         return id;
     }

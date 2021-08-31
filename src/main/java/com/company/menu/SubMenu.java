@@ -32,12 +32,9 @@ public class SubMenu {
                 OutputMessage.redirecting();
                 break;
             default:
-
                 OutputMessage.invalidInput();
                 userSubMenu();
         }
-
-
     }
 
     public static void studentSubMenu() {

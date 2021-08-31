@@ -51,7 +51,7 @@ public class Menu {
                 adminMainMenu();
 
         }
-        if(option != "X"){
+        if (option != "X") {
             adminMainMenu();
         }
 
@@ -95,7 +95,7 @@ public class Menu {
                 OutputMessage.invalidInput();
                 administrationMainMenu();
         }
-        if(option != "X"){
+        if (option != "X") {
             administrationMainMenu();
         }
     }
@@ -129,8 +129,9 @@ public class Menu {
                 OutputMessage.invalidInput();
                 lecturerAccessMenu();
         }
-        if(option != "X"){
-lecturerAccessMenu();        }
+        if (option != "X") {
+            lecturerAccessMenu();
+        }
     }
 
     public static void studentAccessMenu() {
@@ -162,7 +163,7 @@ lecturerAccessMenu();        }
                 OutputMessage.invalidInput();
                 studentAccessMenu();
         }
-        if(option != "X"){
+        if (option != "X") {
             studentAccessMenu();
         }
     }

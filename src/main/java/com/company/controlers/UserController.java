@@ -35,15 +35,14 @@ public class UserController {
                 System.out.printf("%-3.5s %-9.12s %-10.10s %-20.24s%n", userID, rs.getString("username"),
                         rs.getString("password"), rs.getString("access"));
                 System.out.println("====================================");
-
             }
             if (userID == null) {
                 System.out.println("Such user doesn't exists.\n");
-
             }
         } catch (SQLException throwables) {
-            throwables.printStackTrace();
-
+//            throwables.printStackTrace();
+            OutputMessage.error();
+            findUserByUsername();
         }
     }
 
@@ -79,7 +78,9 @@ public class UserController {
                         ps.execute();
                         System.out.println("The password has been updated.");
                     } catch (Exception e) {
-                        e.printStackTrace();
+//                        e.printStackTrace();
+                        OutputMessage.error();
+                        changeUserPassword();
                     }
                 } else {
                     System.out.print("\nDo you wish to start over? Y/N : ");
@@ -92,8 +93,9 @@ public class UserController {
                 }
             }
         } catch (Exception e) {
-            e.printStackTrace();
-            System.out.println("Redirecting to start menu.");
+//            e.printStackTrace();
+            OutputMessage.error();
+            changeUserPassword();
         }
     }
 
@@ -149,7 +151,9 @@ public class UserController {
                 }
                 System.out.println("===================");
             } catch (SQLException throwables) {
-                throwables.printStackTrace();
+//                throwables.printStackTrace();
+                OutputMessage.error();
+                findUsersByAccess();
             }
         }
     }
