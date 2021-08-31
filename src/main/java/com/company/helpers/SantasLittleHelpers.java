@@ -51,7 +51,6 @@ public class SantasLittleHelpers {
                 OutputMessage.invalidInput();
                 subjectCases();
         }
-
         return subjectName;
     }
 

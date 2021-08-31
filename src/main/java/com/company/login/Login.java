@@ -1,6 +1,7 @@
 package com.company.login;
 
 import com.company.dbhelper.DbConnection;
+import com.company.helpers.OutputMessage;
 import com.company.menu.Menu;
 
 
@@ -31,8 +32,6 @@ public class Login {
         } else {
             System.out.println("Login failed. Check password");
         }
-
-
         try {
             ps = DbConnection.user().prepareStatement("SELECT * FROM users WHERE username = '" + login + "';");
             rs = ps.executeQuery();
@@ -40,7 +39,6 @@ public class Login {
             String passwordCheck;
 
             //asking for password from user
-
             while (rs.next()) {
                 passwordCheck = rs.getString("password");
                 //Check if password is correct
@@ -49,7 +47,6 @@ public class Login {
                     System.out.println("Access granted.");
 
                     String access = rs.getString("access");
-
                     switch (access) {
                         case "admin":
                             Menu.adminMainMenu();
@@ -71,8 +68,9 @@ public class Login {
                 }
             }
         } catch (Exception e) {
-            e.printStackTrace();
+//            e.printStackTrace();
+            OutputMessage.error();
+            userLogin();
         }
     }
 }
-

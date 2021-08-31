@@ -1,6 +1,7 @@
 package com.company.Tables;
 
 import com.company.dbhelper.DbConnection;
+import com.company.helpers.OutputMessage;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -41,7 +42,9 @@ public class Tables {
                 System.out.println("");
             }
         } catch (SQLException throwables) {
-            throwables.printStackTrace();
+//            throwables.printStackTrace();
+            OutputMessage.error();
+            getUsersTable();
         }
     }
 /*

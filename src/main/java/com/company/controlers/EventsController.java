@@ -1,6 +1,7 @@
 package com.company.controlers;
 
 import com.company.dbhelper.DbConnection;
+import com.company.helpers.OutputMessage;
 
 
 import java.sql.PreparedStatement;
@@ -32,7 +33,9 @@ public class EventsController {
             ps.execute();
             System.out.println("\nNew event has been added.");
         } catch (Exception e) {
-            e.printStackTrace();
+//            e.printStackTrace();
+            OutputMessage.error();
+            addNewEvent();
         }
     }
 
@@ -51,9 +54,10 @@ public class EventsController {
                     ps.execute();
 
                     System.out.println("\nSuccessfully updated event's label.");
-
                 } catch (Exception e) {
-                    e.printStackTrace();
+//                    e.printStackTrace();
+                    OutputMessage.error();
+                    editEventLabel();
                 }
             } else {
                 System.out.println("The event's data remained unchanged.");
@@ -79,13 +83,14 @@ public class EventsController {
 
                 System.out.print("\nEnter edited date(format dd.mm.yyyy): ");
                 String update = scanner.next().trim();
-
                 try {
                     ps = DbConnection.user().prepareStatement("UPDATE events SET event_date = '" + update + "' WHERE id =" + id);
                     ps.execute();
                     System.out.println("\nSuccessfully updated event's data.");
                 } catch (Exception e) {
-                    e.printStackTrace();
+//                    e.printStackTrace();
+                    OutputMessage.error();
+                    editEventDate();
                 }
             } else {
                 System.out.println("The event's data remained unchanged.");
@@ -113,13 +118,14 @@ public class EventsController {
                 System.out.print("\nEnter new event's description: ");
                 scanner.nextLine();
                 String update = scanner.nextLine();
-
                 try {
                     ps = DbConnection.user().prepareStatement("UPDATE events SET description = '" + update + "' WHERE id =" + id);
                     ps.execute();
                     System.out.println("\nSuccessfully updated event's description.");
                 } catch (Exception e) {
-                    e.printStackTrace();
+//                    e.printStackTrace();
+                    OutputMessage.error();
+                    editEventDescription();
                 }
             } else {
                 System.out.println("The event's data remained unchanged.");
@@ -147,7 +153,9 @@ public class EventsController {
             ps.execute();
             System.out.println("\nThe event was successfully removed from the database.");
         } catch (Exception e) {
-            e.printStackTrace();
+//            e.printStackTrace();
+            OutputMessage.error();
+            deleteEvent();
         }
     }
 
@@ -168,10 +176,10 @@ public class EventsController {
                 System.out.println("===================================");
                 System.out.println("\nThe event's description is: " + rs.getString("description"));
             }
-
-
         } catch (SQLException throwables) {
-            throwables.printStackTrace();
+//            throwables.printStackTrace();
+            OutputMessage.error();
+            selectEventByDate();
         }
     }
 
@@ -187,11 +195,11 @@ public class EventsController {
                 System.out.printf("\n%-12.12s %-25.25s%n", rs.getString("event_date"),
                         rs.getString("label"));
                 System.out.println("\t\t" + rs.getString("description") + "\n");
-
             }
-
         } catch (SQLException throwables) {
-            throwables.printStackTrace();
+//            throwables.printStackTrace();
+            OutputMessage.error();
+            selectEventByYear();
         }
     }
 
@@ -206,11 +214,11 @@ public class EventsController {
                 System.out.printf("\n%-12.12s %-25.25s%n", rs.getString("event_date"),
                         rs.getString("label"));
                 System.out.println("\t\t" + rs.getString("description") + "\n");
-
             }
-
         } catch (SQLException throwables) {
-            throwables.printStackTrace();
+//            throwables.printStackTrace();
+            OutputMessage.error();
+            selectEventByMonth();
         }
     }
 
@@ -227,9 +235,10 @@ public class EventsController {
                         rs.getString("label"));
                 System.out.println("\t\t" + rs.getString("description"));
             }
-
         } catch (SQLException throwables) {
-            throwables.printStackTrace();
+//            throwables.printStackTrace();
+            OutputMessage.error();
+            selectEventByLabel();
         }
     }
 
@@ -247,14 +256,12 @@ public class EventsController {
                 id = rs.getInt("id");
                 System.out.printf("\n%-3.5s %-12.12s %-25.25s%n", id, rs.getString("event_date"),
                         rs.getString("label"));
-
                 System.out.println("\t\t" + rs.getString("description"));
-
             }
-
         } catch (SQLException throwables) {
-            throwables.printStackTrace();
-
+//            throwables.printStackTrace();
+            OutputMessage.error();
+            getEventByID();
         }
         return id;
     }
