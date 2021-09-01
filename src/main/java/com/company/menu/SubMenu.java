@@ -35,6 +35,9 @@ public class SubMenu {
                 OutputMessage.invalidInput();
                 userSubMenu();
         }
+        if(!option.equals("X")){
+            userSubMenu();
+        }
     }
 
     public static void studentSubMenu() {
@@ -78,6 +81,9 @@ public class SubMenu {
                 OutputMessage.invalidInput();
                 studentSubMenu();
         }
+        if(!option.equals("X")){
+            studentSubMenu();
+        }
     }
 
     public static void employeeSubMenu() {
@@ -117,6 +123,9 @@ public class SubMenu {
                 OutputMessage.invalidInput();
                 employeeSubMenu();
         }
+        if(!option.equals("X")){
+            employeeSubMenu();
+        }
     }
 
     public static void eventSubMenu() {
@@ -155,6 +164,9 @@ public class SubMenu {
                 OutputMessage.invalidInput();
                 eventSubMenu();
         }
+        if(!option.equals("X")){
+           eventSubMenu();
+        }
     }
 
     public static void scoreSubMenu() {
@@ -185,6 +197,9 @@ public class SubMenu {
             default:
                 OutputMessage.invalidInput();
                 scoreSubMenu();
+        }
+        if(!option.equals("X")){
+            scoreSubMenu();
         }
     }
 
@@ -226,6 +241,9 @@ public class SubMenu {
                 OutputMessage.invalidInput();
                 observeData();
         }
+        if(!option.equals("X")){
+            observeData();
+        }
     }
 
     public static void observeChoiceEmployee() {
@@ -255,6 +273,9 @@ public class SubMenu {
             default:
                 OutputMessage.invalidInput();
                 observeChoiceEmployee();
+        }
+        if(!option.equals("X")){
+            observeChoiceEmployee();
         }
     }
 
@@ -288,6 +309,9 @@ public class SubMenu {
             default:
                 OutputMessage.invalidInput();
                 observeChoiceLecturers();
+        }
+        if(!option.equals("X")){
+            observeChoiceLecturers();
         }
     }
 
@@ -323,6 +347,10 @@ public class SubMenu {
                 OutputMessage.invalidInput();
                 observeChoiceStudents();
         }
+        if(!option.equals("X")){
+            observeChoiceStudents();
+        }
+
     }
 
     public static void observeChoiceScores() {
@@ -353,6 +381,9 @@ public class SubMenu {
             default:
                 OutputMessage.invalidInput();
                 observeChoiceScores();
+        }
+        if(!option.equals("X")){
+            observeChoiceScores();
         }
     }
 
@@ -391,6 +422,9 @@ public class SubMenu {
             default:
                 OutputMessage.invalidInput();
                 observeChoiceEvents();
+        }
+        if(!option.equals("X")){
+            observeChoiceEvents();
         }
     }
 }

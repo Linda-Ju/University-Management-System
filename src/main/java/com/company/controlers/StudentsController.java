@@ -36,7 +36,6 @@ public class StudentsController {
         } catch (Exception e) {
 //            e.printStackTrace();
             OutputMessage.error();
-            addNewStudent();
         }
 
 // adding new user to database
@@ -114,7 +113,7 @@ public class StudentsController {
             } catch (Exception e) {
 //                e.printStackTrace();
                 OutputMessage.error();
-                editStudentName();
+
             }
         } else {
             System.out.println("The student's data remained unchanged.");
@@ -140,7 +139,6 @@ public class StudentsController {
             } catch (Exception e) {
 //                e.printStackTrace();
                 OutputMessage.error();
-                editStudentSurname();
             }
         } else {
             System.out.println("The student's data remained unchanged.");
@@ -164,7 +162,6 @@ public class StudentsController {
             } catch (Exception e) {
 //                e.printStackTrace();
                 OutputMessage.error();
-                editStudentFaculty();
             }
         } else {
             System.out.println("The student's data remained unchanged.");
@@ -188,7 +185,7 @@ public class StudentsController {
             } catch (Exception e) {
 //                e.printStackTrace();
                 OutputMessage.error();
-                editStudentGroup();
+
             }
         } else {
             System.out.println("The student's data remained unchanged.");
@@ -204,7 +201,7 @@ public class StudentsController {
 
         if (option.equals("Y")) {
             try {
-                ps = DbConnection.user().prepareStatement("SELECT * FROM employees WHERE id = " + id);
+                ps = DbConnection.user().prepareStatement("SELECT * FROM students WHERE id = " + id);
                 rs = ps.executeQuery();
                 while (rs.next()) {
                     String name = rs.getString("name");
@@ -216,13 +213,12 @@ public class StudentsController {
                     } catch (Exception e) {
 //                        e.printStackTrace();
                         OutputMessage.error();
-                        deleteStudent();
-                    }
+                 }
                 }
             } catch (Exception e) {
 //                e.printStackTrace();
                 OutputMessage.error();
-                deleteStudent();
+
             }
             try {
                 ps = DbConnection.user().prepareStatement("DELETE FROM students WHERE id = " + id);
@@ -232,7 +228,7 @@ public class StudentsController {
             } catch (Exception e) {
 //                e.printStackTrace();
                 OutputMessage.error();
-                deleteStudent();
+
             }
         } else {
             System.out.println("\nThe student stayed in the database.");
@@ -258,7 +254,7 @@ public class StudentsController {
         } catch (SQLException throwables) {
 //            throwables.printStackTrace();
             OutputMessage.error();
-            selectStudentsBySurname();
+
         }
     }
 
@@ -284,7 +280,7 @@ public class StudentsController {
         } catch (SQLException throwables) {
 //            throwables.printStackTrace();
             OutputMessage.error();
-            selectStudentsByFaculty();
+
         }
     }
 
@@ -310,7 +306,7 @@ public class StudentsController {
         } catch (SQLException throwables) {
 //            throwables.printStackTrace();
             OutputMessage.error();
-            selectStudentsByGroup();
+
         }
     }
 
@@ -344,7 +340,7 @@ public class StudentsController {
         } catch (SQLException throwables) {
 //            throwables.printStackTrace();
             OutputMessage.error();
-            getStudentByID();
+
         }
         return id;
     }
