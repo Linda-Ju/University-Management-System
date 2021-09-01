@@ -11,7 +11,7 @@ public class Menu {
 
     public static void adminMainMenu() {
         //access to every menu + some extras like getting password for user
-        System.out.println("ADMIN PANEL\n");
+        System.out.println("\nADMIN PANEL\n");
 
         System.out.println("1. User data");
         System.out.println("2. Add/Change/Delete employee data");
@@ -22,7 +22,8 @@ public class Menu {
         System.out.println("X. Exit");
 
         System.out.print("\nSelect an option: \t");
-        String option = scanner.next().toUpperCase();
+        String option = scanner.nextLine().toUpperCase();
+
 
         switch (option) {
             case "1":
@@ -49,6 +50,7 @@ public class Menu {
             default:
                 OutputMessage.invalidInput();
                 adminMainMenu();
+                break;
 
         }
         if(!option.equals("X")){
@@ -60,7 +62,7 @@ public class Menu {
     public static void administrationMainMenu() {
         //add/edit/delete events, users, students, scores, observe those
 
-        System.out.println("ADMINISTRATION MENU\n");
+        System.out.println("\nADMINISTRATION MENU\n");
 
         System.out.println("1. Add/Change/Delete employee data");
         System.out.println("2. Add/Change/Delete student data");
@@ -102,7 +104,7 @@ public class Menu {
 
     public static void lecturerAccessMenu() {
 
-        System.out.println("LECTURERS MENU\n");
+        System.out.println("\nLECTURERS MENU\n");
 
         System.out.println("1. Add/Change/Delete score data");
         System.out.println("2. Observe students scores");
@@ -135,7 +137,7 @@ lecturerAccessMenu();        }
 
     public static void studentAccessMenu() {
         // observe his data, events
-        System.out.println("STUDENT MENU\n");
+        System.out.println("\nSTUDENT MENU\n");
 
         System.out.println("1. Observe your lecturers");
         System.out.println("2. Observe scores");
