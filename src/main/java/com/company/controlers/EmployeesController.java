@@ -41,7 +41,6 @@ public class EmployeesController {
         } catch (Exception e) {
 //            e.printStackTrace();
             OutputMessage.error();
-            addNewEmployee();
         }
         try {
             ps = DbConnection.user().prepareStatement("SELECT * FROM employees WHERE first_name = '" + name +
@@ -63,7 +62,6 @@ public class EmployeesController {
                 } catch (Exception e) {
 //                    e.printStackTrace();
                     OutputMessage.error();
-                    addNewEmployee();
                 }
                 try {
                     ps = DbConnection.user().prepareStatement("SELECT * FROM users WHERE username = '" + login + "';");
@@ -76,19 +74,16 @@ public class EmployeesController {
                         } catch (Exception e) {
  //                           e.printStackTrace();
                             OutputMessage.error();
-                            addNewEmployee();
                         }
                     }
                 } catch (SQLException throwables) {
 //                    throwables.printStackTrace();
-                    OutputMessage.error();
-                    addNewEmployee();
+    OutputMessage.error();
                 }
             }
         } catch (Exception e) {
 //            e.printStackTrace();
             OutputMessage.error();
-            addNewEmployee();
         }
     }
 
@@ -109,7 +104,6 @@ public class EmployeesController {
             } catch (Exception e) {
 //                e.printStackTrace();
                 OutputMessage.error();
-                editEmployeeName();
             }
         } else {
             System.out.println("The employee's data remained unchanged.");
@@ -161,7 +155,6 @@ public class EmployeesController {
             } catch (Exception e) {
 //                e.printStackTrace();
                 OutputMessage.error();
-                editEmployeePosition();
             }
         } else {
             System.out.println("The employee's data remained unchanged.");
@@ -190,13 +183,13 @@ public class EmployeesController {
                     } catch (Exception e) {
 //                        e.printStackTrace();
                         OutputMessage.error();
-                        deleteEmployee();
+
                     }
                 }
             } catch (Exception e) {
 //                e.printStackTrace();
                 OutputMessage.error();
-                deleteEmployee();
+
             }
             try {
                 ps = DbConnection.user().prepareStatement("DELETE FROM employees WHERE id = " + id);
@@ -207,7 +200,7 @@ public class EmployeesController {
             } catch (Exception e) {
 //                e.printStackTrace();
                 OutputMessage.error();
-                deleteEmployee();
+
             }
         } else {
             System.out.println("The employee stayed in the database.");
@@ -241,7 +234,7 @@ public class EmployeesController {
         } catch (SQLException throwables) {
 //            throwables.printStackTrace();
             OutputMessage.error();
-            getEmployeeByID();
+
         }
         return id;
     }
@@ -266,7 +259,6 @@ public class EmployeesController {
         } catch (SQLException throwables) {
 //            throwables.printStackTrace();
             OutputMessage.error();
-            selectEmployeeBySurname();
         }
     }
 
@@ -292,7 +284,7 @@ public class EmployeesController {
         } catch (SQLException throwables) {
 //            throwables.printStackTrace();
             OutputMessage.error();
-            selectEmployeeByPosition();
+
         }
     }
 
@@ -318,7 +310,6 @@ public class EmployeesController {
             } catch (SQLException throwables) {
 //                throwables.printStackTrace();
                 OutputMessage.error();
-                selectLecturersBySubject();
             }
         } else {
             System.out.print("\nDo you wish to start over? Y/N :  ");
@@ -353,7 +344,6 @@ public class EmployeesController {
         } catch (SQLException throwables) {
 //            throwables.printStackTrace();
             OutputMessage.error();
-            selectLecturersByStudentGroup();
         }
     }
 }
