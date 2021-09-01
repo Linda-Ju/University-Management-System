@@ -13,7 +13,7 @@ public class SubMenu {
 
         System.out.println("1. Remind password");
         System.out.println("2. Change password");
-        System.out.println("3. observe users by access level");
+        System.out.println("3. Observe users by access level");
         System.out.println("X. Exit\n");
         System.out.print("Select an option: \t");
         String option = scanner.next().toUpperCase();
@@ -178,7 +178,7 @@ public class SubMenu {
         System.out.println("3. Delete score");
         System.out.println("X. Exit\n");
 
-        System.out.println("Select an option: \t");
+        System.out.print("Select an option: \t");
         String option = scanner.next().toUpperCase();
 
         switch (option) {
@@ -214,7 +214,7 @@ public class SubMenu {
         System.out.println("5. Events");
         System.out.println("X. Exit\n");
 
-        System.out.println("Select an option: \t");
+        System.out.print("Select an option: \t");
         String option = scanner.next().toUpperCase();
 
         switch (option) {
@@ -254,7 +254,7 @@ public class SubMenu {
         System.out.println("2. Select employee by surname");
         System.out.println("3. Select employees list by position");
         System.out.println("X. Exit\n");
-        System.out.println("Select an option: \t");
+        System.out.print("Select an option: \t");
         String option = scanner.next().toUpperCase();
 
         switch (option) {

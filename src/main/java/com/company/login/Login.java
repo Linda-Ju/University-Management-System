@@ -44,7 +44,7 @@ public class Login {
                 //Check if password is correct
                 boolean correct = password.equals(passwordCheck);
                 if (correct) {
-                    System.out.println("Access granted.");
+                    System.out.println("Access granted.\n");
 
                     String access = rs.getString("access");
                     switch (access) {
