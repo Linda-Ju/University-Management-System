@@ -46,7 +46,7 @@ public class ScoresController {
             } catch (Exception e) {
 //                e.printStackTrace();
                 OutputMessage.error();
-                addNewScore();
+
             }
         } else {
             System.out.print("\nDo you wish to submit another score? Y/N : ");
@@ -80,7 +80,7 @@ public class ScoresController {
         } catch (Exception e) {
 //            e.printStackTrace();
             OutputMessage.error();
-            deleteScore();
+
         }
     }
 
@@ -108,7 +108,7 @@ public class ScoresController {
             } catch (Exception e) {
 //                e.printStackTrace();
                 OutputMessage.error();
-                editScore();
+
             }
         }
     }
@@ -139,7 +139,7 @@ public class ScoresController {
             } catch (Exception e) {
                 //               e.printStackTrace();
                 OutputMessage.error();
-                selectStudentScoresBySubject();
+
             }
         }
     }
