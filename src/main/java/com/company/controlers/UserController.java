@@ -141,11 +141,11 @@ public class UserController {
                 rs = ps.executeQuery();
                 System.out.println("\n" + access.toUpperCase() + " access level: ".toUpperCase());
                 System.out.println("\n===================");
-                System.out.printf("%-9.12s %-10.10s%n", "username", "password");
+                System.out.printf("%-3.5s %-9.12s %-10.10s%n", "#", "username", "password");
                 System.out.println("-------------------");
                 int count = 1;
                 while (rs.next()) {
-                    System.out.printf("%-9.12s %-10.10s%n", count, rs.getString("username"),
+                    System.out.printf("%-3.5s %-9.12s %-10.10s%n", count, rs.getString("username"),
                             rs.getString("password"));
                     count++;
                 }
