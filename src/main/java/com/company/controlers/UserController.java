@@ -95,7 +95,7 @@ public class UserController {
         } catch (Exception e) {
 //            e.printStackTrace();
             OutputMessage.error();
-            changeUserPassword();
+
         }
     }
 
@@ -133,7 +133,7 @@ public class UserController {
             default:
                 access = null;
                 OutputMessage.invalidInput();
-                findUsersByAccess();
+
         }
         if (access != null) {
             try {
@@ -153,7 +153,7 @@ public class UserController {
             } catch (SQLException throwables) {
 //                throwables.printStackTrace();
                 OutputMessage.error();
-                findUsersByAccess();
+
             }
         }
     }

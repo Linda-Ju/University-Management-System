@@ -211,7 +211,6 @@ public class EmployeesController {
         System.out.print("\nEnter the employee's id: ");
         int check = 0;
         try {check = scanner.nextInt();
-            scanner.close();
         }
         catch(InputMismatchException e) {
             System.err.println("Wrong input! Input only integer numbers please...");
