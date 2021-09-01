@@ -7,6 +7,7 @@ import com.company.helpers.SantasLittleHelpers;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class StudentsController {
@@ -315,7 +316,13 @@ public class StudentsController {
 
     public static int getStudentByID() {
         System.out.print("\nEnter the student's id: ");
-        int check = scanner.nextInt();
+        int check = 0;
+        try {check = scanner.nextInt();
+            scanner.close();
+        }
+        catch(InputMismatchException e) {
+        System.err.println("Wrong input! Input only integer numbers please...");
+    }
         int id = 0;
         try {
             ps = DbConnection.user().prepareStatement("SELECT * FROM students WHERE id =" + check);

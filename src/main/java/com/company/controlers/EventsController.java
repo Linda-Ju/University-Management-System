@@ -7,6 +7,7 @@ import com.company.helpers.OutputMessage;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class EventsController {
@@ -245,7 +246,13 @@ public class EventsController {
 
     public static int getEventByID() {
         System.out.print("\nEnter the events id: ");
-        int check = scanner.nextInt();
+        int check = 0;
+        try {check = scanner.nextInt();
+            scanner.close();
+        }
+        catch(InputMismatchException e) {
+            System.err.println("Wrong input! Input only integer numbers please...");
+        }
         int id = 0;
 
         try {
