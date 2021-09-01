@@ -3,6 +3,7 @@ package com.company.controlers;
 import com.company.dbhelper.DbConnection;
 import com.company.helpers.OutputMessage;
 import com.company.helpers.SantasLittleHelpers;
+import com.sun.xml.internal.ws.util.StringUtils;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -151,8 +152,8 @@ public class StudentsController {
         System.out.print("\nDo you wish to edit this data? Y/N : ");
         String option = scanner.next().trim().toUpperCase();
         if (option.equals("Y")) {
-            System.out.print("\nEnter new faculty: ");
-            String update = scanner.next().trim();
+
+            String update = SantasLittleHelpers.facultyCases();
             try {
                 ps = DbConnection.user().prepareStatement("UPDATE students SET faculty = '" + update + "' WHERE id =" + id);
                 ps.execute();
@@ -238,6 +239,8 @@ public class StudentsController {
     public static void selectStudentsBySurname() {
         System.out.print("\nEnter the student's surname: ");
         String surname = scanner.next().trim();
+        StringUtils.capitalize(surname);
+
         try {
             ps = DbConnection.user().prepareStatement("SELECT * FROM students WHERE surname = '" + surname + "' ORDER BY name");
             rs = ps.executeQuery();
@@ -259,8 +262,7 @@ public class StudentsController {
     }
 
     public static void selectStudentsByFaculty() {
-        System.out.print("\nEnter the student's faculty: ");
-        String faculty = scanner.nextLine().trim();
+        String faculty = SantasLittleHelpers.facultyCases();
 
         try {
             ps = DbConnection.user().prepareStatement("SELECT * FROM students WHERE faculty = '" + faculty + "' ORDER BY  group_id, name");

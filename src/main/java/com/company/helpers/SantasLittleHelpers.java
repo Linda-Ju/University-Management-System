@@ -10,7 +10,7 @@ public class SantasLittleHelpers {
     public static String subjectCases(){
         Scanner scanner = new Scanner(System.in);
 
-        System.out.println("Choose a subject");
+        System.out.println("Choose a subject: ");
         System.out.println("1. Mathematics");
         System.out.println("2. Physics");
         System.out.println("3. Chemistry");
@@ -52,6 +52,40 @@ public class SantasLittleHelpers {
                 subjectCases();
         }
         return subjectName;
+    }
+
+    public static String facultyCases(){
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.println("\nSelect a faculty: ");
+        System.out.println("1. Communication Technology");
+        System.out.println("2. Geoinformatics");
+        System.out.println("3. Economics");
+
+        System.out.print("\nSelect an option: \t");
+        String faculty = scanner.next().toUpperCase();
+        String facultyName;
+
+        switch (faculty) {
+            case "1":
+                facultyName = "Communication Technology";
+                break;
+            case "2":
+                facultyName = "Geoinformatics";
+                break;
+            case "3":
+                facultyName = "Economics";
+                break;
+            case "X":
+                facultyName = null;
+                OutputMessage.redirecting();
+                break;
+            default:
+                facultyName = null;
+                OutputMessage.invalidInput();
+                subjectCases();
+        }
+        return facultyName;
     }
 
     public static String dateFormat() {
