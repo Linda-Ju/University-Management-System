@@ -14,10 +14,10 @@ public class Menu {
         System.out.println("ADMIN PANEL\n");
 
         System.out.println("1. User data");
-        System.out.println("2. Employees data");
-        System.out.println("3. Students data");
-        System.out.println("4. Scores data");
-        System.out.println("5. Events data");
+        System.out.println("2. Add/Change/Delete employee data");
+        System.out.println("3. Add/Change/Delete student data");
+        System.out.println("4. Add/Change/Delete score data");
+        System.out.println("5. Add/Change/Delete event data");
         System.out.println("6. Observe data");
         System.out.println("X. Exit");
 
@@ -51,7 +51,7 @@ public class Menu {
                 adminMainMenu();
 
         }
-        if (option != "X") {
+        if(!option.equals("X")){
             adminMainMenu();
         }
 
@@ -95,7 +95,7 @@ public class Menu {
                 OutputMessage.invalidInput();
                 administrationMainMenu();
         }
-        if (option != "X") {
+        if(!option.equals("X")){
             administrationMainMenu();
         }
     }
@@ -129,9 +129,8 @@ public class Menu {
                 OutputMessage.invalidInput();
                 lecturerAccessMenu();
         }
-        if (option != "X") {
-            lecturerAccessMenu();
-        }
+        if(!option.equals("X")){
+lecturerAccessMenu();        }
     }
 
     public static void studentAccessMenu() {
@@ -163,7 +162,7 @@ public class Menu {
                 OutputMessage.invalidInput();
                 studentAccessMenu();
         }
-        if (option != "X") {
+        if(!option.equals("X")){
             studentAccessMenu();
         }
     }

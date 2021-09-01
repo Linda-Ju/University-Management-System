@@ -9,13 +9,13 @@ public class SubMenu {
     private static Scanner scanner = new Scanner(System.in);
 
     public static void userSubMenu() {
-        System.out.println("What do you want to do?");
+        System.out.println("User DATA\n");
 
         System.out.println("1. Remind password");
         System.out.println("2. Change password");
         System.out.println("3. observe users by access level");
         System.out.println("X. Exit\n");
-        System.out.print("Select an option: ");
+        System.out.print("Select an option: \t");
         String option = scanner.next().toUpperCase();
 
         switch (option) {
@@ -49,7 +49,7 @@ public class SubMenu {
         System.out.println("6. Delete student");
         System.out.println("X. Exit\n");
 
-        System.out.print("Select an option");
+        System.out.print("Select an option: \t");
         String option = scanner.next().toUpperCase();
 
         switch (option) {
@@ -127,7 +127,7 @@ public class SubMenu {
         System.out.println("2. Edit label ");
         System.out.println("3. Change date");
         System.out.println("4. Edit description");
-        System.out.println("5. Delete student");
+        System.out.println("5. Delete event");
         System.out.println("X. Exit\n");
         System.out.println("Select an option: \t");
         String option = scanner.next().toUpperCase();
