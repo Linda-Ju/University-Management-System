@@ -36,7 +36,7 @@ public class EventsController {
         } catch (Exception e) {
 //            e.printStackTrace();
             OutputMessage.error();
-            addNewEvent();
+
         }
     }
 
@@ -58,7 +58,7 @@ public class EventsController {
                 } catch (Exception e) {
 //                    e.printStackTrace();
                     OutputMessage.error();
-                    editEventLabel();
+
                 }
             } else {
                 System.out.println("The event's data remained unchanged.");
@@ -70,7 +70,7 @@ public class EventsController {
             if (choice.equals("Y")) {
                 editEventLabel();
             } else {
-                System.out.println("Redirecting to start menu.. EvC68\n");
+                OutputMessage.redirecting();
             }
         }
     }
@@ -91,7 +91,7 @@ public class EventsController {
                 } catch (Exception e) {
 //                    e.printStackTrace();
                     OutputMessage.error();
-                    editEventDate();
+
                 }
             } else {
                 System.out.println("The event's data remained unchanged.");
@@ -103,7 +103,7 @@ public class EventsController {
             if (choice.equals("Y")) {
                 editEventLabel();
             } else {
-                System.out.println("Redirecting to start menu.. EvC100\n");
+                OutputMessage.redirecting();
             }
         }
     }
@@ -126,7 +126,6 @@ public class EventsController {
                 } catch (Exception e) {
 //                    e.printStackTrace();
                     OutputMessage.error();
-                    editEventDescription();
                 }
             } else {
                 System.out.println("The event's data remained unchanged.");
@@ -138,7 +137,7 @@ public class EventsController {
             if (choice.equals("Y")) {
                 editEventLabel();
             } else {
-                System.out.println("Redirecting to start menu.. Ev134\n");
+                OutputMessage.redirecting();
             }
         }
     }
@@ -156,7 +155,6 @@ public class EventsController {
         } catch (Exception e) {
 //            e.printStackTrace();
             OutputMessage.error();
-            deleteEvent();
         }
     }
 
@@ -180,7 +178,7 @@ public class EventsController {
         } catch (SQLException throwables) {
 //            throwables.printStackTrace();
             OutputMessage.error();
-            selectEventByDate();
+
         }
     }
 
@@ -200,7 +198,7 @@ public class EventsController {
         } catch (SQLException throwables) {
 //            throwables.printStackTrace();
             OutputMessage.error();
-            selectEventByYear();
+
         }
     }
 
@@ -219,7 +217,7 @@ public class EventsController {
         } catch (SQLException throwables) {
 //            throwables.printStackTrace();
             OutputMessage.error();
-            selectEventByMonth();
+
         }
     }
 
@@ -239,7 +237,7 @@ public class EventsController {
         } catch (SQLException throwables) {
 //            throwables.printStackTrace();
             OutputMessage.error();
-            selectEventByLabel();
+
         }
     }
 
@@ -247,12 +245,14 @@ public class EventsController {
     public static int getEventByID() {
         System.out.print("\nEnter the events id: ");
         int check = 0;
-        try {check = scanner.nextInt();
+        try {
+            check = scanner.nextInt();
             scanner.close();
-        }
-        catch(InputMismatchException e) {
+        } catch (InputMismatchException e) {
             System.err.println("Wrong input! Input only integer numbers please...");
+
         }
+
         int id = 0;
 
         try {
@@ -268,7 +268,7 @@ public class EventsController {
         } catch (SQLException throwables) {
 //            throwables.printStackTrace();
             OutputMessage.error();
-            getEventByID();
+
         }
         return id;
     }
