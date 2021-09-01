@@ -16,11 +16,11 @@ public class OutputMessage {
 
     //Message for invalid choice, looping method
     public static void invalidInput() {
-        System.out.println("Invalid input. Try again\n");
+        System.err.println("Invalid input. Try again\n");
     }
 
     public static void error() {
-        System.out.println("Error. Please try again.\n");
+        System.err.println("Error. Please try again.\n");
     }
 }
 
