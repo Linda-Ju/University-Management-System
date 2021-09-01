@@ -1,6 +1,7 @@
 package com.company.controlers;
 
 import com.company.dbhelper.DbConnection;
+import com.company.helpers.OutputMessage;
 import com.company.helpers.SantasLittleHelpers;
 
 import java.sql.PreparedStatement;
@@ -37,7 +38,9 @@ public class EmployeesController {
             ps.execute();
             System.out.println("\nData been added to database. Generating users account...\n");
         } catch (Exception e) {
-            e.printStackTrace();
+//            e.printStackTrace();
+            OutputMessage.error();
+            addNewEmployee();
         }
         try {
             ps = DbConnection.user().prepareStatement("SELECT * FROM employees WHERE first_name = '" + name +
@@ -57,7 +60,9 @@ public class EmployeesController {
                     System.out.println("New account has been set.\n Username: " + login + "\n Password: " + password +
                             "\n\n Don't forget to write those down.");
                 } catch (Exception e) {
-                    e.printStackTrace();
+//                    e.printStackTrace();
+                    OutputMessage.error();
+                    addNewEmployee();
                 }
                 try {
                     ps = DbConnection.user().prepareStatement("SELECT * FROM users WHERE username = '" + login + "';");
@@ -68,15 +73,21 @@ public class EmployeesController {
                             ps = DbConnection.user().prepareStatement("UPDATE employees SET user_id = " + usersID + " WHERE id = " + employeesID);
                             ps.execute();
                         } catch (Exception e) {
-                            e.printStackTrace();
+ //                           e.printStackTrace();
+                            OutputMessage.error();
+                            addNewEmployee();
                         }
                     }
                 } catch (SQLException throwables) {
-                    throwables.printStackTrace();
+//                    throwables.printStackTrace();
+                    OutputMessage.error();
+                    addNewEmployee();
                 }
             }
         } catch (Exception e) {
-            e.printStackTrace();
+//            e.printStackTrace();
+            OutputMessage.error();
+            addNewEmployee();
         }
     }
 
@@ -95,7 +106,9 @@ public class EmployeesController {
                 ps.execute();
                 System.out.println("\nSuccessfully updated employee's name.");
             } catch (Exception e) {
-                e.printStackTrace();
+//                e.printStackTrace();
+                OutputMessage.error();
+                editEmployeeName();
             }
         } else {
             System.out.println("The employee's data remained unchanged.");
@@ -119,7 +132,9 @@ public class EmployeesController {
                 System.out.println("\nSuccessfully updated employee's surname.");
 
             } catch (Exception e) {
-                e.printStackTrace();
+//                e.printStackTrace();
+                OutputMessage.error();
+                editEmployeeName();
             }
         } else {
             System.out.println("The employee's data remained unchanged.");
@@ -143,7 +158,9 @@ public class EmployeesController {
                 System.out.println("\nSuccessfully updated employee's position.");
 
             } catch (Exception e) {
-                e.printStackTrace();
+//                e.printStackTrace();
+                OutputMessage.error();
+                editEmployeePosition();
             }
         } else {
             System.out.println("The employee's data remained unchanged.");
@@ -170,11 +187,15 @@ public class EmployeesController {
                         ps = DbConnection.user().prepareStatement("DELETE FROM users WHERE username = '" + login + "'");
                         ps.execute();
                     } catch (Exception e) {
-                        e.printStackTrace();
+//                        e.printStackTrace();
+                        OutputMessage.error();
+                        deleteEmployee();
                     }
                 }
             } catch (Exception e) {
-                e.printStackTrace();
+//                e.printStackTrace();
+                OutputMessage.error();
+                deleteEmployee();
             }
             try {
                 ps = DbConnection.user().prepareStatement("DELETE FROM employees WHERE id = " + id);
@@ -183,11 +204,12 @@ public class EmployeesController {
                 System.out.println("\nThe employee was successfully removed from the database.");
 
             } catch (Exception e) {
-                e.printStackTrace();
+//                e.printStackTrace();
+                OutputMessage.error();
+                deleteEmployee();
             }
         } else {
             System.out.println("The employee stayed in the database.");
-
         }
     }
 
@@ -199,20 +221,20 @@ public class EmployeesController {
             ps = DbConnection.user().prepareStatement("SELECT * FROM employees WHERE id =" + check);
             rs = ps.executeQuery();
 
+            System.out.println("\n=====================================");
             System.out.printf("%-3.5s %-9.12s %-13.13s %-20.24s%n", "id", "name", "surname", "position");
-
+            System.out.println("-------------------------------------");
 
             while (rs.next()) {
                 id = rs.getInt("id");
-
                 System.out.printf("%-3.5s %-9.12s %-13.13s %-20.24s%n", id, rs.getString("first_name"),
                         rs.getString("last_name"), rs.getString("position"));
-
-
+                System.out.println("=====================================");
             }
-
         } catch (SQLException throwables) {
-            throwables.printStackTrace();
+//            throwables.printStackTrace();
+            OutputMessage.error();
+            getEmployeeByID();
         }
         return id;
     }
@@ -225,15 +247,19 @@ public class EmployeesController {
             ps = DbConnection.user().prepareStatement("SELECT * FROM employees WHERE last_name = '" + searchValue + "' ORDER BY first_name");
             rs = ps.executeQuery();
 
+            System.out.println("\n=====================================");
             System.out.printf("%-3.5s %-9.12s %-13.13s %-20.24s%n", "id", "name", "surname", "position");
-
+            System.out.println("-------------------------------------");
             while (rs.next()) {
 
                 System.out.printf("%-3.5s %-9.12s %-13.13s %-20.24s%n", rs.getInt("id"), rs.getString("first_name"),
                         rs.getString("last_name"), rs.getString("position"));
+                System.out.println("=====================================");
             }
         } catch (SQLException throwables) {
-            throwables.printStackTrace();
+//            throwables.printStackTrace();
+            OutputMessage.error();
+            selectEmployeeBySurname();
         }
     }
 
@@ -245,7 +271,9 @@ public class EmployeesController {
             ps = DbConnection.user().prepareStatement("SELECT * FROM employees WHERE position= '" + searchValue + "' ORDER BY first_name");
             rs = ps.executeQuery();
 
+            System.out.println("\n=====================================");
             System.out.printf("%-3.5s %-9.12s %-13.13s %-20.24s%n", "#", "name", "surname", "position");
+            System.out.println("-------------------------------------");
             int count = 1;
             while (rs.next()) {
                 System.out.printf("%-3.5s %-9.12s %-13.13s %-20.24s%n", count,
@@ -253,8 +281,11 @@ public class EmployeesController {
                         rs.getString("position"));
                 count++;
             }
+            System.out.println("=====================================");
         } catch (SQLException throwables) {
-            throwables.printStackTrace();
+//            throwables.printStackTrace();
+            OutputMessage.error();
+            selectEmployeeByPosition();
         }
     }
 
@@ -267,14 +298,20 @@ public class EmployeesController {
                 rs = ps.executeQuery();
                 int count = 1;
                 System.out.println("\n" + subject + " lecturers:");
+
+                System.out.println("\n=======================");
                 System.out.printf("%-3.5s %-9.12s %-13.13s %n", "#", "name", "surname");
+                System.out.println("-----------------------");
                 while (rs.next()) {
                     System.out.printf("%-3.5s %-9.12s %-13.13s %n", count, rs.getString("first_name"),
                             rs.getString("last_name"));
                     count++;
                 }
+                System.out.println("=======================");
             } catch (SQLException throwables) {
-                throwables.printStackTrace();
+//                throwables.printStackTrace();
+                OutputMessage.error();
+                selectLecturersBySubject();
             }
         } else {
             System.out.print("\nDo you wish to start over? Y/N :  ");
@@ -294,16 +331,22 @@ public class EmployeesController {
         try {
             ps = DbConnection.user().prepareStatement("SELECT DISTINCT employees.first_name, employees.last_name, scores.subject FROM scores INNER JOIN employees ON scores.lecturers_id = employees.id LEFT JOIN students ON scores.student_id = students.id WHERE group_id = '" + groupID + "' ORDER BY scores.subject, employees.first_name");
             rs = ps.executeQuery();
-            int count =1;
-            System.out.println(groupID);
+            int count = 1;
+            System.out.println("\nEntered group name is " + groupID + ".");
+
+            System.out.println("\n=======================================");
             System.out.printf("%-3.5s %-9.12s %-13.13s %-20.24s%n", "#", "Name", "Surname", "Subject");
+            System.out.println("---------------------------------------");
             while (rs.next()) {
-                System.out.printf("%-3.5s %-9.12s %-13.13s %-20.24s%n",count, rs.getString("first_name"),
+                System.out.printf("%-3.5s %-9.12s %-13.13s %-20.24s%n", count, rs.getString("first_name"),
                         rs.getString("last_name"), rs.getString("subject"));
                 count++;
             }
+            System.out.println("=======================================");
         } catch (SQLException throwables) {
-            throwables.printStackTrace();
+//            throwables.printStackTrace();
+            OutputMessage.error();
+            selectLecturersByStudentGroup();
         }
     }
 }

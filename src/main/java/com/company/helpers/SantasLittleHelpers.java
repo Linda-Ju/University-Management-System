@@ -17,8 +17,9 @@ public class SantasLittleHelpers {
         System.out.println("4. History");
         System.out.println("5. English");
         System.out.println("6. Spanish");
+        System.out.println("X. Quit");
 
-        System.out.print("Select an option: ");
+        System.out.print("\nSelect an option: \t");
         String subject = scanner.next().toUpperCase();
         String subjectName;
 
@@ -43,13 +44,13 @@ public class SantasLittleHelpers {
                 break;
             case "X":
                 subjectName = null;
-                System.out.println("End of session. User logout.");
+                OutputMessage.redirecting();
                 break;
             default:
                 subjectName = null;
-                System.out.println("Invalid input, try again!");
+                OutputMessage.invalidInput();
+                subjectCases();
         }
-
         return subjectName;
     }
 

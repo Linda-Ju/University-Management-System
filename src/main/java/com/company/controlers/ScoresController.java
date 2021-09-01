@@ -1,6 +1,7 @@
 package com.company.controlers;
 
 import com.company.dbhelper.DbConnection;
+import com.company.helpers.OutputMessage;
 import com.company.helpers.SantasLittleHelpers;
 import com.company.menu.SubMenu;
 
@@ -34,24 +35,26 @@ public class ScoresController {
             System.out.print("\nEnter the lecturer's ID: ");
             int lecturerID = scanner.nextInt();
 
-            System.out.print("\nEnter a score: ");
+            System.out.print("\nEnter the score: ");
             int score = scanner.nextInt();
 
             try {
                 ps = DbConnection.user().prepareStatement("INSERT INTO scores(subject, lecturers_id, student_id, score, submitted) " +
                         "VALUES ('" + subjectName + "', " + lecturerID + ", " + studentID + ", " + score + ", '" + strDate + "')");
                 ps.execute();
-                System.out.println("New score has been added");
+                System.out.println("New score has been added.");
             } catch (Exception e) {
-                e.printStackTrace();
+//                e.printStackTrace();
+                OutputMessage.error();
+                addNewScore();
             }
         } else {
-            System.out.print("\nDo you wish to submit another score Y/N");
+            System.out.print("\nDo you wish to submit another score? Y/N : ");
             String proceed = scanner.next().trim().toUpperCase();
             if (proceed.equals("Y")) {
                 addNewScore();
             } else {
-                System.out.println("Redirecting to start menu  ");
+                System.out.println("Redirecting to start menu...");
             }
         }
     }
@@ -68,14 +71,16 @@ public class ScoresController {
             System.out.print("\nEnter a lecturer's ID: ");
             String lecturerID = scanner.next();
 
-            System.out.print("\nEnter the date (dd/MM/yyyy): ");
+            System.out.print("\nEnter the date (dd/mm/yyyy): ");
             String date = scanner.next();
             ps = DbConnection.user().prepareStatement("DELETE FROM scores WHERE subject = '" + subjectName +
                     "' AND student_id = " + studentID + " AND lecturers_id = " + lecturerID + " AND submitted = '" + date + "'");
             ps.execute();
             System.out.println("Successfully deleted score!");
         } catch (Exception e) {
-            e.printStackTrace();
+//            e.printStackTrace();
+            OutputMessage.error();
+            deleteScore();
         }
     }
 
@@ -87,7 +92,7 @@ public class ScoresController {
             System.out.print("\nEnter the student's ID: ");
             int studentID = scanner.nextInt();
 
-            System.out.print("\nEnter the day assignment was submitted : ");
+            System.out.print("\nEnter the day assignment was submitted (dd.mm.yyyy): ");
             String date = scanner.next();
 
             System.out.print("\nEnter a lecturer's ID: ");
@@ -101,7 +106,9 @@ public class ScoresController {
                 ps.execute();
                 System.out.println("Successfully edited score!");
             } catch (Exception e) {
-                e.printStackTrace();
+//                e.printStackTrace();
+                OutputMessage.error();
+                editScore();
             }
         }
     }
@@ -109,26 +116,31 @@ public class ScoresController {
     public static void selectStudentScoresBySubject() {
         String subjectName = SantasLittleHelpers.subjectCases();
 
-       if(subjectName != null) {
-           try {
-               System.out.print("\nEnter the student's ID: ");
-               int studentID = scanner.nextInt();
+        if (subjectName != null) {
+            try {
+                System.out.print("\nEnter the student's ID: ");
+                int studentID = scanner.nextInt();
 
-               ps = DbConnection.user().prepareStatement("SELECT score, submitted FROM scores WHERE student_id = " + studentID + " AND subject = '" + subjectName + "' ORDER BY submitted DESC");
-               rs = ps.executeQuery();
-               int score;
-               String date;
-               System.out.println(subjectName);
-               System.out.println("score \t submission date");
-               while (rs.next()) {
-                   score = rs.getInt("score");
-                   date = rs.getString("submitted");
-                   System.out.println(score + "\t" + date);
-               }
-           } catch (Exception e) {
-               e.printStackTrace();
-           }
-       }
+                ps = DbConnection.user().prepareStatement("SELECT score, submitted FROM scores WHERE student_id = " + studentID + " AND subject = '" + subjectName + "' ORDER BY submitted DESC");
+                rs = ps.executeQuery();
+                int score;
+                String date;
+                System.out.println("\nSelected subject: " + subjectName);
 
+                System.out.println("\n========================");
+                System.out.printf("%-7.7s %-20.20s%n", "score", "submission date");
+                System.out.println("------------------------");
+                while (rs.next()) {
+                    score = rs.getInt("score");
+                    date = rs.getString("submitted");
+                    System.out.printf("%-7.7s %-20.20s%n ", score, date);
+                }
+                System.out.println("=======================");
+            } catch (Exception e) {
+                //               e.printStackTrace();
+                OutputMessage.error();
+                selectStudentScoresBySubject();
+            }
+        }
     }
 }
