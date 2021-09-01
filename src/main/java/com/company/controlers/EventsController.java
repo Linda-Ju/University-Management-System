@@ -166,14 +166,11 @@ public class EventsController {
             ps = DbConnection.user().prepareStatement("SELECT * FROM events WHERE event_date = '" + date + "' ORDER BY event_date");
             rs = ps.executeQuery();
 
-            System.out.println("\n===================================");
-            System.out.printf("%-12.12s %-25.25s%n", "date", "event");
-            System.out.println("-----------------------------------");
+
             while (rs.next()) {
-                System.out.printf("%-12.12s %-25.25s%n", rs.getString("event_date"),
+                System.out.printf("\n%-12.12s %-25.25s%n", rs.getString("event_date"),
                         rs.getString("label"));
-                System.out.println("===================================");
-                System.out.println("\nThe event's description is: " + rs.getString("description"));
+                System.out.println("\t\t" + rs.getString("description") + "\n");
             }
         } catch (SQLException throwables) {
 //            throwables.printStackTrace();
