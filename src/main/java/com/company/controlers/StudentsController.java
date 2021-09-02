@@ -3,7 +3,6 @@ package com.company.controlers;
 import com.company.dbhelper.DbConnection;
 import com.company.helpers.OutputMessage;
 import com.company.helpers.SantasLittleHelpers;
-import com.sun.xml.internal.ws.util.StringUtils;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -239,7 +238,7 @@ public class StudentsController {
     public static void selectStudentsBySurname() {
         System.out.print("\nEnter the student's surname: ");
         String surname = scanner.next().trim();
-        StringUtils.capitalize(surname);
+
 
         try {
             ps = DbConnection.user().prepareStatement("SELECT * FROM students WHERE surname = '" + surname + "' ORDER BY name");
