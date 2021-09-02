@@ -99,7 +99,6 @@ public class StudentsController {
     public static void editStudentName() {
         int id = getStudentByID();
 
-      if(id!=0) {
           System.out.print("\nDo you wish to edit this data? Y/N : ");
           String option = scanner.next().trim().toUpperCase();
           if (option.equals("Y")) {
@@ -120,8 +119,7 @@ public class StudentsController {
           } else {
               System.out.println("The student's data remained unchanged.");
           }
-      } else{ OutputMessage.invalidPerson();
-      }
+
     }
 
     public static void editStudentSurname() {

@@ -220,15 +220,18 @@ public class EmployeesController {
             ps = DbConnection.user().prepareStatement("SELECT * FROM employees WHERE id =" + check);
             rs = ps.executeQuery();
 
-            System.out.println("\n=====================================");
-            System.out.printf("%-3.5s %-9.12s %-13.13s %-20.24s%n", "id", "name", "surname", "position");
-            System.out.println("-------------------------------------");
+
 
             while (rs.next()) {
                 id = rs.getInt("id");
-                System.out.printf("%-3.5s %-9.12s %-13.13s %-20.24s%n", id, rs.getString("first_name"),
-                        rs.getString("last_name"), rs.getString("position"));
-                System.out.println("=====================================");
+                if(id !=0) {
+                    System.out.println("\n=====================================");
+                    System.out.printf("%-3.5s %-9.12s %-13.13s %-20.24s%n", "id", "name", "surname", "position");
+                    System.out.println("-------------------------------------");
+                    System.out.printf("%-3.5s %-9.12s %-13.13s %-20.24s%n", id, rs.getString("first_name"),
+                            rs.getString("last_name"), rs.getString("position"));
+                    System.out.println("=====================================");
+                }
             }
         } catch (SQLException throwables) {
 //            throwables.printStackTrace();

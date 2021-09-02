@@ -22,5 +22,7 @@ public class OutputMessage {
     public static void error() {
         System.err.println("Error. Please try again.\n");
     }
+
+    public static void invalidPerson(){ System.err.println("Such person do not exists");}
 }
 
