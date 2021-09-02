@@ -2,13 +2,15 @@ package com.company.helpers;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.InputMismatchException;
 import java.util.Random;
 import java.util.Scanner;
 
 public class SantasLittleHelpers {
+    static Scanner scanner = new Scanner(System.in);
 
-    public static String subjectCases(){
-        Scanner scanner = new Scanner(System.in);
+    public static String subjectCases() {
+
 
         System.out.println("Choose a subject: ");
         System.out.println("1. Mathematics");
@@ -54,8 +56,7 @@ public class SantasLittleHelpers {
         return subjectName;
     }
 
-    public static String facultyCases(){
-        Scanner scanner = new Scanner(System.in);
+    public static String facultyCases() {
 
         System.out.println("\nSelect a faculty: ");
         System.out.println("1. Communication Technology");
@@ -104,4 +105,5 @@ public class SantasLittleHelpers {
         // this will convert any number sequence into 6 character.
         return String.format("%06d", number);
     }
+
 }
