@@ -241,6 +241,7 @@ public class StudentsController {
         System.out.print("\nEnter the student's surname: ");
         String surname = scanner.next().trim();
 
+
         try {
             ps = DbConnection.user().prepareStatement("SELECT * FROM students WHERE surname = '" + surname + "' ORDER BY name");
             rs = ps.executeQuery();

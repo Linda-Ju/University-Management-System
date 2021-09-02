@@ -16,7 +16,7 @@ public class Login {
 
 
     public static void userLogin() {
-        System.out.println("Welcome to the website!");//Welcome message
+        System.out.println("Welcome to the University Management System!");//Welcome message
 
         //request username from user
         System.out.print("\nEnter your username: ");
