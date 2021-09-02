@@ -3,11 +3,11 @@ package com.company.controlers;
 import com.company.dbhelper.DbConnection;
 import com.company.helpers.OutputMessage;
 import com.company.helpers.SantasLittleHelpers;
-import com.sun.xml.internal.ws.util.StringUtils;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -71,7 +71,7 @@ public class StudentsController {
                             ps = DbConnection.user().prepareStatement("UPDATE students SET user_id = " + usersID + " WHERE id =" + studentsID);
                             ps.execute();
                         } catch (Exception e) {
- //                           e.printStackTrace();
+                            //                           e.printStackTrace();
                             OutputMessage.error();
                             addNewStudent();
                         }
@@ -99,26 +99,29 @@ public class StudentsController {
     public static void editStudentName() {
         int id = getStudentByID();
 
-        System.out.print("\nDo you wish to edit this data? Y/N : ");
-        String option = scanner.next().trim().toUpperCase();
-        if (option.equals("Y")) {
+      if(id!=0) {
+          System.out.print("\nDo you wish to edit this data? Y/N : ");
+          String option = scanner.next().trim().toUpperCase();
+          if (option.equals("Y")) {
 
-            System.out.print("\nEnter edited name: ");
-            String update = scanner.next().trim();
+              System.out.print("\nEnter edited name: ");
+              String update = scanner.next().trim();
 
-            try {
-                ps = DbConnection.user().prepareStatement("UPDATE students SET name = '" + update + "' WHERE id =" + id);
-                ps.execute();
+              try {
+                  ps = DbConnection.user().prepareStatement("UPDATE students SET name = '" + update + "' WHERE id =" + id);
+                  ps.execute();
 
-                System.out.println("\nSuccessfully updated student's name.");
-            } catch (Exception e) {
+                  System.out.println("\nSuccessfully updated student's name.");
+              } catch (Exception e) {
 //                e.printStackTrace();
-                OutputMessage.error();
+                  OutputMessage.error();
 
-            }
-        } else {
-            System.out.println("The student's data remained unchanged.");
-        }
+              }
+          } else {
+              System.out.println("The student's data remained unchanged.");
+          }
+      } else{ OutputMessage.invalidPerson();
+      }
     }
 
     public static void editStudentSurname() {
@@ -214,7 +217,7 @@ public class StudentsController {
                     } catch (Exception e) {
 //                        e.printStackTrace();
                         OutputMessage.error();
-                 }
+                    }
                 }
             } catch (Exception e) {
 //                e.printStackTrace();
@@ -239,7 +242,6 @@ public class StudentsController {
     public static void selectStudentsBySurname() {
         System.out.print("\nEnter the student's surname: ");
         String surname = scanner.next().trim();
-        StringUtils.capitalize(surname);
 
         try {
             ps = DbConnection.user().prepareStatement("SELECT * FROM students WHERE surname = '" + surname + "' ORDER BY name");
@@ -322,28 +324,36 @@ public class StudentsController {
         System.err.println("Wrong input! Input only integer numbers please...");
     }
         int id = 0;
-        try {
-            ps = DbConnection.user().prepareStatement("SELECT * FROM students WHERE id =" + check);
-            rs = ps.executeQuery();
 
-            System.out.println("\n=============================================================");
-            System.out.printf("%-3.5s %-9.12s %-13.13s %-8.8s %-20.24s%n", "id", "name", "surname", "group", "faculty");
-            System.out.println("-------------------------------------------------------------");
 
-            while (rs.next()) {
-                id = rs.getInt("id");
 
-                System.out.printf("%-3.5s %-9.12s %-13.13s %-8.8s %-25.25s%n", id, rs.getString("name"),
-                        rs.getString("surname"),
-                        rs.getString("group_id"),
-                        rs.getString("faculty"));
-            }
-            System.out.println("=============================================================");
-        } catch (SQLException throwables) {
+
+            try {
+                ps = DbConnection.user().prepareStatement("SELECT * FROM students WHERE id =" + check);
+                rs = ps.executeQuery();
+
+
+                while (rs.next()) {
+                    id = rs.getInt("id");
+                    if (id != 0) {
+                        System.out.println("\n=============================================================");
+                        System.out.printf("%-3.5s %-9.12s %-13.13s %-8.8s %-20.24s%n", "id", "name", "surname", "group", "faculty");
+                        System.out.println("-------------------------------------------------------------");
+                        System.out.printf("%-3.5s %-9.12s %-13.13s %-8.8s %-25.25s%n", id, rs.getString("name"),
+                                rs.getString("surname"),
+                                rs.getString("group_id"),
+                                rs.getString("faculty"));
+                        System.out.println("=============================================================");
+                    }
+
+                }
+
+            } catch (SQLException throwables) {
 //            throwables.printStackTrace();
-            OutputMessage.error();
+                OutputMessage.error();
 
-        }
-        return id;
+            }
+
+         return id;
     }
 }
