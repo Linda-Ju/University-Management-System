@@ -6,11 +6,11 @@ for testing softwere :
 ||lecturer: lecturer qwerty ||
 ||student: student qwerty ||
 
-Some tips on other data: faculty - Communication Tehnology
-                          group - EC1B
-                          student id: 6
-                          lecturers id: 17
-                          events id 4-7, year 2021/2022, month 11
+Some tips on other data: || faculty - Communication Tehnology ||
+                         || group - EC1B ||
+                         || student id: 6 ||
+                         || lecturers id: 17 ||
+                         || events id 4-7, year 2021/2022, month 11 ||
                           
  Have a nice trip.
 
