@@ -241,9 +241,7 @@ public class SubMenu {
                 OutputMessage.invalidInput();
                 observeData();
         }
-        if(!option.equals("X")){
-            observeData();
-        }
+
     }
 
     public static void observeChoiceEmployee() {
@@ -357,8 +355,8 @@ public class SubMenu {
         System.out.println("What do you want to observe?\n");
 
         System.out.println("1. Select scores by subject");
-        System.out.println("2. Select final score by subjects");
-        System.out.println("3. Select final student score");
+        System.out.println("2. Select final score by subjects(UND)");
+        System.out.println("3. Select final student score(UND)");
         System.out.println("X. Exit\n");
         System.out.println("Select an option: \t");
         String option = scanner.next().toUpperCase();
