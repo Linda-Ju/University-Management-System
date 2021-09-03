@@ -4,7 +4,7 @@ for testing softwere :
 admin access: admin admin
 administration: secretary qwerty
 lecturer: lecturer qwerty
-student: Cstudent qwerty
+student: student qwerty
 
 Some tips on other data: faculty - Communication Tehnology
                           group - EC1A
