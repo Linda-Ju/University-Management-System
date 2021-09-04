@@ -34,8 +34,11 @@ done separate class for tables, just to save our table structure(it's all commen
 but it worked fine in this case), so if you want testrun it - mock database or just create local database on your own
   *
   
-#Thanks
+# Thanks
 
-#I want to thank my group-mates to make it happen;
-#Thank Accenture team for this experience;
+# I want to thank my group-mates to make it happen;
+# Thank Accenture team for this experience;
 # And special thanks goes to our mentor Uche for guiding us through!
+
+Sincerelly yours -
+Freebie
