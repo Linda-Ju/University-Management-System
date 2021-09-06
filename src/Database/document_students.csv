@@ -1,0 +1,30 @@
+"id","name","surname","user_id","faculty","group_id"
+2,Cody,Fox,5,Communication Technology,CT1A
+3,Robert,Fletcher,6,Communication Technology,CT1A
+4,Emma,Hubbard,7,Communication Technology,CT1A
+5,Sabrina,Kelly,8,Communication Technology,CT1B
+6,Jessica,Haynes,9,Communication Technology,CT1B
+7,Jack,May,10,Communication Technology,CT1B
+8,Ronald,Hood,11,Communication Technology,CT2A
+9,Charles,Farmer,12,Communication Technology,CT2A
+10,Thomas,Haynes,13,Communication Technology,CT2A
+11,Diana,Cannon,14,Geoinformatics,GE1A
+12,Darrell,Gardner,15,Geoinformatics,GE1A
+13,Mark,Gallagher,16,Geoinformatics,GE1A
+14,Jeffery,Robbins,17,Geoinformatics,GE1A
+15,Nelson,Anderson,18,Geoinformatics,GE2A
+16,Blaze,Allison,19,Geoinformatics,GE2A
+17,Ginger,McDaniel,20,Geoinformatics,GE2A
+18,Lily,Cannon,21,Geoinformatics,GE2A
+19,Edith,Franklin,22,Economics,EC1A
+20,Helen,Daniel,23,Economics,EC1A
+21,Carol,Blankenship,24,Economics,EC1A
+22,Arleen,Scott,25,Economics,EC1B
+23,Kory,Clarke,26,Economics,EC1B
+24,Jonathan,Black,27,Economics,EC2A
+25,Cameron,Hamilton,28,Economics,EC2A
+26,Matthew,Mason,29,Economics,EC2A
+27,Helen,Copeland,30,Economics,EC2A
+28,Francis,Marshall,45,Economics,EC2A
+29,Jeffery,Poole,46,Economics,EC1B
+31,Ivan,Davidoff,50,Economics,
