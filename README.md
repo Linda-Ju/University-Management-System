@@ -1,5 +1,5 @@
 # University-Management-System
-This is a class to add and test there methods for project stade 2. will be deleted on project final stage
+Project submission:
 
 * This is a demo-version of University Management System.
   *
@@ -11,7 +11,7 @@ This is a class to add and test there methods for project stade 2. will be delet
 at this stage of knowledge we didn't manage to do that
   *
 
-* also big point is database/password safety from sql-injections, we fixed it on login,
+* Also big point is database/password safety from sql-injections, we fixed it on login,
 but some blind spots in other methods left.
   *
   
